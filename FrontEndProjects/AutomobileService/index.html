@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Service</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div id="headerConatiner">
+        <div id="logo">
+            
+            <img src="image1.png" alt="auto-logo">
+        </div>
+        <div id="selectionsInHeader">
+            <ul class="dropDown-menu">
+                <li><a href="#booking-info">Home</a></li>
+                <li><a href="#self-promo">Service</a></li>
+                <li><a href="#intro">About Us</a></li>
+                <li><a href="#signin-details">Log In</a></li>
+                <li><a href="#location">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="booking-form">
+        
+        <form id="booking-info" action="booking">
+                                   
+            <select name="cars-name" id="cars-name" class="selection-car-details">
+                <option selected disabled value="Select Your Vehicle">Select Your Vehicle</option>
+                <option value="Maruti Suzuki">Maruti Suzuki</option>
+                <option value="TATA">TATA</option>
+                <option value="Honda">Honda</option>
+                <option value="Hyundai">Hyundai</option>
+                <option value="Volkswagen">Volkswagen</option>
+                <option value="Mahindra & Mahindra">Mahindra & Mahindra</option>
+                <option value="Kia">Kia</option>
+                <option value="MG Motor">MG Motor</option>
+                <option value="Toyota">Toyota</option>
+            </select>
+            <select name="cars-model" id="cars-model" class="selection-car-details">
+                <option selected disabled value="Select Model Number">Select Model Number</option>
+            </select>
+            <select name="fuel-type" id="fuel-type" class="selection-car-details">                
+                <option selected disabled value="Fuel-Type">Fuel Type</option>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="Electric">Electric</option>
+                <option value="Gas">Gas</option>
+            </select>
+
+
+            <button onclick="location.href='#signin-details'" id="booking-button"  type="button">LETS GO</button>
+
+        </form>
+        
+    </div>
+    <div id="self-promo">
+        <h2 id="heading-of-promo"> WHY <span class="highlight1">CHOOSE US</span> </h2>
+        <div class="self-promo-1">
+            <div class="promo-logo">
+                <img src="image4.jpeg" alt="drop-pick" width="150px">
+                Pick & Drop
+                <span class="highlight">Service</span>
+            </div>
+            <div class="promo-logo">
+                <img src="image5.jpg" alt="drop-pick" width="190px">  
+                Warranted              
+                <span class="highlight">Spare Parts</span>                
+            </div>
+            <div class="promo-logo">                
+                <img src="image6.png" alt="drop-pick" width="170px">  
+                Multi Brand
+                <span class="highlight">Options</span>
+            </div>
+            <div class="promo-logo">                
+                <img src="image7.jpg" alt="drop-pick" width="150px">  
+                Realtime
+                <span class="highlight">Tracking</span>
+            </div>
+            <div class="promo-logo">                
+                <img src="image8.jpg" alt="drop-pick" width="150px">  
+                Standardised
+                <span class="highlight">Workshops</span>
+            </div>
+            <div class="promo-logo">                
+                <img src="image9.jpg" alt="drop-pick" width="150px">  
+                24/7
+                <span class="highlight">Support</span>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <h2 id="heading-of-promo"> LET US WORRY <span class="highlight1">ABOUT YOUR VEHICLE</span> </h2>
+    
+    <div id="intro">
+        <img class="height-intro" src="image10.avif" alt="intro-image">
+        <p class="text-intro height-intro">
+            We focus on automating and improving the process of vehicle service and address the pain points within the user's journey. Just book an appointment with the App/Website, and then relax, as our pick-up and delivery service, ensures Hassle free service from the comfort of your home/office.Customers are the most valuable part of our Autozang family and we take customer's voice/opinions with utmost importance, after all innovation based on user feedback is our mantra. That's why when you give your vehicle for service, be rest assured for the best service quality because Your Vehicle is Our Responsibility.
+        </p>
+    </div>
+
+    <h2 id="heading-of-promo"> CONNECT <span class="highlight1">WITH US</span> </h2>    
+    <div class="signin-details-head">
+        <form action="signin" id="signin-details">
+            <div id="add-detail"></div>
+            <button id="login-button">Log In</button>
+            <button id="signup-btn">New User</button>
+        </form>
+    </div>
+    <h2 id="heading-of-promo"> WE ARE <span class="highlight1">HERE FOR YOU</span> </h2>    
+    <div id="location">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.840862324685!2d80.2714237!3d13.083187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5265ffa1216265%3A0x47ee704562150916!2sPuratchi%20Thalaivar%20Dr.%20M.G.%20Ramachandran%20Central%20Railway%20Station%20(Chennai)!5e0!3m2!1sen!2sin!4v1592368539433!5m2!1sen!2sin" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <hr>
+    <div id="contact-us">
+        <span> <span id="contact">CONTACT</span> <span>88888 88888</span> </span>
+        <span> <span id="contact">LOCATION</span> <span>xxx xxxx xxxxxxxxxx</span> </span>
+        <span> <span id="contact">REACH ME</span> <span>abc@gmail.com</span> </span>
+    </div>
+    <hr>
+
+   
+    <a href="index_page_2.html">
+        <button id="signup-btn">
+            Click Here     
+        </button>    
+    </a>             
+
+
+    <script src="script.js"></script>
+</body>
+    <footer>
+        @copyright
+    </footer>
+</html>

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="style.css">
+  <title>Hotstar clone</title>
+
+
+</head>
+
+<body>
+  <header class="header-section">
+    <span class="logo-img">
+      <img src="logo-d-plus.svg" alt="">
+    </span>
+    <!-- side bar control -->
+    <!-- side bar control end -->
+    <div id="mySidepanel" class="sidepanel">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="#home">Home</a>
+      <a href="#movies">Movies</a>
+      <a href="#tv">TV</a>
+      <a href="#sports">Sports</a>
+    </div>
+    <nav class="navbar">
+      <div class="openbtn-class">
+        <button class="openbtn" onclick="openNav()">☰</button>
+      </div>
+      <ul class="ul-navbar">
+        <li><a class="ul-li-navbar" href="#home">Home</a></li>
+        <li><a class="ul-li-navbar" href="#movies">Movies</a></li>
+        <li><a class="ul-li-navbar" href="#tv">TV</a></li>
+        <li><a class="ul-li-navbar" href="#sports">Sports</a></li>
+      </ul>
+
+      <nav class="searchbar-user">
+        <div class="input-search-bar">
+          <input type="text" class="search-box" placeholder="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <button class="subscribe-btn">Subscribe</button>
+        <button class="user-button">User</button>
+      </nav>
+    </nav>
+
+  </header>
+
+
+  <!-------------------- carosal ------------------------- -->
+
+  <div class="container">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="2000">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+        <li data-target="#myCarousel" data-slide-to="4"></li>
+        <li data-target="#myCarousel" data-slide-to="5"></li>
+        <li data-target="#myCarousel" data-slide-to="6"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="carousel-content">
+                <h3>Vikram</h3>
+                <p>A special investigator assigned a case of serial killings discovers the case is not what it seems to
+                  be, and leading down this path is only going to end in a war between everyone involved.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <img src="files/posters/2.jpg" alt="Movie" style="width:100%;">
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="carousel-content">
+                <h3>Sita Ramam</h3>
+                <p>An orphan soldier, Lieutenant Ram's life changes, after he gets a letter from a girl named Sita. He
+                  meets her and love blossoms between them. When he comes back to his camp in Kashmir,After he gets
+                  caught in jail, he sends a letter to Sita which won't reach her.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <img src="files/posters/1.jpg" alt="Movie" style="width:100%;">
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="carousel-content">
+                <h3>K.G.F: Chapter 2</h3>
+                <p>In the blood-soaked Kolar Gold Fields, Rocky's name strikes fear into his foes. While his allies look
+                  up to him, the government sees him as a threat to law and order. Rocky must battle threats from all
+                  sides for unchallenged supremacy.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <img src="files/posters/3.jpg" alt="Movie" style="width:100%;">
+            </div>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="carousel-content">
+                <h3>2018</h3>
+                <p>A disaster film set during the 2018 Kerala Floods where people from all walks of life faced
+                  catastrophic consequences and put in collective efforts to survive the calamity.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <img src="files/posters/4.jpg" alt="Movie" style="width:100%;">
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="carousel-content">
+                <h3>Baahubali </h3>
+                <p>Amarendra Baahubali, the heir apparent to the throne of Mahishmati, finds his life and relationships
+                  endangered as his adoptive brother Bhallaladeva conspires to claim the throne.
+
+                </p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <img src="files/posters/5.jpg" alt="Movie" style="width:100%;">
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="carousel-content">
+                <h3>300: Rise of an Empire</h3>
+                <p>Greek general Themistocles of Athens leads the naval charge against invading Persian forces led by
+                  mortal-turned-god Xerxes and Artemisia, vengeful commander of the Persian navy.
+
+                </p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <img src="files/posters/6.jpg" alt="Movie" style="width:100%;">
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="carousel-content">
+                <h3>Avatar</h3>
+                <p>A paraplegic Marine dispatched to the moon Pandora on a unique mission becomes torn between following
+                  his orders and protecting the world he feels is his home.
+                </p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <img src="files/posters/7.jpg" alt="Movie" style="width:100%;">
+              <div class="carousel-image-border-left"></div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Left and right controls -->
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+  </div>
+  <!-- end -->
+
+  <!------------video container--------->
+
+  <div class="video-card-container">
+    <div class="video-card">
+      <img src="files/1disney.PNG" class="video-card-image" alt="">
+      <video src="files/1disney.mp4" loop="" class="card-video"></video>
+    </div>
+    <div class="video-card">
+      <img src="files/2pixar.PNG" class="video-card-image" alt="">
+      <video src="files/2pixar.mp4" loop="" class="card-video"></video>
+    </div>
+    <div class="video-card">
+      <img src="files/3geographic.PNG" class="video-card-image" alt="">
+      <video src="files/3geographic.mp4" loop="" class="card-video"></video>
+    </div>
+    <div class="video-card">
+      <img src="files/4marvel.PNG" class="video-card-image" alt="">
+      <video src="files/4marvel.mp4" loop="" class="card-video"></video>
+    </div>
+    <div class="video-card">
+      <img src="files/5star-wars.PNG" class="video-card-image" alt="">
+      <video src="files/5star-war.mp4" loop="" class="card-video"></video>
+    </div>
+  </div>
+
+  <!--------------------->
+
+  <!-----------------Movie 1-------------------------->
+  <div class="container-movie">
+    <h1>Latest & Trending</h1>
+  </div>
+
+
+  <!--------------------------------------------------->
+  <!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+	<div class="row">
+		<div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+            <div class="MultiCarousel-inner">
+                             
+                
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+                <div class="item">                    
+                      <div class="container-movie-section">
+                        <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                        <div class="overlay">
+                          <section class="movie-details overlay">
+                            <p>
+                              Movie Name
+                            </p>
+                            <p>
+                              Released Year
+                            </p>
+                            <p>
+                              Over view
+                            </p>
+                            <button>Watchlist</button>
+                          </section>
+                        </div>
+                      </div>                    
+                </div>
+
+
+                
+                <!-- <div class="item">
+                    <div class="pad15">
+                        <p class="lead">Multi Item Carousel</p>
+                        <p>₹ 1</p>
+                        <p>₹ 6000</p>
+                        <p>50% off</p>
+                    </div>
+                </div> -->
+                
+                
+            </div>
+            <button class="btn btn-primary leftLst"><</button>
+            <button class="btn btn-primary rightLst">></button>
+        </div>
+	</div>
+
+</div>
+
+
+
+  <!--------------------------------------------------->
+  <div class="container-movie">
+    <h1>Latest & Trending</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel"  data-interval="1000">
+              <div class="MultiCarousel-inner">
+                               
+                  
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+                  <div class="item">                    
+                        <div class="container-movie-section">
+                          <img class="image" src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+                          <div class="overlay">
+                            <section class="movie-details overlay">
+                              <p>
+                                Movie Name
+                              </p>
+                              <p>
+                                Released Year
+                              </p>
+                              <p>
+                                Over view
+                              </p>
+                              <button>Watchlist</button>
+                            </section>
+                          </div>
+                        </div>                    
+                  </div>
+  
+  
+                  
+                  <!-- <div class="item">
+                      <div class="pad15">
+                          <p class="lead">Multi Item Carousel</p>
+                          <p>₹ 1</p>
+                          <p>₹ 6000</p>
+                          <p>50% off</p>
+                      </div>
+                  </div> -->
+                  
+                  
+              </div>
+              <button class="btn btn-primary leftLst"><</button>
+              <button class="btn btn-primary rightLst">></button>
+          </div>
+    </div>
+  
+  </div>
+  <!--------------------------------------------------->
+
+
+  <div style="color: white;">
+    <h2>Hi</h2>
+    <h2>Hi</h2>
+    <h2>Hi</h2>
+    <h2>Hi</h2>
+    <h2>Hi</h2>
+    <h2>Hi</h2>
+  </div>
+
+
+
+
+  <script src="script.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</body>
+
+
+
+</html>
+
+<!-- 
+<img src="https://upload.wikimedia.org/wikipedia/en/f/f1/Vishwaroopam_poster.jpg" alt="movie">
+<img src="https://www.gethucinema.com/wp-content/uploads/2017/02/C5Pe32GXUAEh026.jpg" alt="movie">
+<img src="https://w0.peakpx.com/wallpaper/828/229/HD-wallpaper-ponniyin-selvan-part-1-tamil-movie.jpg" alt="movie">
+<img src="https://images.moviebuff.com/e0b75436-dbad-4270-806e-a0c8f99112f6?w=600" alt="movie">
+<img src="https://4.bp.blogspot.com/-WV13fFQXD-Y/UcQ4m9MBq8I/AAAAAAAAA1A/jCgkQw94s_M/s1600/RAANJHANAA_POSTER.jpg" alt="movie">
+<img src="https://i.pinimg.com/564x/14/57/70/145770f66e7d196d9bb4776c90ebab42--movie-posters-book-jacket.jpg" alt="movie">
+<img src="https://www.itl.cat/pngfile/big/86-868837_hd-images-pictures-stills-first-look-posters-of.jpg" alt="movie">
+<img src="https://images.moviebuff.com/f33799c6-9545-48ac-80ba-b1c88d4fff02?w=600" alt="movie">
+<img src="https://3.bp.blogspot.com/-fVLvsQ28ZZE/UB0cbWx2v7I/AAAAAAAAicw/UFd5TWVgIO4/s1600/Surya%2527s%2BMaatran%2Bmovie%2BPoster.jpg" alt="movie">
+<img src="https://alchetron.com/cdn/Dhaam-Dhoom-images-3bee509a-69dc-4a14-9a25-ff20924b086.jpg"alt="movie">
+
+
+ -->

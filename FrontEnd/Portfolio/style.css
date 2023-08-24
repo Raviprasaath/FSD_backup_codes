@@ -1,0 +1,251 @@
+
+/* Front page splitup */
+.static-sides {
+    display: flex;
+    flex-direction: row;
+}
+
+/* left side nav bar */
+.nav-left-side {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(211, 209, 213, 0.483); 
+    align-items: center;
+}
+/* left side nav bar */
+.nav-bar-names {
+    position: sticky;
+    top: 120px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    margin-right: 30px;
+}
+/* left side nav bar */
+.nav-bar-names >a {
+    width: 100px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 5px 0px 0px gainsboro;
+    text-decoration: none;
+    color: black;
+    background-color: rgba(69, 224, 172, 0.003);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* left side nav bar */
+.nav-bar-names >a:hover {
+    background-color: rgba(0, 255, 255, 0.129);
+    transform: scale(1.03);
+    font-weight: bold;
+    transition-timing-function: ease;
+}
+/* left side nav bar */
+.top-name-tag {
+    font-weight: 800;
+    font-size: 40px;
+    width: fit-content;
+    padding-top: 20px;
+}
+/* left side nav bar */
+.top-name-tag::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-left: 5px red solid;
+    border-bottom: 5px red solid;
+    top: 65px;
+    left: 25px;    
+}
+/* left side nav bar */
+.top-name-tag::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-right: 5px red solid;
+    border-top: 5px red solid;
+    top: 22px;
+    left: 150px;
+}
+
+
+
+/* Main container */
+.Home-container {
+    margin: 0% 10px 0% 10px;
+} 
+.mainsection-container {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    background-color: rgba(127, 255, 212, 0.31);
+}
+.left-container {
+    width: 100%;
+}
+
+.right-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 250px;
+    background-image: url(profilepic.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin-right: 15px;
+    margin-bottom: 10px;
+    margin-top: 15px;
+}
+.intro-name , .intro-bio{
+    padding: 20px;
+}
+
+.buttonmore {
+    margin-left: 30%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px;
+    background-color: orange;
+    border-radius: 15px;
+    text-align: center;
+    width: 200px;
+    font-weight: bold;
+
+}
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 700px) {
+    .static-sides {
+        display: flex;
+        flex-direction: row;
+    }
+    
+    /* left side nav bar */
+    .nav-left-side {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(211, 209, 213, 0.483); 
+        align-items: center;
+    }
+    /* left side nav bar */
+    .nav-bar-names {
+        position: sticky;
+        top: 120px;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+        margin-right: 10px;
+    }
+    /* left side nav bar */
+    .nav-bar-names >a {
+        width: 100px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0px 5px 0px 0px gainsboro;
+        text-decoration: none;
+        color: black;
+        background-color: rgba(69, 224, 172, 0.003);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    /* left side nav bar */
+    .nav-bar-names >a:hover {
+        background-color: rgba(0, 255, 255, 0.129);
+        transform: scale(1.03);
+        font-weight: bold;
+        transition-timing-function: ease;
+    }
+    /* left side nav bar */
+    .top-name-tag {
+        font-weight: 800;
+        font-size: 40px;
+        width: fit-content;
+        padding-top: 20px;
+    }
+    /* left side nav bar */
+    .top-name-tag::before {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-left: 5px red solid;
+        border-bottom: 5px red solid;
+        top: 65px;
+        left: 25px;    
+    }
+    /* left side nav bar */
+    .top-name-tag::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-right: 5px red solid;
+        border-top: 5px red solid;
+        top: 22px;
+        left: 150px;
+    }
+    
+    
+    
+    
+    
+    
+    .Home-container {
+        margin: 0% 10px 0% 10px;
+    } 
+    .mainsection-container {
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(127, 255, 212, 0.31);
+        height: fit-content;
+    }
+    .left-container {
+        padding: 0px;
+        width: 100%;
+        height: fit-content;
+    }
+    .right-section{
+        height: 40vh;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        background-image: url(profilepic.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .intro-name , .intro-bio{
+        padding: 20px;
+    }
+    .buttonmore {
+        margin-left: 5%;
+        margin-bottom: 5px;
+        padding: 10px;
+        border: 1px;
+        background-color: orange;
+        border-radius: 15px;
+        text-align: center;
+        width: 120px;
+        font-weight: bold;
+    }
+}
+/* background-color: rgba(184, 229, 221, 0.697); */

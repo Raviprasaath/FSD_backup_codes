@@ -1,0 +1,21 @@
+.image-container {
+  position: relative;
+  display: inline-block; /* Or any appropriate display property */
+  overflow: hidden; /* Clip the gradient to the container */
+}
+
+.image-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20%; /* Adjust the width as needed */
+  height: 100%;
+  background-image: linear-gradient(to right, rgba(7, 7, 7, 0), rgb(9, 0, 0));
+  z-index: 1;
+}
+
+.image-container img {
+  display: block;
+  z-index: 2;
+}

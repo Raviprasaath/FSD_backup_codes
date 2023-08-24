@@ -1,0 +1,385 @@
+:root {
+  --primary-color: #2d2e30;
+  --primary-color-dull: #ffffff9b;
+  --secondary-color: white;
+  --subscribe-button: #1f80e0;
+  --user-button: rgb(138, 177, 39);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+
+.logo-img img {
+  padding-left: 0.1rem;
+}
+
+body {
+  background-color: var(--primary-color);
+}
+
+.header-section {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  justify-content: space-between;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.ul-navbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.ul-li-navbar {
+  padding-left: 10px;
+  color: var(--primary-color-dull);
+}
+
+.ul-li-navbar {
+  font-size: 2rem;
+}
+
+.ul-navbar li a {
+  padding-left: 2rem;
+}
+
+.search-box {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 500;
+  height: 30px;
+  outline: none;
+  text-transform: capitalize;
+  transition: 0.5s;
+  width: 20dvw;
+  border-bottom: 2px var(--secondary-color) solid;
+}
+
+.input-search-bar {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.fa-magnifying-glass {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  color: var(--secondary-color);
+}
+
+.searchbar-user {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.subscribe-btn {
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: var(--subscribe-button);
+  color: var(--secondary-color);
+  font-size: 2rem;
+  height: 3.4rem;
+}
+.user-button {
+  height: 3.4rem;
+  font-size: 2rem;
+  border: none;
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: var(--user-button);
+  color: var(--secondary-color);
+}
+
+.openbtn,
+.openbtn-class {
+  display: none;
+}
+
+/* nav side bar------------------ */
+.sidepanel {
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  height: 100dvh;
+  top: 0;
+  left: 0;
+  background-color: black;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidepanel a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 2rem;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidepanel a:hover {
+  color: #f1f1f1;
+}
+
+.sidepanel .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.carosal-img {
+  padding: 20px;
+}
+
+/* -------carousel----------- */
+.container {
+  width: 100%;
+}
+
+.carousel-inner img {
+  height: 80%;
+}
+.carousel-content h3 {
+  font-size: 4rem;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.carousel-content p {
+  font-size: 1.8rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.carousel-content h3,
+.carousel-content p {
+  color: var(--secondary-color);
+  padding: 20px;
+  padding-left: 40px;
+}
+
+/* ----------------------------------------- */
+
+.slider {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  flex: 0 0 auto;
+  height: 100%;
+  left: 0;
+  margin-right: 30px;
+  overflow: hidden;
+  position: relative;
+  transition: 1s;
+  width: 100%;
+}
+
+/* --------------video----------------------- */
+.video-card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px;
+  gap: 20px;
+  position: relative;
+  width: 92%;
+}
+.video-card {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  /* width: calc(20% - 10px); */
+  width: 250px;
+}
+
+.video-card-image {
+  width: 100%;
+  height: 150px;
+}
+
+.card-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* ---------------Movie Section-------------------------- */
+
+.container-movie {
+  color: var(--secondary-color);
+}
+
+.container-movie h1 {
+  text-transform: uppercase;
+  font-size: 2.5rem;
+}
+
+.container-movie-section {
+  position: relative;
+  max-width: 200px;
+}
+
+.image {
+  display: block;
+  width: 200px;
+  height: auto;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.8);
+  color: #f1f1f1;
+  width: 200px;
+  transition: 0.5s ease;
+  opacity: 0;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  height: 150px;
+}
+
+.container-movie-section:hover {
+  .overlay {
+    opacity: 1;
+  }
+  transform: scale(1);
+}
+
+/* ------------------------------------------------- */
+
+/* //multi .carosal */
+.MultiCarousel {
+  float: left;
+  overflow: hidden;
+  padding: 15px;
+  width: 100%;
+  position: relative;
+}
+.MultiCarousel .MultiCarousel-inner {
+  transition: 1s ease all;
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item {
+  float: left;
+}
+.MultiCarousel .MultiCarousel-inner .item > div {
+  text-align: center;
+  /* padding: 10px; */
+  margin: 10px;
+  background: #f1f1f1;
+  color: #666;
+}
+.MultiCarousel .leftLst,
+.MultiCarousel .rightLst {
+  position: absolute;
+  border-radius: 50%;
+  top: calc(50% - 20px);
+}
+.MultiCarousel .leftLst {
+  left: 0;
+}
+.MultiCarousel .rightLst {
+  right: 0;
+}
+
+.MultiCarousel .leftLst.over,
+.MultiCarousel .rightLst.over {
+  pointer-events: none;
+  background: #ccc;
+}
+
+
+
+
+/* --------------------------------------------------------- */
+
+@media only screen and (max-width: 1024px) {
+}
+@media only screen and (max-width: 768px) {
+  .header-section {
+    justify-content: space-evenly;
+  }
+  .ul-navbar {
+    display: none;
+  }
+  .openbtn {
+    display: block;
+    padding: 10px 10px;
+  }
+  .openbtn-class {
+    display: block;
+  }
+  .search-box {
+    font-size: 2rem;
+    font-weight: 300;
+    width: 30dvw;
+    padding-left: 20px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .logo-img img {
+    padding-left: 1rem;
+  }
+  .ul-navbar {
+    display: none;
+  }
+  .openbtn {
+    display: block;
+  }
+  .search-box {
+    font-size: 1.5rem;
+    font-weight: 300;
+    width: 100px;
+  }
+  .subscribe-btn {
+    padding: 5px 10px;
+    font-size: 1.7rem;
+  }
+  .user-button {
+    font-size: 1.7rem;
+    padding: 5px 10px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .searchbar-user {
+    flex-wrap: wrap;
+  }
+}

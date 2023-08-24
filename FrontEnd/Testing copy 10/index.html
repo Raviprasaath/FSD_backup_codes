@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form id="numberForm">
+      <label for="numbers">Enter comma-separated numbers:</label>
+      <input type="text" id="numbers" name="numbers" required>
+      <button type="submit" id="submitBtn">Submit</button>
+  </form>
+  
+  <p id="result"></p>
+
+  <script>
+      document.getElementById("numberForm").addEventListener("submit", function(event) {
+          event.preventDefault();
+          
+          const inputNumbers = document.getElementById("numbers").value;
+          const numbersArray = inputNumbers.split(",");
+          
+          const squaredNumbers = numbersArray.map(number => parseInt(number) ** 2);
+          
+          const resultParagraph = document.getElementById("result");
+          resultParagraph.textContent = "The squares are: " + squaredNumbers.join(", ");
+      });
+  </script>
+</html>
+ 

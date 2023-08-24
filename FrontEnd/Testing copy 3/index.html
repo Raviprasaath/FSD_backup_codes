@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <!-- Title section -->
+     <header id="title-card">
+        <a href="./sample.html" style="text-decoration: none">
+            <h1 class="movieapp" style="color: black">Movie <i class="fa-solid fa-video fa-lg" style="color: #e5349b"></i> APP</h1>
+        </a>
+        <div class="type-btn">
+        <input type="text" id="search" placeholder="Search..">
+        <button type="submit" id="submit">Submit</button>
+        </div>
+    </header>
+<!-- container section -->
+<section class="container" id="container">
+        <div class="movie-list">
+            <!-- Genere section -->
+        <h1 style="color:darkblue;">Geners</h1>
+        <ul class="list" onclick="filterMovie(event)">
+            <li data-genereid="28">Action</li>
+            <li data-genereid="12">Adventure</li>
+            <li data-genereid="16">Animation</li>
+            <li data-genereid="35">Comedy</li>
+            <li data-genereid="80">Crime</li>
+            <li data-genereid="99">Documentry</li>
+            <li data-genereid="18">Drama</li>
+            <li data-genereid="10751">Family</li>
+            <li data-genereid="14">Fantasy</li>
+            <li data-genereid="36">History</li>
+            <li data-genereid="27">Horror</li>
+            <li data-genereid="10402">Music</li>
+            <li data-genereid="9648">Mystery</li>
+            <li data-genereid="10749">Romance</li>
+            <li data-genereid="878">Science Fiction</li>
+            <li data-genereid="10770">Tv Movie</li>
+            <li data-genereid="53">Thriller</li>
+            <li data-genereid="10752">War</li>
+            <li data-genereid="37">Western</li>
+        </ul>
+    </div>
+<!-- Now Playing section -->
+<div class="card-container" id="card-container">
+        
+    <h1 style="color: chocolate; padding-left: 10px;">Now Playing</h1>
+
+<div class="movie-details" id="movie-details">
+    <!-- <div class="card">
+        <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg" class="card-image">
+        <h3 class="card-title">the avathar</h3>
+        <div class="card-details">
+            <div class="card-detail-lang">dfk</div>
+            <div class="card-detail-rating">kdfjhjds</div>
+        </div>
+    </div> -->
+
+</div>
+
+</div>
+</section>
+
+<!-- Select card description section -->
+
+<section class="container-moviedescription" id="container-moviedescription">
+<!-- 
+    <div class="Movie-Description">
+    <div class="movie-detail-image">    
+    <img src="https://www.themoviedb.org/t/p/w220_and_h330_face/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg" class="card-image">
+    </div>
+    <div class="movie-description-details">
+    <h2 style="display: inline-block;">Title</h2>
+    <i class="fa-solid fa-xmark fa-2xl"></i>
+
+    <div class="moviedescription-icon">
+        <i class="fa-solid fa-star"></i>
+        <div style="display: block;">rating</div>
+    </div>
+
+    <div class="moviedetail-des">
+    <div class="moviedetail-lan" style="display: inline-block;">EN </div>
+    <i class="fa-solid fa-circle fa-2xs" style="display:inline-block;"> </i>
+    <div class="moviedetail-genere" style="display:inline-block;"> Action</div>
+    </div>
+    <div class="moviedetail-para">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus dolores delectus, quas corrupti deserunt perferendis vero, molestiae accusamus temporibus impedit maxime natus quia provi.
+    </div>
+    <div class="moviedetail-price">
+        <i class="fa-solid fa-rupee-sign fa-xs"></i>
+        <div style="display: inline-block;">250</div>
+    </div>
+    <button class="moviedetails-ticketbtn" type="submit">Book Ticket</button>
+</div>
+</div> -->
+</section>
+
+
+<!-- Payment section -->
+<!-- <section class="payment-container" id="payment-container">
+    <div class="payment-title">
+        <button type="submit" class="back-btn">
+            Back
+        </button>
+        <h1>CheckOut</h1>
+    </div>
+    <div id="mainPayment-container">
+        <div class="container-summary" id="container-summary">
+            <title>Black Adam</title>
+            <div class="ticket-name">Classic Ticket</div>
+            <div class="ticket-rupees">250</div>
+            <label>Number of tickets</label>
+            <input type="number" class="no-of-ticket">
+            <label>Convenience fee(1.78%)</label>
+            <p class="total-convi-fee">8.75</p>
+            <hr>
+            <label class="sub-total">Sub Total</label>
+            <p class="ticket-total">250</p>
+        </div>
+        <div class="container-payment">
+            <h1>Payment</h1>
+            <label>First Name</label>
+            <input type="text" class="input-fname">
+            <label>Last Name</label>
+            <input type="text" class="input-lname">
+            <label>Email</label>
+            <input type="email" placeholder="you@hmail.com" class="input-email">
+            <hr>
+            <label>Credit Card</label>
+            <input type="radio" id="credit-card" name="credit-Card" value="credit-card">
+            <label>Debit Card</label>
+            <input type="radio" id="debit-card" name="debit-Card" value="debit-card">
+            <label>UPI</label>
+            <input type="radio" id="upi" name="upi" value="upi">
+        </div>
+        <div class="credit-container">
+            <label>Name on card</label>
+            <input type="text" class="card-name" id="card-name">
+            <div>Full name displayed on the card</div>
+            <label>Credit card  number</label>
+            <input type="text" oninput="numberOnly(this.id);" maxlength="12" id="card-number" class="card-number">
+        </div>
+    </div>
+</section> -->
+<!-- Button -->
+<div class="btn-page" id="btn-page">
+<button id="prev" style="color:black">Prev</button>
+<button id="current" style="color:black">Current</button>
+<button id="next" style="color:black">Next</button>
+</div>
+
+<!-- Payment section -->
+<section class="payment">
+<section class="container" id="container">
+    <button type="submit" class="back-btn"> Back  
+    </button>
+    <h1 class="checkout-heading">CheckOut</h1>
+</section>
+<div class="payment-container">
+
+<div class="summary">
+    <p class="sum">Summary</p>
+    <p id="movie-name">Movie Name</p>
+    <div class="tickets">
+        <span>Classic Ticket</span>
+        <span>250</span>
+    </div>
+    <div class="tickets">
+        <span>Number of Tickets</span>
+        <span><input type="number" min="1" max="20" name="number" id="number" oninput="getInput(this)"></span>
+    </div>
+    <!-- <div class="tickets"> -->
+        <p id="ticket-value"></p>
+        <!-- <span>Convenience Fee(1.75%)</span>
+        <span>8.75</span>
+    <hr>
+        <span>Sub Total</span>
+        <span>508.75</span> -->
+    <!-- </div>  -->
+</div>
+<div class="checkout">
+
+    <p class="title">Payment</p>
+    <div class="payment-section">
+        <div class="payer-section">
+            <div>
+                <label for="fname" class="labelCl">First Name</label>
+                <input type="text" name="fname" id="fname">
+            </div>
+            <div>
+                <label for="lname" class="labelCl">Last Name</label>
+                <input type="text" name="lname" id="lname">
+            </div>
+            <div>
+                <label for="email" class="labelCl">Email</label>
+                <input type="email" name="email" id="email">
+            </div>
+        </div>
+        <hr>
+        <br>
+        <div class="mode-of-pay">
+            <input type="radio" class="selector" id="credit-card" name="payment" value="credit-card">
+            <label for="credit-card">Credit Card</label>
+            <input type="radio" class="selector" id="debit-card" name="payment" value="debit-card">
+            <label for="debit-card">Debit Card</label>
+            <input type="radio" class="selector" id="upi" name="payment" value="upi">
+            <label for="upi">Upi</label>
+        </div>
+        <div id="cards-types">
+            <div class="cards-type">
+                <label for="name-on-card">Name on card</label></br>
+                <input type="text" name="name-on-card" class="card-pay" id="name-on-card">
+                <p class="name-card-title">Full name as displayed on card</p>
+            </div>
+            <div class="cards-type">
+                <label for="card-type-number">Credit Card number</label></br>
+                <input type="text" oninput="numberOnly(this.id);" name="card-type-number" class="card-pay" maxlength="12" id="card-type-number">
+            </div>
+            <div class="cards-type">
+                <label for="expire">Expiration</label></br>
+                <input type="month" name="expire" class="card-pay" id="expire">
+            </div>
+            <div class="cards-type">
+                <label for="cvv-number">CVV</label></br>
+                <input type="password" oninput="numberOnly(this.id);" name="cvv-number" class="card-pay" id="cvv-number" maxlength="3">
+            </div>
+            
+        </div>
+        
+        <button class="proceed-btn">Proceed to Pay</button>
+    </div>
+</div>
+</div>
+</section>
+<!-- Footer section -->
+
+<footer class="footer">
+    <div class="copyright">
+        <i class="fa-solid fa-copyright"> copy right: 1992 Movie  <i class="fa-solid fa-video fa-lg" style="color: blueviolet"></i>  App </i>
+    </div>
+
+    <div class="contacts"> 
+        <i class="fa-solid fa-phone"> Phone: 7729044697</i>
+        
+    </div>
+</footer>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

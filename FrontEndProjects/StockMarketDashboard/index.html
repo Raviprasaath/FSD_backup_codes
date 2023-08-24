@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Agdasima&display=swap" rel="stylesheet">
+<!-- <canvas id="myChart"></canvas> -->
+</head>
+
+<body>
+    <div class="root-body">
+        <div class="bar-icon">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <div class="bar-close">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+        <div class="left-side-bar">
+            
+            <div class="nav-top">
+                <div class="logo">
+                    <img id="logo-img"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS47gpVHovs4b6jy4rjCm4rnny-Gkpg9aapTQ&usqp=CAU"
+                        alt="logo">
+                </div>
+                <nav class="nav-bar">
+                    <ul class="user-selection-nav-bar">
+
+                        <li>
+                            <a href="#dashBoard" class="ui-selection">
+                                <i class="fa-sharp fa-solid fa-table-columns"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#charts">
+                                <i class="fa-solid fa-chart-line"></i>
+                                Charts
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#news">
+                                <i class="fa-sharp fa-solid fa-newspaper"></i>
+                                News</a>
+                        </li>
+                        <li>
+                            <a href="#trends">
+                                <i class="fa-sharp fa-solid fa-arrow-trend-up"></i>
+                                Trends</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="nav-bottom">
+                <ul class="user-selection-nav-bar">
+                    <li>
+                        <a href="#settings">
+                            <i class="fa-sharp fa-solid fa-gear"></i>
+                            Settings
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="middle-page-data">
+            <div class="heading-portion">
+                <h1>DASHBOARD</h1>
+            </div>
+            <div class="table-of-data">
+                <!-- slection of trade type -->
+                <div class="trade-type-selection">
+                    <button class="trade-selection">INTRADAY</button>
+                    <button class="trade-selection">DAILY</button>
+                    <button class="trade-selection">WEEKLY</button>
+                    <button class="trade-selection">MONTHLY</button>
+                </div>
+                <!-- Table of Content -->
+                <div id="table-data">
+                    <!-- <div id="initial-popup">
+                        Please Choose a Stock to Explore a Data's
+                    </div> -->
+                    <table id="table-main">         
+                        
+                        <thead>
+                            <tr class="table-heading">
+                                <th class="trading-type-heading">Type of Trade</th>
+                                <th>OPEN</th>
+                                <th>HIGH</th>
+                                <th>LOW</th>
+                                <th>CLOSE</th>
+                                <th>VOLUME</th>
+                            </tr>    
+                        </thead>
+                        <tbody class="table-data-filling-in-script">
+                            
+                        </tbody>
+                        
+                        
+                    </table>
+
+
+                    
+                </div>
+                <div>
+
+                </div>
+            </div>
+            <div class="data-graph-splitting">
+                <div class="random-data-main-page">
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="rights-side-data">
+            <div class="searching-option">
+                <div id="searching-section">
+                    <input id="search-bar" type="text" name="input" placeholder="Search">
+                    <span>
+                        <button >
+                            <i id="fetchStart" class="fa-brands fa-searchengin"></i>
+                        </button>
+                        <button >
+                            <i id="search-close-button" class="fa-solid fa-xmark"></i>
+                        </button>
+                    </span>
+
+                </div>
+                <div class="searching-option-li active">
+
+
+
+                </div>
+            </div>
+            <div class="right-end-data">
+
+                <div id="images-container">
+                    <div class="news-feed">
+                        <!-- <img class="news-feed-banner"  src="https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F738923%2Fgeneric-upward-14.jpg&op=resize&w=700" alt="news-img">
+                        <div class="news-feed-a-title">
+                            <p class="news-feed-title">Why Shares of CleanSpark, Riot Platforms, and Hut 8 Mining Are Rising Today</p>
+                            <a class="newsfeed-anchor-link" href="https://www.fool.com/investing/2023/07/07/why-shares-of-cleanspark-riot-platforms-and-hut-8/">Read More</a>
+                        </div> -->
+                    </div>
+                </div>
+                <div id="quote-random">
+                    <div class="quote">
+                        I love the man that can smile in trouble, that can gather strength from distress, and grow brave by reflection. 'Tis the business of little minds to shrink, but he whose heart is firm, and whose conscience approves his conduct, will pursue his principles unto death.
+                    </div>
+                    <div class="author">
+                        Thomas Paine
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

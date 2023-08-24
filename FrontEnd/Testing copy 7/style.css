@@ -1,0 +1,16 @@
+
+body {
+  background-image: url("https://static.independent.co.uk/2023/01/20/11/GettyImages-1244124706.jpg");
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(20px);
+  background-repeat: no-repeat; 
+}
+.cont {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.cont img {
+  width: 400px;
+}

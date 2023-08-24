@@ -1,0 +1,91 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
+}
+.payment-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 15px;
+  width: 40%;
+  height: 40vh;
+}
+.title {
+  width: 55vw;
+}
+
+.sum, .title {
+  font-size: 24px;
+  font-weight: 800;
+}
+#movie-name {
+  font-weight: 600;
+}
+.tickets {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+hr {
+  width: 90%;
+  text-align: center;
+}
+.payment-section{
+  border: 1px solid black;
+  width: 90%;
+  height: 80vh;
+}
+
+
+#fname, #lname, #email {
+  height: 10px;
+  padding: 5px;
+  width: 60%;
+}
+
+.payer-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 97%;
+  height: 50px;
+  margin: 5px;
+  padding: 5px;
+}
+
+.name-card-title {
+  font-size: 12px;
+}
+
+.cards-type {
+  padding: 10px;
+}
+.cards-type input {
+  width: 70%;
+  padding: 8px;
+  margin-top: 10px;
+  border: 2px solid rgba(42, 41, 41, 0.3);
+  border-radius: 8px;
+}
+.proceed-btn {
+  border: none;
+  text-align: center;
+  padding: 10px 40%;
+  margin-left: 4%;
+  background-color: rgba(73, 20, 208, 0.519);
+  font-size: 15px;
+  border-radius: 10px;
+}

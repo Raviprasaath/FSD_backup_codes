@@ -1,0 +1,187 @@
+:root {
+    --primary-color: #2d2e30;
+    --primary-color-dull: #ffffff9b;
+    --secondary-color: white;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--primary-color);
+}
+
+.logo {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    
+}
+
+
+.main-page-split {
+    display: grid;
+    grid-template-columns: 80px auto;
+}
+
+.sidebar {
+    background-color: var(--primary-color);
+    height: 100vh;
+    transition: 1s ease-in-out;
+
+}
+
+
+.sidebar > ul > li > a {
+    color: var(--primary-color-dull);
+    transition: 0.3s ease-in-out;
+}
+
+.sidebar > ul {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    left: 30px;
+    height: 100vh;
+    line-height: 2.5rem;
+    width: 50px;
+    transition: 0.3s ease-in-out;
+}
+
+.hidden {
+    visibility: hidden;
+    display: none;
+}
+
+.name-logo-only-sidebar {
+    background-color: var(--primary-color);
+}
+
+.sidebar > ul > li > a:hover {
+    color: var(--secondary-color);
+    font-size: 1.15rem;
+    transition: 0.3s ease-in-out;
+
+}
+
+.sidebar > ul:hover {
+    width: 150px;
+    .hidden {
+        display: inline;
+        visibility: visible;
+        font-family:serif;
+    }
+    transition: 0s ease;
+    z-index: 2;
+}
+
+.main-section-splitter {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+#movies {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* movie 1 container */
+.movie-container {
+    display: flex;
+    width: 90vw;
+}
+.movies-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 205px;
+    margin-left: 10px;
+
+}
+
+.movie-card-title {
+    color: var(--secondary-color);
+    padding-left: 30px;
+}
+
+.movies-box img {
+    height: 200px;
+    width: 160px;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+
+.watchlist {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+
+.movies-box:hover {
+    transform: scale(1.5);
+    transition: 0.3s ease-in-out;
+
+    
+    .movie-hover {
+        height: fit-content;
+        visibility: visible;
+        display: flex;
+    }
+}
+
+.movie-hover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-color: var(--primary-color);
+    padding: 5px;
+    visibility: hidden;
+    /* display: none; */
+}
+
+.movie-name {
+    font-size: 1.1rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: var(--secondary-color);
+}
+.release-year {
+    font-size: 0.8rem;
+    font-family:Arial, Helvetica, sans-serif;
+    color: var(--secondary-color);
+}
+.overview {
+    font-size: 0.6rem;
+    font-family: monospace;
+    color: var(--secondary-color);
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.header-image {
+    margin: auto;
+    padding: 20px;
+    height: fit-content;
+}
+.header-image img{
+    width: 90vw;
+}
+
+

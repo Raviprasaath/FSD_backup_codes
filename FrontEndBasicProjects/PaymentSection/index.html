@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="payment-container">
+
+        <div class="summary">
+            <p class="sum">Summary</p>
+            <p id="movie-name">Movie Name</p>
+            <div class="tickets">
+                <span>Classic Ticket</span>
+                <span>250</span>
+            </div>
+            <div class="tickets">
+                <span>Number of Tickets</span>
+                <span><input type="number" name="number" id="number"></span>
+            </div>
+            <div class="tickets">
+                <span>Convenience Fee(1.75%)</span>
+                <span>8.75</span>
+            </div>
+            <hr>
+            <div class="tickets">
+                <span>Sub Total</span>
+                <span>508.75</span>
+            </div>
+        </div>
+        <div class="checkout">
+
+            <p class="title">Checkout</p>
+            <div class="payment-section">
+                <form action="">
+                <div class="payer-section">
+                        <div>
+                            <label for="fname" class="labelCl">First Name</label>
+                            <input type="text" name="fname" id="fname" required>
+                        </div>
+                        <div>
+                            <label for="lname" class="labelCl">Last Name</label>
+                            <input type="text" name="lname" id="lname" required>
+                        </div>
+                        <div>
+                            <label for="email" class="labelCl">Email</label>
+                            <input type="email" name="email" id="email" required>
+                        </div>
+                    </div>
+             
+                <hr>
+                <br>
+                
+
+
+                    <div class="mode-of-pay">
+                        <input type="radio" class="selector" id="credit-card" name="payment" required value="credit-card">
+                        <label for="credit-card">Credit Card</label>
+                        <input type="radio" class="selector" id="debit-card" name="payment" value="debit-card" required>
+                        <label for="debit-card">Debit Card</label>
+                        <input type="radio" class="selector" id="upi" name="payment" value="upi" required>
+                        <label for="upi">Upi</label>
+                    </div>
+                    <div id="cards-types">
+                        <div class="cards-type">
+                            <label for="name-on-card">Name on card</label></br>
+                            <input type="text" name="name-on-card" class="card-pay" id="name-on-card" required>
+                            <p class="name-card-title">Full name as displayed on card</p>
+                        </div>
+                        <div class="cards-type">
+                            <label for="card-type-number">Credit Card number</label></br>
+                            <input type="number" name="card-type-number" class="card-pay" id="card-type-number" required>
+                        </div>
+                        <div class="cards-type">
+                            <label for="expire">Expiration</label></br>
+                            <input type="month" name="expire" class="card-pay" id="expire" required>
+                        </div>
+                        <div class="cards-type">
+                            <label for="cvv-number">CVV</label></br>
+                            <input type="password" name="cvv-number" class="card-pay" id="cvv-number" required>
+                        </div>
+                        
+                    </div>
+                    
+                    <button class="proceed-btn">Proceed to Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

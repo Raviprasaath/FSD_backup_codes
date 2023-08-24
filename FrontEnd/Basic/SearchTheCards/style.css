@@ -1,0 +1,316 @@
+
+.top-portion {
+    background-image: url(https://wallpaperaccess.com/full/314182.jpg);
+    height: 700px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.logo img {
+    width: 100px;
+    padding: 10px;
+}
+
+.logo-home {
+    background-color: rgba(128, 128, 128, 0.422);
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: space-between;
+}
+
+.headings-inside {
+    display: flex;
+    flex-direction: row;
+}
+.headings-inside a {
+    text-decoration: none;
+}
+
+.hover-name {
+    padding: 10px;
+    list-style: none;
+    color: white;
+}
+
+.hover-name:hover {
+    background-color: rgba(106, 227, 187, 0.559);
+    
+}
+
+.search {
+    display: flex;
+    flex-direction: column;   
+    width: fit-content;
+    margin: auto;
+    margin-top: 220px;
+    background-color: rgba(173, 216, 230, 0.778);
+    border-radius: 10px;
+    padding: 5px;
+}
+.search-head {
+    text-align: center;
+    color: white;
+}
+
+
+
+.logo-home {
+    position: relative;
+    top: 15px;
+}
+
+
+.search-name {
+    background-color: rgb(237, 42, 42);
+    width: 350px;
+    margin: 5px;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+.search-bar {
+    margin: 5px;
+    font-size: 25px;
+}
+
+.middle-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: black;
+}
+
+.container {
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    height: 250px;
+    border-radius: 10px;
+    border: 1px solid black;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+}
+
+.container .container-price, .container .container-name {
+    color: white;
+    width: 100%;
+    text-align: center;
+}
+
+
+.con-img img {
+    width: 100%;
+    border-radius: 10px;
+}
+.container:hover {
+    transform: scale(1.04);
+    box-shadow: 0px 0px 4px 0px skyblue;
+}
+.container-price .percent {
+    background-color: rgb(23, 177, 238);
+    border-radius: 5px;
+
+    padding: 5px;
+    margin: 5px;
+}
+.container-name {
+    padding: 5px;
+    margin: 5px;
+}
+
+.strike {
+    background-color: black;
+    padding: 5px;
+    margin: 5px;
+    opacity: 0.8;
+}
+
+.signup {
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 50%;
+    color: white;
+}
+
+
+.signup-detail {
+    position: relative;
+    width: 100%;
+    background-color: rgba(128, 54, 185, 1);
+}
+
+
+.gif-bg {
+    display: flex;
+    justify-content: center;
+       
+}
+
+.gif-bg img {
+    width: 30%;
+    margin: 5%; 
+}
+
+.gif-container {
+    background-color: rgba(0,0,0,0.6);
+    width: 80%;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.gif-container:hover {
+    box-shadow: 2px 2px 20px 2px rgb(191, 235, 16);
+}
+
+
+.signin-title {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: larger;
+    font-weight: bold;
+    width: 250px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.footer-portion {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: end;
+}
+
+.foot {
+    list-style: none;
+    padding: 10px;
+}
+
+
+
+.foot-base {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.aherf {
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px 5px 10px;
+    margin: 5px 10px 5px 10px;
+    background-color: rgb(22, 165, 247);
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
+
+#name, #pass {
+    border-radius: 5px;
+    font-size: medium;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+
+.container a {
+    text-decoration: none;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .headings-inside{
+        display: flex;
+        flex-direction: column;
+    }
+    .logo-home {
+        position: sticky;
+        display: flex;
+        flex-direction: column;
+        font-size: small;
+        width: fit-content;   
+    }
+    .signin-title {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        font-size: small;
+        font-weight: bold;
+        width: fit-content;
+        padding: 10px;
+    }
+    .signup {
+        position:absolute;
+        color: white;        
+        text-align: center; 
+        margin-left: 0px;
+        background-color: rgba(0,0,0,0.6);
+        padding: 10px 30px 10px 30px;
+        margin:auto;
+        border-radius: 10px;
+    }
+    .signup:hover {
+        box-shadow: 2px 2px 20px 2px rgb(191, 235, 16);
+    }
+    .gif-container img{
+        display: none;
+    }
+    .signup-detail {        
+        background-color: rgba(128, 54, 185, 1);
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .search {
+        display: flex;
+        flex-direction: column;   
+        width: fit-content;
+        margin: auto;
+        margin-top: 220px;
+        margin-left: 28%;
+        margin-right: 10%;
+        background-color: rgba(173, 216, 230, 0.778);
+        border-radius: 7px;
+        padding: 3px;
+    }
+    .foot-base {
+        display: flex;
+        flex-direction: column;
+    }
+    .foot:hover {
+        background-color: rgba(0, 255, 255, 0.63);
+        width: 40%;
+    }
+    .footer-portion {
+        background-color: black;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+    }
+}
+
+
+
+
+
+
+
