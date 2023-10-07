@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="heading">Rock Paper Scissors</h1>
+    <div class="container">
+        <div class="player-1-selection">
+            <div class="selectors" onclick="handleStone()">
+                <img class="selector-img" src="./assets/stone.png" alt="stone">
+            </div>
+            <div class="selectors" onclick="handlePaper()">
+                <img class="selector-img" src="./assets/paper.png" alt="paper">
+            </div>
+            <div class="selectors" onclick="handleScissor()">
+                <img class="selector-img" src="./assets/scissor.jpg" alt="scissor">
+            </div>
+        </div>
+        <div id="checking-area">
+            <div id="player1-selected">
+                
+
+            </div>
+            <div id="player-2">
+                
+            </div>
+        </div>
+        <div id="result">
+
+        </div>
+        <div class="firework"></div>
+        
+        <button id="btn-submit">Play Again</button>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
