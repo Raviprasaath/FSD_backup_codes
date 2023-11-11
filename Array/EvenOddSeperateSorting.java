@@ -6,7 +6,7 @@ public class EvenOddSeperateSorting {
     public static void main (String[] args) {
         int [] array = {1,2,3,5,4,7,10};
         int n = array.length;
-             
+
         ArrayList <Integer> list1 = new ArrayList<>();
         ArrayList <Integer> list2 = new ArrayList<>();
         ArrayList <Integer> list3 = new ArrayList<>();

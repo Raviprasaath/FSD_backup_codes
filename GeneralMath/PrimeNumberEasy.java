@@ -6,7 +6,8 @@ public class PrimeNumberEasy {
             return false;
         }
 
-        for (int i = 2; i <= Math.sqrt(number); i++) {
+        // for (int i = 2; i <= Math.sqrt(number); i++) {
+        for (int i = 2; i * i <= (number); i++) {
             if (number % i == 0) {
                 return false;
             }

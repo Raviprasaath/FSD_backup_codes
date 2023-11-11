@@ -1,4 +1,4 @@
-package Strings;
+package Leetcode.Strings;
 
 public class RemoveTrailingZerosFromaString_2710 {
     public static void main(String[] args) {

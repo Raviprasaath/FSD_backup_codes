@@ -6,9 +6,9 @@ public class WaveArray {
         waveSort(array);
         for (int i=0; i<array.length; i++) {
             System.out.print(array[i] + " ");
-        }
-        
+        }        
     }
+    
     public static void waveSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             if (i % 2 == 0) {

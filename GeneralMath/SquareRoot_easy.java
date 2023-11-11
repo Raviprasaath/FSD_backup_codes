@@ -2,7 +2,7 @@ package GeneralMath;
 
 public class SquareRoot_easy {
     public static void main(String[] args) {
-        int n = 17;
+        int n = 16;
         double ans = sqrt(n);
         System.out.printf("%.2f", ans);
     }

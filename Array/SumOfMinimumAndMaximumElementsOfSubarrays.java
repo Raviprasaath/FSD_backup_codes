@@ -7,10 +7,10 @@ public class SumOfMinimumAndMaximumElementsOfSubarrays {
         int m = 3;
                 
         int p1 = 0;
-        int p2 = m-1; 
+        int p2 = m; 
         long sum = 0;
 
-        while (p2 < n) {
+        while (p2 <= n) {
             sum += maxMin (array, p1, p2);
             p1++;
             p2++;
@@ -20,7 +20,7 @@ public class SumOfMinimumAndMaximumElementsOfSubarrays {
     public static int maxMin(int [] array, int p1, int p2) {
         int max = Integer.MIN_VALUE;
         int min = Integer.MAX_VALUE;
-        for (int i=p1; i<=p2; i++) {
+        for (int i = p1; i < p2; i++) {
             max = Math.max(max, array[i]);
             min = Math.min(min, array[i]);
         }

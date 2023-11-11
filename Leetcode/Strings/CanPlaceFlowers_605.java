@@ -1,4 +1,4 @@
-package Strings;
+package Leetcode.Strings;
 
 public class CanPlaceFlowers_605 {
     public static void main(String[] args) {

@@ -7,7 +7,8 @@ public class RotateArrayKtime {
         int array[]={1,2,3,4,5,6,7,8};
         int n = array.length;
         int kTimes=3;
-        rotatearraylist(array, n, kTimes);
+        rotation(array, kTimes);
+        // rotatearraylist(array, n, kTimes);
     }
 
     public static void rotatearraylist(int[] arr,int n,int k ){
@@ -20,5 +21,21 @@ public class RotateArrayKtime {
             list.remove(n);
         }
         System.out.print(list);
+    }
+    public static void rotation(int [] array, int k) {
+        int [] ans = new int[array.length];
+        int j = 0;
+        for (int i=array.length - k; i<array.length; i++) {
+            ans[j] = array[i];
+            j++;
+        }
+        int len = k;
+        for (int i=0; i<array.length-k; i++) {
+            ans[len] = array[i];
+            len++;
+        }
+        for (int i=0; i<array.length; i++) {
+            System.out.print(ans[i]+" ");
+        }
     }
 }

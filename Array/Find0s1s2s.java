@@ -1,6 +1,4 @@
 package Array;
-
-
 public class Find0s1s2s {
     public static void main(String[] args) {
         int array[]={0,0,2,2,1,1,0,1,2,0,0};
@@ -17,7 +15,6 @@ public class Find0s1s2s {
             if(array[i]==2){
                 twocount++;
             }
-
         } 
         int [] array2=new int[array.length];
         for (int i = 0; i < zerocount; i++) {
@@ -32,6 +29,5 @@ public class Find0s1s2s {
         for (int i = 0; i < array2.length; i++) {
             System.out.print(array2[i]+" ");
         }
-
     }
 }

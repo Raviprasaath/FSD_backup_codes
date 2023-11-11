@@ -1,4 +1,4 @@
-package Strings;
+package Leetcode.Strings;
 
 public class RotateString_796 {
     public static void main(String[] args) {
