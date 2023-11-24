@@ -108,12 +108,12 @@ console.dir(caaard)
 
 
 
-// // method 1
-// // childArray.forEach(liElement => {
-// //     if (liElement.textContent === 'ravi') {
-// //         console.log('result is true')
-// //     }
-// // })
+// method 1
+// childArray.forEach(liElement => {
+//     if (liElement.textContent === 'ravi') {
+//         console.log('result is true')
+//     }
+// })
 
 
 
@@ -157,18 +157,18 @@ console.dir(caaard)
 
 
 
-// // ----------------- 02-05-2023 -----------------------
-// //  delete or remove from list
+// ----------------- 02-05-2023 -----------------------
+//  delete or remove from list
 
-// //  1.select the element
-// //  2. .remove() -> whole list
-// // const removeList = document.getElementById("names")
-// // removeList.remove()  // it remove all elements
+//  1.select the element
+//  2. .remove() -> whole list
+// const removeList = document.getElementById("names")
+// removeList.remove()  // it remove all elements
 
 // const removeLast = document.querySelector("#names > li:nth-child(6)");
 // removeLast.remove();
 // console.log(removeLast)
 
-// // go to inspect page right click the element and do copy -> copy selector
-// // now paste inside query selector
+// go to inspect page right click the element and do copy -> copy selector
+// now paste inside query selector
 

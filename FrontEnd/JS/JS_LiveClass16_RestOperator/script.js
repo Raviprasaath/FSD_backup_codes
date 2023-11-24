@@ -9,15 +9,15 @@
 // }
 
 // child("abcd", "5th std", 2, "Father", "Mother", "TamilNadu", "India");
-// // output
-// // abcd 5th std 2
-// // [ 'Father', 'Mother', 'TamilNadu', 'India' ]
+// output
+// abcd 5th std 2
+// [ 'Father', 'Mother', 'TamilNadu', 'India' ]
 
 
 
 
 
-// // default value of Argument
+// default value of Argument
 // function child (name, standard, rollNumber = 1) {   // if we don't give 1 means it give undefined in output      
 //     console.log(name, standard, rollNumber);
 // }

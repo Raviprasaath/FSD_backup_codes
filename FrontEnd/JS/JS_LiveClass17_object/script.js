@@ -207,7 +207,6 @@ console.log("personOwnProperty", personOwnPropertyArr, newPersonOwnPropertyArr)
 const person2 = {
     name : "ravi",
     rollNumber: 1
-
 }
 const newPerson2 = Object.create(person);
 

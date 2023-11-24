@@ -194,7 +194,7 @@ fetchQuote();
 
 
 // why callbacks are not used 
-// 1. Pyramid of doom
+// 1. Pyramid of doom or callback hell
 // 2. Order of execution of inner callbacks is confusing  (out of normal human recognizable pattern)
 // example
 // function googlecall('onbeading mails', (work)=> {
