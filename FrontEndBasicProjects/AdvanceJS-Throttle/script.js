@@ -10,7 +10,7 @@ function throttleSearchHandler(e) {
         cancall = false;
         setTimeout(() => {
             cancall = true;
-        }, 2000);
+        }, 500);
     }
 }
 
