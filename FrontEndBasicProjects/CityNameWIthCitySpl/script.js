@@ -6,7 +6,6 @@ container.appendChild(attach);
 
 btn.addEventListener('click',(e)=> {
     e.preventDefault();
-    
 });
 
 btn.addEventListener('click', display);

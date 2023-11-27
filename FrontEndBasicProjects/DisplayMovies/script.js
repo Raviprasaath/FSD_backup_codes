@@ -31,6 +31,7 @@ function movieCard(movie) {
 }
 function asccending() {
     const moviesContainer = document.getElementById('movies');
+    console.log(moviesContainer.children)
     const movies = Array.from(moviesContainer.children);
     movies.sort((a, b) => {
     const yearA = parseInt(a.querySelector('.release-year').textContent);
