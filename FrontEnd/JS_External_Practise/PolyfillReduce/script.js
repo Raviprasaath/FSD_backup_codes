@@ -11,9 +11,6 @@ console.log(ans);
 
 
 
-
-
-
 Array.prototype.reduce = function(callback, initialValue) {
     let accumulator = initialValue !== undefined ? initialValue : this[0];
 
