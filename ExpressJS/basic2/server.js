@@ -3,6 +3,7 @@ const app =express();
 const path = require('path');
 const PORT = 3000;
 
+
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'views', 'index.html'));
 // })
@@ -45,6 +46,11 @@ app.get('/hello(.html)?', (req, res, next) => {
 })
 
 
+// now we going to gave a path as chain
+// its not found so going to redirect but by chain method
+// it will search in one, two, three and finally it will print
+
+
 const one = (req, res, next) => {
     console.log('one');
     next();
@@ -61,6 +67,9 @@ const three = (req, res, next) => {
 }
 
 app.get('/chain(.html)?', [one, two, three]);
+
+
+
 
 // now user is typing as a non relevant url
 // needs to do 2 things - linking with html file 

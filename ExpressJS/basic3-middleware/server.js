@@ -1,7 +1,39 @@
 const express = require('express');
 const app =express();
 const path = require('path');
-const PORT = 3000;
+const PORT = 5500;
+
+
+// previously we gave a access to index.html file only this will not read linked css
+// so we need to tell initally by using this static 
+// this is a built in middleware of express
+// now in url if we type  like /css/indexFile.css -> this will shows what we written inside the css file
+// this is in built 
+
+// app.use(express.static(path.join(__dirname, './public'))) 
+
+
+
+
+
+// let's make custom middleware
+// when making custom middleware next keyword is important
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.path}`)
+})
+// in the above code in local host if we give a path as a new-page means it will give a ans in terminal
+// same for diff diff paths
+
+// API -application programming interface
+// simply if client giving some path so, based upon the path and request it will
+// going to given the response this is called API
+
+
+
+
+
+
+
 
 // app.get('/', (req, res) => {
 //     res.sendFile(path.join(__dirname, 'views', 'index.html'));
