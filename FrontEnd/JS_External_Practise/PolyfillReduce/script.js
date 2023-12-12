@@ -28,3 +28,15 @@ const sum = numbers.reduce((accumulator, currentValue) => {
 }, 0);
 
 console.log(sum);
+
+
+
+// ------------------from newton assignment
+// Array.prototype.myReduce = function (cb, initialValue) {
+//     let accumlator = initialValue;
+  
+//     for(let item of this) {
+//       accumlator = cb(accumlator, item);
+//     }
+//     return accumlator;
+//   };
