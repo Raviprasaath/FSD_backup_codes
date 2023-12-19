@@ -58,3 +58,16 @@ function func () {
 
 
 // so in terminal if i write this means -> func.mybind() -> o/p was test
+
+
+
+
+
+
+
+// Akshay Shainey notes
+let arr = ["a", "b", "c"];
+// in console if we typing arr. -> which gives many suggestions
+// same for if we created an object
+// for functions also call, apply, bind will you get the access
+
