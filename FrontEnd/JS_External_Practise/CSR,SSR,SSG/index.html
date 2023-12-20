@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="font-family: 'Arial', sans-serif; background-color: #f7f7f7; color: #333; padding: 20px;">
+
+    <h3 style="color: #008080;">
+        Client-side rendering (CSR), server-side rendering (SSR), and static site generation (SSG) are three different
+        approaches to generating and rendering web pages.
+    </h3>
+
+
+    <h1 style="color: #0066cc;">
+        Client-Side Rendering (CSR):
+    </h1>
+
+    <h3 style="color: #008080;">
+        How it works:
+    </h3>
+    <div>
+        <p>
+            In CSR, the entire application is loaded in the browser, and the rendering of the UI happens on the client
+            side.
+            The initial HTML is minimal, often just a container for the JavaScript application.
+            JavaScript is responsible for fetching data from the server and rendering the UI dynamically.
+        </p>
+        <h3 style="color: #008080;">
+            Pros:
+        </h3>
+        <p>
+            Faster initial page load, as only a lightweight HTML file is initially sent to the client.
+            Interactivity and dynamic updates are possible without full page reloads.
+        </p>
+        <h3 style="color: #008080;">
+            Cons:
+        </h3>
+        <p>
+            Slower perceived page load time, especially on slower devices or network connections.
+            Search engine optimization (SEO) can be challenging, as search engines might not wait for JavaScript
+            execution.
+        </p>
+    </div>
+
+    <h1 style="color: #0066cc;">
+        Server-Side Rendering (SSR):
+    </h1>
+
+    <div>
+        <h3 style="color: #008080;">
+            How it works:
+        </h3>
+        <p>
+            In SSR, the server generates the HTML for each request and sends a fully rendered page to the client.
+            Initial HTML content includes the rendered UI and data fetched from the server.
+            JavaScript is still used for client-side interactivity, but the initial page load is more complete.
+        </p>
+        <h3 style="color: #008080;">
+            Pros:
+        </h3>
+        <p>
+            Faster perceived page load time, as the client receives a fully rendered page.
+            Better SEO, as search engines receive fully rendered content.
+        </p>
+        <h3 style="color: #008080;">
+            Cons:
+        </h3>
+        <p>
+            Potentially higher server load, as the server has to generate HTML for each request.
+            Slower initial page load compared to CSR in some cases.
+        </p>
+
+    </div>
+    <h1 style="color: #0066cc;">
+        Static Site Generation (SSG):
+    </h1>
+    <h3 style="color: #008080;">
+        How it works:
+    </h3>
+    <div>
+        In SSG, pages are pre-rendered at build time, and the generated HTML files are served statically.
+        Content is fetched at build time, allowing for a fully static deployment.
+        No server processing is needed for each user request.
+        <h3 style="color: #008080;">
+            Pros:
+        </h3>
+        <p>
+            Fastest page load time as static HTML files can be served directly from a content delivery network (CDN).
+            Highly scalable, as there is no server processing for each request.
+        </p>
+        <h3 style="color: #008080;">
+            Cons:
+        </h3>
+        <p>
+            Limited dynamic content without additional client-side JavaScript for hydration.
+            Content updates may require a rebuild of the entire site.
+        </p>
+    </div>
+
+    <h3 style="color: #008080;">
+        Use Cases:
+    </h3>
+    <p style="color: #333;">
+
+        Use CSR for highly interactive applications where initial page load speed is less critical.
+        Use SSR for applications that require good SEO and faster perceived page load times.
+        Use SSG for content-centric sites, blogs, and landing pages where content doesn't change frequently, and fast
+        page load times are crucial.
+    </p>
+
+</body>
+
+</html>
