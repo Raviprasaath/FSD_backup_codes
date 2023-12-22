@@ -3,7 +3,7 @@ require("dotenv").config();
 const mongoose = require('mongoose');
 const app = express();
 
-// const taskRoutes = require("./routes/taskRoute");
+const taskRoutes = require("./routes/taskRouter");
 
 app.use((req, res, next)=> {
     console.log("path "+ req.path +" method "+req.method);
@@ -11,10 +11,6 @@ app.use((req, res, next)=> {
 })
 
 app.use(express.json());
-
-app.get('/', (req, res)=> {
-    res.send('Hello Ravi ')
-})
 
 // Data Base connection
 mongoose.connect(process.env.MONGO_URI)
@@ -27,8 +23,4 @@ mongoose.connect(process.env.MONGO_URI)
         console.log(error);
     })
 
-
-
-
-// app.use("/api/tasks", taskRoutes);
-
+app.use("/api/tasks", taskRoutes);
