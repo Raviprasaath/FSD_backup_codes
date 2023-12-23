@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config();
-const route = require('./routes/authenticationRouter');
+const contactRoute = require('./routes/authenticationRouter');
+const userRoute = require('./routes/userRoute');
 const mongoose = require('mongoose');
 const errorHandlers = require('./middleware/errorHandlers');
 
@@ -12,7 +13,9 @@ app.use('/', (req, res, next)=> {
     next();    
 })
 
-app.use("/", route);
+app.use("/contacts", contactRoute);
+app.use("/user", userRoute);
+
 app.use(errorHandlers);
 
 mongoose.connect(process.env.MONGO_URI).then(()=> {
