@@ -1,6 +1,7 @@
 import Footer from "./Components/Footer/Footer"
 import Homepage from "./Components/Homepage/Homepage"
 import MovieDetailPage from "./Components/MovieDetailPage/MovieDetailPage"
+import MovieDetailDummyPage from "./Components/MovieDetailDummyPage/MovieDetailDummyPage"
 import Category from "./Components/Category/Category"
 
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
@@ -12,7 +13,8 @@ function App() {
     createRoutesFromElements(
       <Route path='/' element={<RootLayout />}>
         <Route index element = { <Homepage /> }/>
-        <Route path='category' element = { <MovieCollection /> }>
+        <Route path='category' element = { <MovieDetailDummyPage /> }>        
+          <Route index element = { <MovieCollection /> }/>
           <Route path=':id' element = { <MovieDetailPage /> }/>
         </Route>
         <Route path='movie' element = { <Category /> }>

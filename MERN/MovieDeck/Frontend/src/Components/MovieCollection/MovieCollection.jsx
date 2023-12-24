@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import { getNowPlaying, getPopular, getSingleMovie, getTopRated, getUpcoming } from '../../slice/slice';
 
 const MovieCollection = () => {
@@ -8,7 +8,9 @@ const MovieCollection = () => {
     const dispatch= useDispatch();
     const { screenMode, isLoading, popularMovieList, nowPlayingMovieList, topRatedMovieList, upcomingMovieList } = useSelector((state) => state.movieReducer);
     const dataLoad = popularMovieList || nowPlayingMovieList || topRatedMovieList || upcomingMovieList
-    console.log(dataLoad)
+    const handlerDispatch = (idVal) => {
+        dispatch(getSingleMovie({id: idVal}));
+    }
     useEffect(()=> {
         if (location.state.type === "upcoming") {
             dispatch(getUpcoming())
@@ -20,19 +22,19 @@ const MovieCollection = () => {
             dispatch(getTopRated())
         }
     }, [])
+
   return (
     <>
+    <div id='check'className='flex flex-row justify-center flex-wrap gap-4 px-2 py-4'  >
         {dataLoad?.results?.map((item)=> (
-            <Link key={item.id} onClick={()=>dispatch(getSingleMovie({id: item.id}))} to={`/category/${item.id}`}>
-                <div className='flex' >
-                <div className='cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
+            <Link key={item.id} onClick={()=>handlerDispatch(item.id)}  to={`/category/${item.id}`}>
+                <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
                     <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" />
                     {item.title}
                 </div>
-            </div>
             </Link>
-
-    ))}
+        ))}
+    </div>
     </>
   )
 }
