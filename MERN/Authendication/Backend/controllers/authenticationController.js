@@ -4,7 +4,7 @@ const authenticationModel = require('../models/authenticationModel')
 
 const getUserDetail = async (req, res) => {
     try {
-        const allDetails = await authenticationModel.find({});
+        const allDetails = await authenticationModel.find({user_id: req.user.id});
         res.status(200).json(allDetails);
     } catch (e) {
         res.status(400).json({ error: e.message })
@@ -18,7 +18,7 @@ const addingUserDetail = async (req, res) => {
             return res.status(400).send("All fields are mandatory !");
         }
 
-        const contact = await authenticationModel.create({ name, email, phone });
+        const contact = await authenticationModel.create({ name, email, phone,  });
         res.status(201).json(contact);
     } catch (e) {
         res.send(400).json({error: "Something went wrong"})

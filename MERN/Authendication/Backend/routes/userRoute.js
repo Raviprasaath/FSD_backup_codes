@@ -7,7 +7,7 @@ const validateToken = require('../middleware/validateTokenHandler');
 
 route.post('/register', userRegister)
 route.post('/login', userLogin)
-route.get('/current', getCurrentUser)
+route.get('/current', validateToken, getCurrentUser)
 
 
 module.exports = route;
