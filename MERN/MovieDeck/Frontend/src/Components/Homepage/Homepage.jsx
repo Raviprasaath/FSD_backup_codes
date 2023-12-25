@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const Homepage = () => {
     const { screenMode, isLoading, popularMovieList, nowPlayingMovieList, topRatedMovieList, upcomingMovieList } = useSelector((state) => state.movieReducer);
     const dispatch = useDispatch();
-
+    
     const LazyCarousel = React.lazy(()=>import("../Carousel/Carousel"));
     
 
@@ -25,28 +25,28 @@ const Homepage = () => {
         <>
             <div className={`w-[100%] m-auto px-4 ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>                
                 <HomeHeaderCarousel />
-                <Link to='category' state={{type: "upcoming"}}>
+                <Link to='upcoming' state={{type: "upcoming"}}>
                     <h2 className='cursor-pointer font-bold uppercase p-1 hover:underline'>Upcoming</h2>
                 </Link>
                 <Suspense fallback={<Loader />}>
                     <LazyCarousel props={upcomingMovieList}/>                
                 </Suspense>
                 <div className='my-4'></div>
-                <Link to='category' state={{type: "now-showing"}}>
+                <Link to='now-showing' state={{type: "now-showing"}}>
                     <h2 className='cursor-pointer font-bold uppercase p-1 hover:underline'>Now Showing</h2>
                 </Link>
                 <Suspense fallback={<Loader />}>
                     <LazyCarousel props={nowPlayingMovieList}/>
                 </Suspense>
                 <div className='my-4'></div>
-                <Link to='category' state={{type: "popular"}}>
+                <Link to='popular' state={{type: "popular"}}>
                     <h2 className='cursor-pointer font-bold uppercase p-1 hover:underline'>Popular Movies</h2>
                 </Link>
                 <Suspense fallback={<Loader />}>
                     <LazyCarousel props={popularMovieList}/>
                 </Suspense>
                 <div className='my-4'></div>
-                <Link to='category' state={{type: "top-rated"}}>
+                <Link to='top-rated' state={{type: "top-rated"}}>
                     <h2 className='cursor-pointer font-bold uppercase p-1 hover:underline'>Top Rated</h2>
                 </Link>
                 <Suspense fallback={<Loader />}>

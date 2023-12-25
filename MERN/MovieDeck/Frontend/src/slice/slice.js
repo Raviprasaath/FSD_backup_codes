@@ -28,7 +28,8 @@ const createMovieAsyncThunk = (name, type) => {
             Authorization: `Bearer ${API_TOKEN}`,
           },
         };
-        const url = `${BASE_URL}${type}?language=en-US&page=${page}`
+        const pageNo = page || page.page;
+        const url = `${BASE_URL}${type}?language=en-US&page=${pageNo}`
         try {
           const response = await fetch(url, option);
   

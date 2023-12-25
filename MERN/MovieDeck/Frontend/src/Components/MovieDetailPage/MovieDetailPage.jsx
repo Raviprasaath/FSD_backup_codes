@@ -64,7 +64,7 @@ const MovieDetailPage = () => {
 
                   <div className="mt-4 flex items-center">
                     <span className="bg-yellow-500 text-gray-900 px-2 py-1 rounded">
-                      {singleMovieFetch?.vote_average} / 10
+                      {singleMovieFetch?.vote_average.toFixed(1)} / 10
                     </span>
                     <span className="ml-2">{singleMovieFetch?.vote_count} votes</span>
                   </div>

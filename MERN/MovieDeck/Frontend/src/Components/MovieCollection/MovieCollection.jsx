@@ -8,51 +8,81 @@ import { Discuss } from 'react-loader-spinner'
 const MovieCollection = () => {
     const location = useLocation();
     const dispatch= useDispatch();
-    const { screenMode, isLoading, popularMovieList, nowPlayingMovieList, topRatedMovieList, upcomingMovieList } = useSelector((state) => state.movieReducer);
+    const { screenMode, popularMovieList, nowPlayingMovieList, topRatedMovieList, upcomingMovieList } = useSelector((state) => state.movieReducer);
     const [loader, setLoader] = useState(true);
-    const dataLoad = popularMovieList || nowPlayingMovieList || topRatedMovieList || upcomingMovieList
+    const [page, setPage] = useState(1);
+    const [dataLoad, setDataLoad] = useState([]);
+
     const handlerDispatch = (idVal) => {
         dispatch(getSingleMovie({id: idVal}));
     }
+
+    const handlerPageControl = (value) => {
+        if (value === "prev" && page > 1) {
+            setPage(prev => prev - 1)
+        } else if (value === "next" && page <= dataLoad.total_pages) {
+            setPage(prev => prev + 1)
+        }
+    }
+
     useEffect(()=> {
         if (location.state.type === "upcoming") {
-            dispatch(getUpcoming())
+            dispatch(getUpcoming({ type: 'upcoming', page: page+1 }))
+            setDataLoad(upcomingMovieList);
         } else if (location.state.type === "now-showing") {
-            dispatch(getNowPlaying())
+            dispatch(getNowPlaying({ type: 'now_playing', page: page+1 }))
+            setDataLoad(nowPlayingMovieList)
         } else if (location.state.type === "popular") {
-            dispatch(getPopular())
+            dispatch(getPopular({ type: 'popular', page: page+1 } ))
+            setDataLoad(popularMovieList)
         } else if (location.state.type === "top-rated") {
-            dispatch(getTopRated())
+            dispatch(getTopRated({ type: 'top_rated', page: page+1 }))
+            setDataLoad(topRatedMovieList)
         }
         const delay = setTimeout(()=> {
             setLoader(false);
         }, 1000)
         return (()=>delay);
-    }, [])
+
+    }, [page])
+
   return (
     <>  
-        <div id='check'className={`flex flex-row justify-center flex-wrap gap-4 px-2 py-4 ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}  >
-            {dataLoad?.results?.map((item)=> (
-                <Link key={item.id} onClick={()=>handlerDispatch(item.id)}  to={`/category/${item.id}`}>
-                    <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
-                        {loader ? (<div className={`flex justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
-                            <Discuss
-                                visible={true}
-                                height="80"
-                                width="80"
-                                ariaLabel="discuss-loading"
-                                wrapperStyle={{}}
-                                wrapperClass="discuss-wrapper"
-                                color="#fff"
-                                backgroundColor="#F4442E"
-                                />
-                        </div>):(
-                            <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" />
-                        )}
-                        {item.title}
-                    </div>
-                </Link>
-            ))}
+        <div className={`flex flex-col justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
+            <div id='check'className={`flex flex-row justify-center flex-wrap gap-4 px-2 py-4 `}  >
+                {dataLoad?.results?.map((item)=> (
+                    <Link key={item.id} onClick={()=>handlerDispatch(item.id)}  to={`${item.id}`}>
+                        <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
+                            {loader ? (<div className={`flex justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
+                                <Discuss
+                                    visible={true}
+                                    height="80"
+                                    width="80"
+                                    ariaLabel="discuss-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass="discuss-wrapper"
+                                    color="#fff"
+                                    backgroundColor="#F4442E"
+                                    />
+                            </div>):(
+                                <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" />
+                            )}
+                            {item.title}
+                        </div>
+                    </Link>
+                ))}
+            </div>
+            <div className='flex gap-3 '>
+                <button onClick={()=>handlerPageControl("prev")} className="bg-green-500 hover:bg-green-700 text-white text-[1rem] px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green">
+                    Prev
+                </button>
+                <div className="bg-green-500 text-white text-[1rem] px-3 py-1 rounded-md">
+                    Current Page: {page}
+                </div>
+                <button onClick={()=>handlerPageControl("next")} className="bg-green-500 hover:bg-green-700 text-white text-[1rem] px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green">
+                    Next
+                </button>
+            </div>
         </div>
     </>
   )

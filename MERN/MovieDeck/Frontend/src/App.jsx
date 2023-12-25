@@ -9,11 +9,12 @@ import RootLayout from "./Layout/RootLayout"
 import MovieCollection from "./Components/MovieCollection/MovieCollection"
 
 function App() {
+  
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path='/' element={<RootLayout />}>
         <Route index element = { <Homepage /> }/>
-        <Route path='category' element = { <MovieDetailDummyPage /> }>        
+        <Route path=':name' element = { <MovieDetailDummyPage /> }>        
           <Route index element = { <MovieCollection /> }/>
           <Route path=':id' element = { <MovieDetailPage /> }/>
         </Route>
