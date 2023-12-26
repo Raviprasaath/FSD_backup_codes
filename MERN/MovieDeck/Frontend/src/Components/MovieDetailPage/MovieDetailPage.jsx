@@ -15,6 +15,8 @@ const MovieDetailPage = () => {
 
   const dispatch = useDispatch();
 
+  const localStore = JSON.parse(localStorage.getItem('watchList')) || [];
+
   const handleWatchTrailer = (id) => {
     dispatch(getTrailerOut({id: id}))
     setCount((prev)=>prev+1);
@@ -30,6 +32,12 @@ const MovieDetailPage = () => {
   const handleCloseTrailerModal = () => {
     setShowTrailerModal(false);
   };
+
+  const handlerAddToWatchList = (movie) => {
+    localStore.push(movie)
+    localStorage.setItem('watchList', JSON.stringify(localStore));
+  }
+
   useEffect(()=> {
     if (trailerLink) {
       const key = trailerLink?.results?.filter((item)=>item.name.includes("Trailer")||item.name.includes("Teaser"))
@@ -106,7 +114,7 @@ const MovieDetailPage = () => {
                 Watch Trailer
               </button>
 
-              <button className="mt-4 bg-green-500 hover:bg-green-700 text-white text-[1rem] px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green" onClick={() => addToWatchList(singleMovieFetch)}>
+              <button className="mt-4 bg-green-500 hover:bg-green-700 text-white text-[1rem] px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green" onClick={() => handlerAddToWatchList(singleMovieFetch)}>
                 Add to Watch List
               </button>
             </div>
