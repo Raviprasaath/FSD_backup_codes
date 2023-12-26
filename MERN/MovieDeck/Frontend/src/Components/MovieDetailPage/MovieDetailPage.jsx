@@ -4,19 +4,22 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 import { getTrailerOut } from '../../slice/slice';
 import { FidgetSpinner } from 'react-loader-spinner'
 import LazyLoader from '../LazyLoader/LazyLoader';
+import { IoMdCloseCircle } from "react-icons/io";
 
 const MovieDetailPage = () => {
   const { singleMovieFetch, screenMode, trailerLink, isLoading } = useSelector((state) => state.movieReducer);
   const [showTrailerModal, setShowTrailerModal] = useState(false);
   const [trailerPath, setTrailerPath] = useState("");
   const [count, setCount] = useState(0);
-
   const [spinner, setSpinner] = useState(true);
-
+  const [loginCheck, setLoginCheck] = useState(false);
+  const [snakeBar, setSnakeBar] = useState(false);
+  const [watchListStatus, setWatchListStatus] = useState(false);
   const dispatch = useDispatch();
 
   const localStore = JSON.parse(localStorage.getItem('watchList')) || [];
-
+  const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];
+  console.log('localStore', localStore)
   const handleWatchTrailer = (id) => {
     dispatch(getTrailerOut({id: id}))
     setCount((prev)=>prev+1);
@@ -34,18 +37,62 @@ const MovieDetailPage = () => {
   };
 
   const handlerAddToWatchList = (movie) => {
-    localStore.push(movie)
-    localStorage.setItem('watchList', JSON.stringify(localStore));
+    if (loginCheck) {
+      let idCheck = false;
+      idCheck = localStore.length !== 0 && localStore.some((item)=>item.id === movie.id)
+      console.log(idCheck, movie.id);
+      if (!idCheck) {
+        localStore.push(movie);
+        localStorage.setItem('watchList', JSON.stringify(localStore));
+        console.log("new")
+        setWatchListStatus(true);
+      } else {
+        const filterValue = localStore.filter((item)=>item.id !== movie.id);
+        localStorage.setItem('watchList', JSON.stringify(filterValue));
+        console.log("already")
+        setWatchListStatus(false);
+      }
+    } else {
+      setSnakeBar(true);
+    }
   }
+  
+  const handlerSnakeBarClose = () => {
+    setSnakeBar(false);
+  }
+  
 
   useEffect(()=> {
     if (trailerLink) {
       const key = trailerLink?.results?.filter((item)=>item.name.includes("Trailer")||item.name.includes("Teaser"))
       setTrailerPath(key[0].key);
     }
-    
+    if (userLocalCheck.email) {
+      setLoginCheck(true);
+    }
+  }, [trailerLink, showTrailerModal, singleMovieFetch])
 
-  }, [trailerLink, showTrailerModal])
+  useEffect (()=> {
+    const time = setTimeout(()=> {
+      setSnakeBar(false);
+    }, 2000);
+    return (()=>clearTimeout(time));
+  }, [snakeBar])
+
+  useEffect(()=> {
+    if (userLocalCheck.email) {
+      let time = setTimeout(()=> {
+        let idCheck = false;
+        idCheck = localStore.length !== 0 && localStore.some((item)=>item.id === singleMovieFetch.id);
+        console.log("id ", idCheck)
+        if (idCheck) {
+          setWatchListStatus(true);
+        }
+      }, 100)
+      return (()=>clearTimeout(time))
+    }
+  }, [singleMovieFetch])
+  
 
   return (
     <>
@@ -58,7 +105,7 @@ const MovieDetailPage = () => {
             <div className="flex-grow ">
               <div className="top-[45%] left-[50%] -translate-x-1/2 -translate-y-1/2 absolute">
                 <img
-                  className="w-[350px] rounded-lg shadow-lg"
+                  className="w-[25vw] rounded-lg shadow-lg"
                   src={`https://image.tmdb.org/t/p/original/${singleMovieFetch?.poster_path}`}
                   alt={singleMovieFetch?.title}
                 />
@@ -109,14 +156,25 @@ const MovieDetailPage = () => {
                 </div>
               </div>
             </div>
-            <div className='flex justify-center gap-5' > 
+            <div className='flex justify-center gap-5 relative' > 
               <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white text-[1rem] px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-blue" onClick={() => handleWatchTrailer(singleMovieFetch?.id)}>
                 Watch Trailer
               </button>
 
               <button className="mt-4 bg-green-500 hover:bg-green-700 text-white text-[1rem] px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green" onClick={() => handlerAddToWatchList(singleMovieFetch)}>
-                Add to Watch List
+                {watchListStatus ? "Remove From Watch List":"Add to Watch List"}
+   
               </button>
+              {!loginCheck && snakeBar &&
+                <div className='flex justify-between w-[300px] bg-red-600 w-fit h-fit absolute -top-10 left-2 px-2 py-3 rounded-lg'>
+                  <p className='text-[14px]'>
+                    Log in to add movies to your watchlist. 
+                  </p>
+                  <div>
+                    <IoMdCloseCircle className='cursor-pointer' onClick={()=>handlerSnakeBarClose()} />
+                  </div>
+                </div>
+              }
             </div>
 
             {showTrailerModal && spinner && (
@@ -148,11 +206,11 @@ const MovieDetailPage = () => {
                     wrapperClass="fidget-spinner-wrapper"
                     />
                 </div>
-              )}
+            )}
+            
         </div>
       )}
     </>
-    
   );
 };
 

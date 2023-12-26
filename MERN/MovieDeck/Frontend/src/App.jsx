@@ -7,6 +7,11 @@ import Category from "./Components/Category/Category"
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import RootLayout from "./Layout/RootLayout"
 import MovieCollection from "./Components/MovieCollection/MovieCollection"
+import UserPage from "./Components/UserAuthentication/UserPage"
+import SignUpPage from "./Components/UserAuthentication/SignupPage"
+import LoginPage from "./Components/UserAuthentication/LoginPage"
+import WatchLater from "./Components/WatchLater/WatchLater"
+
 
 function App() {
   
@@ -21,6 +26,11 @@ function App() {
         <Route path='movie' element = { <Category /> }>
           <Route path=':id' element = { <MovieDetailPage /> }/>
         </Route>
+        <Route path='user-authentication' element={ <UserPage /> } >
+          <Route path='login' element = { <LoginPage /> }/>
+          <Route path='signup' element = { <SignUpPage /> }/>
+        </Route>
+        <Route path='watch-later' element={ <WatchLater /> }/>
       </Route>
     )
   )
