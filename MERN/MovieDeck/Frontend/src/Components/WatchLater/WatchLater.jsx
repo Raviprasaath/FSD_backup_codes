@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Discuss } from 'react-loader-spinner'
 import { getSingleMovie } from '../../slice/slice';
 import { useDispatch, useSelector } from 'react-redux';
+import image from "../../assets/popcorn.png"
 
 const WatchLater = () => {
     const location = useLocation();
@@ -23,9 +24,9 @@ const WatchLater = () => {
         setLoader(false);
     }, [])
     return (
-        <div className={`flex flex-col justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
+        <div className={`min-h-[80vh] flex flex-col justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
             <div id='check'className={`flex flex-row justify-center flex-wrap gap-4 px-2 py-4 `}  >
-                {dataLoad?.map((item)=> (
+                {dataLoad.length > 0 ? dataLoad?.map((item)=> (
                     <Link key={item.id} onClick={()=>handlerDispatch(item.id)}  to={`${item.id}`}>
                         <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
                             {loader ? (<div className={`flex justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
@@ -45,7 +46,14 @@ const WatchLater = () => {
                             {item.title}
                         </div>
                     </Link>
-                ))}
+                )):(
+                    <div className='relative flex flex-col justify-center items-center'>
+                            <img src={image} className='h-[80vh]' alt="" />
+                            <p className='text-[35px] absolute bg-red-500 px-4 py-2 rounded-lg left-[42%]'>Its Empty!</p>
+                    </div>
+                )
+            }
+
             </div>
         </div>
     )
