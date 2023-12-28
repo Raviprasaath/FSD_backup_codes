@@ -13,6 +13,7 @@ const MovieDetailPage = () => {
   const [count, setCount] = useState(0);
   const [spinner, setSpinner] = useState(true);
   const [loginCheck, setLoginCheck] = useState(false);
+  const [tokenValue, setTokenValue] = useState('');
   const [snakeBar, setSnakeBar] = useState(false);
   const [watchListStatus, setWatchListStatus] = useState(false);
   const dispatch = useDispatch();
@@ -44,12 +45,12 @@ const MovieDetailPage = () => {
       if (!idCheck) {
         localStore.push(movie);
         localStorage.setItem('watchList', JSON.stringify(localStore));
-
         setWatchListStatus(true);
+        addingFunction(movie, tokenValue);
       } else {
         const filterValue = localStore.filter((item)=>item.id !== movie.id);
         localStorage.setItem('watchList', JSON.stringify(filterValue));
-
+        deletingFunction(movie, tokenValue);
         setWatchListStatus(false);
       }
     } else {
@@ -60,7 +61,78 @@ const MovieDetailPage = () => {
   const handlerSnakeBarClose = () => {
     setSnakeBar(false);
   }
-  
+
+  const addingFunction = async(movie, tokenValue) => {
+    let myHeaders = new Headers();
+    myHeaders.append("projectID", "vflsmb93q9oc");
+    myHeaders.append("Authorization", `Bearer ${tokenValue}`);
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('accept', 'application/json');
+
+    let raw = JSON.stringify({
+      detail: movie,
+    })
+    
+    let requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    const response = await fetch(`http://localhost:4501/watch-later/${movie.id}`, requestOptions);
+    const result = await response.json();
+    console.log(result);
+  }
+
+  const deletingFunction = async (movie, tokenValue) => {
+    let myHeaders = new Headers();
+    myHeaders.append("projectID", "vflsmb93q9oc");
+    myHeaders.append("Authorization", `Bearer ${tokenValue}`);
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('accept', 'application/json');
+
+    let idVal = "";
+
+    const optionGet = {
+      method: 'GET',
+      headers: myHeaders
+    }
+
+    let tempStore = [];
+    
+    const optionDelete = {
+      method: 'DELETE',
+      body: JSON.stringify(movie),
+      headers: myHeaders
+    }
+
+    try {
+      const response = await fetch(`http://localhost:4501/watch-later`, optionGet);
+      const result = await response.json();
+      tempStore = result;
+      console.log(result);
+      const ans = tempStore.filter((item)=> {
+        return (item.detail.id === movie.id)
+      })
+      if (ans.length !== 0) {
+        idVal = ans[0]._id;
+      }
+    } catch (error) {
+      console.error('Error deleting movie:', error);
+    }
+
+    try {
+      if (idVal) {
+        const response = await fetch(`http://localhost:4501/watch-later/${idVal}`, optionDelete);
+        const result = await response.json();
+        console.log(result);
+      }
+    } catch (error) {
+      console.error('Error deleting movie:', error);
+    }
+};
+
 
   useEffect(()=> {
     if (trailerLink) {
@@ -69,6 +141,7 @@ const MovieDetailPage = () => {
     }
     if (userLocalCheck.email) {
       setLoginCheck(true);
+      setTokenValue(userLocalCheck.accessToken)
     }
   }, [trailerLink, showTrailerModal, singleMovieFetch])
 

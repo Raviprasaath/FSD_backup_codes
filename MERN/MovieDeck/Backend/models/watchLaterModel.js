@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 
-const watchListSchema = mongoose.Schema({
-    movie_id: {
-        type : String,
-        required: true
+const watchListSchema = new mongoose.Schema({
+    detail: {
+        type : mongoose.Schema.Types.Mixed,
+        required: true,
+        unique: true
     }
 }, 
     {
-        timeStamps: true
+        timestamps: true
     }
 );
 
-module.exports = mongoose.model("MovieDeckWatchList", watchListSchema)
+module.exports = mongoose.model("MovieDeckWatchLists", watchListSchema)

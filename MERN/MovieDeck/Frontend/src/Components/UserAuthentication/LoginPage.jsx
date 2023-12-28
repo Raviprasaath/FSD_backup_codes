@@ -42,6 +42,7 @@ const LoginPage = () => {
     }
   };
 
+  
   const loginAPIcall = async(user) => {
     const option = {
       method: 'POST',

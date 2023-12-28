@@ -11,23 +11,49 @@ const WatchLater = () => {
     const { screenMode, singleMovieFetch } = useSelector((state) => state.movieReducer);
     const [loader, setLoader] = useState(true);
     const [dataLoad, setDataLoad] = useState([]);
+    const [loginCheck, setLoginCheck] = useState(false);
+    const [tokenValue, setTokenValue] = useState('');
+    const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];
 
     const handlerDispatch = (idVal) => {
         dispatch(getSingleMovie({id: idVal}));
     }
-    const localStore = JSON.parse(localStorage.getItem('watchList')) || [];
-    const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];
- 
-    useEffect(()=> {
-        console.log(localStore)
-        setDataLoad(localStore);
+    
+    const gettingWatchList = async (tokenValue) => {
+        let myHeaders = new Headers();
+        myHeaders.append("projectID", "vflsmb93q9oc");
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", `Bearer ${tokenValue}`);
+        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('accept', 'application/json');
+
+        let requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };5
+
+        const response = await fetch("http://localhost:4501/watch-later/", requestOptions)
+        const result = await response.json();
+        console.log(result)
+        setDataLoad(result);
         setLoader(false);
+    }
+    console.log('watch later dataLoad', dataLoad)
+
+    useEffect(()=> {
+        if (userLocalCheck.email) {
+            setLoginCheck(true);
+            setTokenValue(userLocalCheck.accessToken)
+            gettingWatchList(userLocalCheck.accessToken);
+        }
     }, [])
+
     return (
         <div className={`min-h-[80vh] flex flex-col justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
             <div id='check'className={`flex flex-row justify-center flex-wrap gap-4 px-2 py-4 `}  >
                 {dataLoad.length > 0 ? dataLoad?.map((item)=> (
-                    <Link key={item.id} onClick={()=>handlerDispatch(item.id)}  to={`${item.id}`}>
+                    <Link key={item.detail.id} onClick={()=>handlerDispatch(item.detail.id)}  to={`${item.detail.id}`}>
                         <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
                             {loader ? (<div className={`flex justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
                                 <Discuss
@@ -41,9 +67,9 @@ const WatchLater = () => {
                                     backgroundColor="#F4442E"
                                     />
                             </div>):(
-                                <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" />
+                                <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.detail.poster_path}`} alt="img" />
                             )}
-                            {item.title}
+                            {item.detail.title}
                         </div>
                     </Link>
                 )):(

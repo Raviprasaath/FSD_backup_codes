@@ -40,6 +40,7 @@ const Navbar = () => {
 
     const handlerLogout = () => {
         localStorage.removeItem('userDetails');
+        localStorage.removeItem('watchList');
         setLoginCheck(false);
     }
 

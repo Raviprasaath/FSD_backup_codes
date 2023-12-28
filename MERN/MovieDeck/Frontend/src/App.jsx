@@ -38,3 +38,10 @@ function App() {
 }
 
 export default App
+
+
+/*
+Todo
+All api work move to Thunk
+
+*/
