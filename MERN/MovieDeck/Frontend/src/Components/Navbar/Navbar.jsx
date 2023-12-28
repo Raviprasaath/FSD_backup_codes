@@ -5,13 +5,14 @@ import { MdOutlineDarkMode } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import { useDispatch } from 'react-redux'
 import { screenModeToggler } from '../../slice/slice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MdWatchLater } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
 
 const Navbar = () => {
     const [screenMode, setScreenMode] = useState("dark")
     const dispatch = useDispatch();
+    const location = useLocation();
     const [loginCheck, setLoginCheck] = useState(false);
     const [snakeBar, setSnakeBar] = useState(false);
     const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];
@@ -37,12 +38,18 @@ const Navbar = () => {
         setSnakeBar(false);
     }
 
-    console.log(loginCheck)
+    const handlerLogout = () => {
+        localStorage.removeItem('userDetails');
+        setLoginCheck(false);
+    }
+
     useEffect(()=> {
         if (userLocalCheck.email) {
             setLoginCheck(true);
         }
-    }, [loginCheck])
+    }, [loginCheck, location.pathname])
+
+
 
   return (
     <section className={`flex sticky top-0 z-10 items-center justify-between px-4 ${screenMode==="dark"? 'bg-slate-800 text-white border-b	':'bg-white text-black border-b border-black'}`}>
@@ -70,13 +77,19 @@ const Navbar = () => {
                     </div>
                 }
             </div>
-            <Link to='user-authentication/login'>
-                Log In
-            </Link>
-            <p>/</p>
-            <Link to='user-authentication/signup'>
-                Sign Up
-            </Link>
+            {!loginCheck ? 
+                (<>
+                    <Link to='user-authentication/login'>
+                        Log In
+                    </Link>
+                    <p>/</p>
+                    <Link to='user-authentication/signup'>
+                        Sign Up
+                    </Link>
+                </>):(
+                    <div onClick={()=>handlerLogout()} className='cursor-pointer'>Log out</div>
+                )
+            }
             
         </div>
     </section>

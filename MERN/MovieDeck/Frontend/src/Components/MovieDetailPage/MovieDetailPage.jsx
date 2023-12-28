@@ -40,16 +40,16 @@ const MovieDetailPage = () => {
     if (loginCheck) {
       let idCheck = false;
       idCheck = localStore.length !== 0 && localStore.some((item)=>item.id === movie.id)
-      console.log(idCheck, movie.id);
+
       if (!idCheck) {
         localStore.push(movie);
         localStorage.setItem('watchList', JSON.stringify(localStore));
-        console.log("new")
+
         setWatchListStatus(true);
       } else {
         const filterValue = localStore.filter((item)=>item.id !== movie.id);
         localStorage.setItem('watchList', JSON.stringify(filterValue));
-        console.log("already")
+
         setWatchListStatus(false);
       }
     } else {
@@ -84,11 +84,11 @@ const MovieDetailPage = () => {
       let time = setTimeout(()=> {
         let idCheck = false;
         idCheck = localStore.length !== 0 && localStore.some((item)=>item.id === singleMovieFetch.id);
-        console.log("id ", idCheck)
+
         if (idCheck) {
           setWatchListStatus(true);
         }
-      }, 100)
+      }, 1000)
       return (()=>clearTimeout(time))
     }
   }, [singleMovieFetch])

@@ -1,5 +1,5 @@
 require('dotenv').config();
-const authRoute = require("./routes/userRoutes")
+
 const mongoose = require('mongoose');
 
 const express = require('express');
@@ -15,7 +15,8 @@ app.use('/', (req, res, next)=> {
 
 app.use(cors());
 
-app.use("/auth", authRoute);
+app.use("/auth", require("./routes/userRoutes"));
+app.use("/watch-later", require("./routes/userWatchList"))
 
 mongoose.connect(process.env.MONGO_URI).then(()=> {
     app.listen(process.env.PORT, (error)=> {
