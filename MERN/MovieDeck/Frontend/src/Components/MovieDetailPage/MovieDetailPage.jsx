@@ -19,7 +19,7 @@ const MovieDetailPage = () => {
 
   const localStore = JSON.parse(localStorage.getItem('watchList')) || [];
   const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];
-  console.log('localStore', localStore)
+
   const handleWatchTrailer = (id) => {
     dispatch(getTrailerOut({id: id}))
     setCount((prev)=>prev+1);

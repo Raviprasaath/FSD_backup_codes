@@ -6,6 +6,13 @@ import { useSelector } from 'react-redux';
 const LoginPage = () => {
   const { screenMode } = useSelector((state) => state.movieReducer);
 
+  const [login, setLogin] = useState(
+    {
+      email: '',
+      password: '',
+    });
+
+
   const [user, setUser] = useState({
     email: '',
     password: '',
@@ -35,9 +42,29 @@ const LoginPage = () => {
 
     if (!isAnyFieldMissing) {
       console.log('Form submitted:', user);
+      registerAPIcall(user);
       localStorage.setItem('userDetails', JSON.stringify(user));
     }
   };
+
+  const registerAPIcall = async(user) => {
+    console.log('test2')
+      const option = {
+        method: 'POST',
+        body: {
+          username: user.username,
+          email: user.email,
+          password: user.password,
+        },
+        headers: {
+          accept: 'application/json',
+        },
+      };
+    const response = await fetch('http://localhost:4500/auth/register/', option);
+    const result = await response.json();
+    console.log(result);
+    console.log('result');
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

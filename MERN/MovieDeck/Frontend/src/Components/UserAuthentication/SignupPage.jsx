@@ -5,7 +5,13 @@ import { useSelector } from 'react-redux';
 
 const SignUpPage = () => {
   const { screenMode } = useSelector((state) => state.movieReducer);
-  
+  const [register, setRegister] = useState(
+    {
+      username: '',
+      email: '',
+      password: ''
+    });
+    
   const [user, setUser] = useState({
     username: '',
     email: '',
@@ -39,10 +45,49 @@ const SignUpPage = () => {
 
     if (!isAnyFieldMissing) {
       console.log('Form submitted:', user);
-      
+      registerAPIcall(user);
+
       localStorage.setItem('userDetails', JSON.stringify(user));
     }
   };
+  const registerAPIcall = async (user) => {
+    console.log('test2');
+
+    const options = {
+        method: 'POST',
+        body: JSON.stringify({
+            username: user.username,
+            email: user.email,
+            password: user.password,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+            accept: 'application/json',
+        },
+    };
+
+    let retryCount = 0;
+    const maxRetries = 3;
+
+    while (retryCount < maxRetries) {
+        try {
+            const response = await fetch('http://localhost:4500/auth/register/', options);
+            const result = await response.json();
+            console.log(result);
+            console.log('result');
+            return; // Successful, exit the loop
+        } catch (error) {
+            console.error('Error during registration API call:', error);
+            retryCount++;
+            console.log(`Retrying... (${retryCount}/${maxRetries})`);
+            await new Promise(resolve => setTimeout(resolve, 1000)); // 1-second delay
+        }
+    }
+
+    console.error('Failed to fetch after retries');
+};
+
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
