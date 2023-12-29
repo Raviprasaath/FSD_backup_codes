@@ -44,13 +44,13 @@ const LoginPage = () => {
       }));
 
       result.then(result => {
-        console.log(result);
         if (result.payload._id || result.payload.accessToken) {
           setStatus(true);
           navigateHome();
           localStorage.setItem('userDetails', JSON.stringify(result.payload));
         } else {
           setErrorMessage(result.payload.error);
+          // setErrorMessage(result); // -> manual error creation my note
         }
       })
 
