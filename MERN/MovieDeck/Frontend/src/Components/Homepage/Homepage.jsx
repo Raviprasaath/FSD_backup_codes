@@ -27,6 +27,7 @@ const Homepage = () => {
                 tokenValue: userLocalCheck.accessToken,
                 methods: "GET",
                 suffix: "watch-later/",
+                movie: "",
             }))
             result.then((res=>{
                 const response = res.payload;

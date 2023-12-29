@@ -24,11 +24,11 @@ const WatchLater = () => {
             setLoginCheck(true);
             setTokenValue(userLocalCheck.accessToken)
 
-
             const result = dispatch(gettingWatchList({
                 tokenValue: userLocalCheck.accessToken,
                 methods: "GET",
                 suffix: "watch-later/",
+                movie: "",
             }))
             result.then((res=>{
                 const response = res.payload;

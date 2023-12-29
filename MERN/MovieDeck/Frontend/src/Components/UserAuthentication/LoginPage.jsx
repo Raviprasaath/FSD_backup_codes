@@ -50,7 +50,7 @@ const LoginPage = () => {
           navigateHome();
           localStorage.setItem('userDetails', JSON.stringify(result.payload));
         } else {
-          setErrorMessage(result);
+          setErrorMessage(result.payload.error);
         }
       })
 

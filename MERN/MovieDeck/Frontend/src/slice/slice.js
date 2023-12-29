@@ -149,21 +149,34 @@ export const getSignup = createAsyncThunk(
 )
 export const gettingWatchList =createAsyncThunk(
     'watchListGetting/gettingWatchList',
-    async ({tokenValue, methods, suffix }, {rejectWithValue}) => {
-        console.log(tokenValue, methods, suffix);
+    async ({tokenValue, methods, suffix, movie }, {rejectWithValue}) => {
+
         let myHeaders = new Headers();
         myHeaders.append("projectID", "vflsmb93q9oc");
-        myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Authorization", `Bearer ${tokenValue}`);
         myHeaders.append('Content-Type', 'application/json');
         myHeaders.append('accept', 'application/json');
 
-        let requestOptions = {
-            method: methods,
-            headers: myHeaders,
-            redirect: 'follow'
-        };
+        let requestOptions;
+        if (methods === "POST" || methods === "DELETE") {
+            let raw = JSON.stringify({
+                detail: movie,
+              })
+              requestOptions = {
+                  method: methods,
+                  headers: myHeaders,
+                  body: raw,
+                  redirect: 'follow'
+                };
+            } else if (methods === "GET") {
+            requestOptions = {
+                method: methods,
+                headers: myHeaders,
+                redirect: 'follow'
+            };
+        }
         let url = SERVER_BASE_URL + suffix
+        
 
         try {
             const response = await fetch(url, requestOptions);

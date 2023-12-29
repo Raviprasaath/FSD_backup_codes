@@ -31,7 +31,7 @@ const Navbar = () => {
             setSnakeBar(false);
         }, 1500)
         if(loginCheck) {
-            navigate('/watch-later');
+            navigate('/watch-later', {replace: true});
         }
     }
     const handlerCloseSnakeBar = () => {
@@ -47,6 +47,8 @@ const Navbar = () => {
     useEffect(()=> {
         if (userLocalCheck.email) {
             setLoginCheck(true);
+        } else if (location.pathname.includes('watch-later') && !userLocalCheck.email) {
+            navigate('/', {replace: true});
         }
     }, [loginCheck, location.pathname])
 

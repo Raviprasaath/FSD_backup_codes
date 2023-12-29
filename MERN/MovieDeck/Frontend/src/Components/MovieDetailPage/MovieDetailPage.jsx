@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import { getTrailerOut } from '../../slice/slice';
+import { getTrailerOut, gettingWatchList } from '../../slice/slice';
 import { FidgetSpinner } from 'react-loader-spinner'
 import LazyLoader from '../LazyLoader/LazyLoader';
 import { IoMdCloseCircle } from "react-icons/io";
@@ -46,12 +46,44 @@ const MovieDetailPage = () => {
         localStore.push(movie);
         localStorage.setItem('watchList', JSON.stringify(localStore));
         setWatchListStatus(true);
-        addingFunction(movie, tokenValue);
+
+        dispatch(gettingWatchList({
+          tokenValue: tokenValue,
+          methods: "POST",
+          suffix: `watch-later/${movie.id}/`,
+          movie: movie,
+        }))
+
       } else {
         const filterValue = localStore.filter((item)=>item.id !== movie.id);
         localStorage.setItem('watchList', JSON.stringify(filterValue));
-        deletingFunction(movie, tokenValue);
+
         setWatchListStatus(false);
+
+        let idVal = "";
+        const result = dispatch(gettingWatchList({
+          tokenValue: userLocalCheck.accessToken,
+          methods: "GET",
+          suffix: "watch-later/",
+          movie: movie,
+        }))
+        result.then((res=>{
+          const response = res.payload;
+          const ans = response.filter((item)=>{
+            return (item.detail.id === movie.id);
+          });
+          if (ans.length !== 0) {
+            idVal = ans[0]._id;
+          }
+          dispatch(gettingWatchList({
+            tokenValue: userLocalCheck.accessToken,
+            methods: "DELETE",
+            suffix: `watch-later/${idVal}`,
+            movie: "",
+          }))
+        }))
+
+
       }
     } else {
       setSnakeBar(true);
@@ -61,78 +93,6 @@ const MovieDetailPage = () => {
   const handlerSnakeBarClose = () => {
     setSnakeBar(false);
   }
-
-  const addingFunction = async(movie, tokenValue) => {
-    let myHeaders = new Headers();
-    myHeaders.append("projectID", "vflsmb93q9oc");
-    myHeaders.append("Authorization", `Bearer ${tokenValue}`);
-    myHeaders.append('Content-Type', 'application/json');
-    myHeaders.append('accept', 'application/json');
-
-    let raw = JSON.stringify({
-      detail: movie,
-    })
-    
-    let requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow'
-    };
-
-    const response = await fetch(`http://localhost:4501/watch-later/${movie.id}`, requestOptions);
-    const result = await response.json();
-    console.log(result);
-  }
-
-  const deletingFunction = async (movie, tokenValue) => {
-    let myHeaders = new Headers();
-    myHeaders.append("projectID", "vflsmb93q9oc");
-    myHeaders.append("Authorization", `Bearer ${tokenValue}`);
-    myHeaders.append('Content-Type', 'application/json');
-    myHeaders.append('accept', 'application/json');
-
-    let idVal = "";
-
-    const optionGet = {
-      method: 'GET',
-      headers: myHeaders
-    }
-
-    let tempStore = [];
-    
-    const optionDelete = {
-      method: 'DELETE',
-      body: JSON.stringify(movie),
-      headers: myHeaders
-    }
-
-    try {
-      const response = await fetch(`http://localhost:4501/watch-later`, optionGet);
-      const result = await response.json();
-      tempStore = result;
-      console.log(result);
-      const ans = tempStore.filter((item)=> {
-        return (item.detail.id === movie.id)
-      })
-      if (ans.length !== 0) {
-        idVal = ans[0]._id;
-      }
-    } catch (error) {
-      console.error('Error deleting movie:', error);
-    }
-
-    try {
-      if (idVal) {
-        const response = await fetch(`http://localhost:4501/watch-later/${idVal}`, optionDelete);
-        const result = await response.json();
-        console.log(result);
-      }
-    } catch (error) {
-      console.error('Error deleting movie:', error);
-    }
-};
-
 
   useEffect(()=> {
     if (trailerLink) {
