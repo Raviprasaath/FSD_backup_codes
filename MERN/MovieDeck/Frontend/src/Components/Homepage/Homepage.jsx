@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { getNowPlaying, getPopular, getTopRated, getUpcoming } from '../../slice/slice';
+import { getNowPlaying, getPopular, getTopRated, getUpcoming, gettingWatchList } from '../../slice/slice';
 import Carousel from '../Carousel/Carousel';
 import { Suspense } from 'react';
 import Loader from "../LazyLoader/LazyLoader"
@@ -11,33 +11,9 @@ const Homepage = () => {
     const { screenMode, isLoading, popularMovieList, nowPlayingMovieList, topRatedMovieList, upcomingMovieList } = useSelector((state) => state.movieReducer);
     const dispatch = useDispatch();
     const [loginCheck, setLoginCheck] = useState(false);
-    const [tokenValue, setTokenValue] = useState('');
 
     const LazyCarousel = React.lazy(()=>import("../Carousel/Carousel"));
     const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];
-
-    const gettingWatchList = async (tokenValue) => {
-        let myHeaders = new Headers();
-        myHeaders.append("projectID", "vflsmb93q9oc");
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization", `Bearer ${tokenValue}`);
-        myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('accept', 'application/json');
-
-        let requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };5
-
-        const response = await fetch("http://localhost:4501/watch-later/", requestOptions)
-        const result = await response.json();
-        console.log(result)
-        const tempArr = result.map((item)=>item.detail);
-        localStorage.setItem('watchList', JSON.stringify(tempArr));
-    }
-    
-
 
     useEffect(()=> {
         dispatch(getNowPlaying({ type: 'now_playing', page: 1 }));
@@ -47,10 +23,18 @@ const Homepage = () => {
 
         if (userLocalCheck.email) {
             setLoginCheck(true);
-            setTokenValue(userLocalCheck.accessToken);
-            gettingWatchList(userLocalCheck.accessToken);
+            const result = dispatch(gettingWatchList({
+                tokenValue: userLocalCheck.accessToken,
+                methods: "GET",
+                suffix: "watch-later/",
+            }))
+            result.then((res=>{
+                const response = res.payload;
+                const tempArr = response.map((item)=>item.detail);
+                localStorage.setItem('watchList', JSON.stringify(tempArr));
+            }))
         }
-    }, [])
+    }, [loginCheck])
 
     return (
         <>

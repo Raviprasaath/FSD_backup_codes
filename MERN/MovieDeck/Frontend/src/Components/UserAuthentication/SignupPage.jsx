@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import bg from '../../assets/userpage.jpg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSignup } from '../../slice/slice';
 
 const SignUpPage = () => {
   const { screenMode } = useSelector((state) => state.movieReducer);
   const [status, setStatus] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     username: '',
@@ -41,42 +43,27 @@ const SignUpPage = () => {
     });
 
     if (!isAnyFieldMissing) {
-      registerAPIcall(user);
-      localStorage.setItem('userDetails', JSON.stringify(user));
-    }
-  };
-  const registerAPIcall = async (user) => {
 
-    const options = {
-        method: 'POST',
-        body: JSON.stringify({
-            username: user.username,
-            email: user.email,
-            password: user.password,
-        }),
-        headers: {
-            'Content-Type': 'application/json',
-            accept: 'application/json',
-        },
-    };
+      const result = dispatch(getSignup({
+        username: user.username,
+        email: user.email,
+        password: user.password,
+        signing: 'register',
+      }));
 
-    try {
-        const response = await fetch('http://localhost:4501/auth/register/', options);
-        const result = await response.json();
-
-        if (result._id) {
+      result.then(result => {
+        if (result.payload._id) {
           setStatus(true);
           navigateLogin();
         } else {
           setErrorMessage(result);
         }
-        return result;
-    } catch (error) {
-        console.error('Error during registration API call:', error);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // 1-second delay
-    }        
-    console.error('Failed to fetch after retries');
-};
+    });
+
+      localStorage.setItem('userDetails', JSON.stringify(user));
+    }
+  };
+
 
   function navigateLogin() {
     setTimeout (()=> {

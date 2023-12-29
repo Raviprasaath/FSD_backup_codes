@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import bg from '../../assets/userpage.jpg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSignup } from '../../slice/slice';
 
 const LoginPage = () => {
   const { screenMode } = useSelector((state) => state.movieReducer);
   const [errorMessage, setErrorMessage] = useState("");
   const [status, setStatus] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     email: '',
@@ -19,8 +21,6 @@ const LoginPage = () => {
     password: false,
     showGeneralError: false,
   });
-
-  const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];
 
   const handleUserForm = (e) => {
     e.preventDefault();
@@ -37,34 +37,26 @@ const LoginPage = () => {
     });
 
     if (!isAnyFieldMissing) {
-      loginAPIcall(user);
-      localStorage.setItem('userDetails', JSON.stringify(user));
+      const result = dispatch(getSignup({
+        email: user.email,
+        password: user.password,
+        signing: 'login',
+      }));
+
+      result.then(result => {
+        console.log(result);
+        if (result.payload._id || result.payload.accessToken) {
+          setStatus(true);
+          navigateHome();
+          localStorage.setItem('userDetails', JSON.stringify(result.payload));
+        } else {
+          setErrorMessage(result);
+        }
+      })
+
     }
   };
 
-  
-  const loginAPIcall = async(user) => {
-    const option = {
-      method: 'POST',
-      body: JSON.stringify({
-        email: user.email,
-        password: user.password,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        accept: 'application/json',
-      },
-    };
-    const response = await fetch('http://localhost:4501/auth/login/', option);
-    const result = await response.json();
-    if (result.email) {
-      localStorage.setItem('userDetails', JSON.stringify(result));
-      setStatus(true);
-      navigateHome();
-    } else {
-      setErrorMessage(result);
-    }
-  }
 
   function navigateHome() {
     setTimeout (()=> {

@@ -10,9 +10,12 @@ const initialState = {
     topRatedMovieList: [],
     singleMovieFetch: [],
     trailerLink: '',
+    userAuth: {},
+    watchList: [],
 }
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie/'
+const SERVER_BASE_URL = "http://localhost:4501/"
 
 const API_KEY = '494170c64724d022e9296a5fa98644eb';
 const API_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTQxNzBjNjQ3MjRkMDIyZTkyOTZhNWZhOTg2NDRlYiIsInN1YiI6IjY0OTAyNGE5MjYzNDYyMDBhZTFjZGI1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7il3x7f91baELU8ceqe8OYauvsHEJ-lC34vS3Gslqoc'
@@ -99,6 +102,83 @@ export const getTrailerOut = createAsyncThunk(
         }
     }
 )
+
+export const getSignup = createAsyncThunk(
+    'userDetail/getSignup',
+    async ({username, password, email, signing}, {rejectWithValue}) => {
+
+        let url;
+        let body;
+
+        if (signing === 'login') {
+            url = SERVER_BASE_URL + 'auth/login';
+            body = {
+                email,
+                password,
+            };
+        } else if (signing === 'register') {
+            url = SERVER_BASE_URL + 'auth/register';
+            body = {
+                username,
+                email,
+                password,
+            };
+        }
+
+        const options = {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+                'Content-Type': 'application/json',
+                accept: 'application/json',
+            },
+        };
+
+        try{
+            const response = await fetch(url, options);
+            if (response.ok) {
+                const result = await response.json();
+                return result;
+            } else {
+                return rejectWithValue({error: 'Signing Fetching Fails'})
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
+export const gettingWatchList =createAsyncThunk(
+    'watchListGetting/gettingWatchList',
+    async ({tokenValue, methods, suffix }, {rejectWithValue}) => {
+        console.log(tokenValue, methods, suffix);
+        let myHeaders = new Headers();
+        myHeaders.append("projectID", "vflsmb93q9oc");
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", `Bearer ${tokenValue}`);
+        myHeaders.append('Content-Type', 'application/json');
+        myHeaders.append('accept', 'application/json');
+
+        let requestOptions = {
+            method: methods,
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+        let url = SERVER_BASE_URL + suffix
+
+        try {
+            const response = await fetch(url, requestOptions);
+            if (response.ok) {
+                const result = await response.json();
+                return result
+            } else {
+                return rejectWithValue({error: 'Watch list fetching error'})
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+)
+
 
 const movieSlices = createSlice({
     name: "movieSlice",
@@ -187,6 +267,33 @@ const movieSlices = createSlice({
             state.isLoading = false,
             state.error = action.payload.error
         })
+
+        
+        .addCase(getSignup.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getSignup.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.userAuth = action.payload,
+            state.error = ''
+        })
+        .addCase(getSignup.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(gettingWatchList.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(gettingWatchList.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.watchList = action.payload,
+            state.error = ''
+        })
+        .addCase(gettingWatchList.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
     }
 })
 

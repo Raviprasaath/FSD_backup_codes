@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Discuss } from 'react-loader-spinner'
-import { getSingleMovie } from '../../slice/slice';
+import { getSingleMovie, gettingWatchList } from '../../slice/slice';
 import { useDispatch, useSelector } from 'react-redux';
 import image from "../../assets/popcorn.png"
 
 const WatchLater = () => {
-    const location = useLocation();
+    const navigate = useNavigate();
     const dispatch= useDispatch();
     const { screenMode, singleMovieFetch } = useSelector((state) => state.movieReducer);
     const [loader, setLoader] = useState(true);
@@ -18,42 +18,35 @@ const WatchLater = () => {
     const handlerDispatch = (idVal) => {
         dispatch(getSingleMovie({id: idVal}));
     }
-    
-    const gettingWatchList = async (tokenValue) => {
-        let myHeaders = new Headers();
-        myHeaders.append("projectID", "vflsmb93q9oc");
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization", `Bearer ${tokenValue}`);
-        myHeaders.append('Content-Type', 'application/json');
-        myHeaders.append('accept', 'application/json');
-
-        let requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            redirect: 'follow'
-        };5
-
-        const response = await fetch("http://localhost:4501/watch-later/", requestOptions)
-        const result = await response.json();
-        console.log(result)
-        setDataLoad(result);
-        setLoader(false);
-    }
-    console.log('watch later dataLoad', dataLoad)
 
     useEffect(()=> {
         if (userLocalCheck.email) {
             setLoginCheck(true);
             setTokenValue(userLocalCheck.accessToken)
-            gettingWatchList(userLocalCheck.accessToken);
+
+
+            const result = dispatch(gettingWatchList({
+                tokenValue: userLocalCheck.accessToken,
+                methods: "GET",
+                suffix: "watch-later/",
+            }))
+            result.then((res=>{
+                const response = res.payload;
+                const tempArr = response.map((item)=>item.detail);
+                setDataLoad(tempArr);
+                setLoader(false);
+            }))
+
+        } else {
+            navigate('/', {replace: true});
         }
-    }, [])
+    }, [loginCheck]);
 
     return (
         <div className={`min-h-[80vh] flex flex-col justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
             <div id='check'className={`flex flex-row justify-center flex-wrap gap-4 px-2 py-4 `}  >
                 {dataLoad.length > 0 ? dataLoad?.map((item)=> (
-                    <Link key={item.detail.id} onClick={()=>handlerDispatch(item.detail.id)}  to={`${item.detail.id}`}>
+                    <Link key={item.id * Math.random()} onClick={()=>handlerDispatch(item.id)}  to={`${item.id}`}>
                         <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
                             {loader ? (<div className={`flex justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
                                 <Discuss
@@ -67,9 +60,9 @@ const WatchLater = () => {
                                     backgroundColor="#F4442E"
                                     />
                             </div>):(
-                                <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.detail.poster_path}`} alt="img" />
+                                <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" />
                             )}
-                            {item.detail.title}
+                            {item.title}
                         </div>
                     </Link>
                 )):(
