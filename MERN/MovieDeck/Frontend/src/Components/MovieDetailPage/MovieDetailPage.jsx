@@ -136,7 +136,7 @@ const MovieDetailPage = () => {
           <div className="h-1/2 sm:h-2/3 lg:h-1/2 relative"/>
             <img className='opacity-50' src={`https://image.tmdb.org/t/p/original/${singleMovieFetch?.backdrop_path}`} alt="img" />
             <div className="flex-grow ">
-              <div className="top-[45%] left-[50%] -translate-x-1/2 -translate-y-1/2 absolute">
+              <div className="mm:top-[15%] sm:top-[20%] md:top-[35%] lg:top-[42%] left-[50%] -translate-x-1/2 -translate-y-1/2 absolute">
                 <img
                   className="w-[25vw] rounded-lg shadow-lg"
                   src={`https://image.tmdb.org/t/p/original/${singleMovieFetch?.poster_path}`}

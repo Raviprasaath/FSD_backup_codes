@@ -27,24 +27,23 @@ const MovieCollection = () => {
 
     useEffect(()=> {
         if (location.state.type === "upcoming") {
-            dispatch(getUpcoming({ type: 'upcoming', page: page+1 }))
-            setDataLoad(upcomingMovieList);
+            dispatch(getUpcoming({ type: 'upcoming', page: page }))
+            setDataLoad(upcomingMovieList)
         } else if (location.state.type === "now-showing") {
-            dispatch(getNowPlaying({ type: 'now_playing', page: page+1 }))
+            dispatch(getNowPlaying({ type: 'now_playing', page: page }))
             setDataLoad(nowPlayingMovieList)
         } else if (location.state.type === "popular") {
-            dispatch(getPopular({ type: 'popular', page: page+1 } ))
+            dispatch(getPopular({ type: 'popular', page: page } ))
             setDataLoad(popularMovieList)
         } else if (location.state.type === "top-rated") {
-            dispatch(getTopRated({ type: 'top_rated', page: page+1 }))
+            dispatch(getTopRated({ type: 'top_rated', page: page }))
             setDataLoad(topRatedMovieList)
         }
         const delay = setTimeout(()=> {
             setLoader(false);
         }, 1000)
         return (()=>delay);
-
-    }, [page])
+    }, [page, upcomingMovieList, nowPlayingMovieList, popularMovieList, topRatedMovieList])
 
   return (
     <>  

@@ -12,6 +12,7 @@ const initialState = {
     trailerLink: '',
     userAuth: {},
     watchList: [],
+    sideBar: false,
 }
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie/'
@@ -199,6 +200,9 @@ const movieSlices = createSlice({
     reducers: {
         screenModeToggler: (state, action) => {
             action.payload === "light" ? state.screenMode = "dark": state.screenMode = "light";
+        },
+        sideBarStore: (state, action) => {
+            state.sideBar = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -310,5 +314,5 @@ const movieSlices = createSlice({
     }
 })
 
-export const { screenModeToggler } = movieSlices.actions;
+export const { screenModeToggler, sideBarStore } = movieSlices.actions;
 export default movieSlices.reducer;

@@ -26,14 +26,14 @@ const { upcomingMovieList, screenMode} = useSelector((state) => state.movieReduc
         {upcomingMovieList.results?.map((item)=> (
             <SwiperSlide key={item.id} className='w-[90%]'>
                 <Link onClick={()=>dispatch(getSingleMovie({ id:  item.id}))} to={`movie/${item.id}`}>
-                    <div className={`cursor-pointer flex gap-5 justify-center items-center ${screenMode==="light"?'border':''}`}>
-                        <img className='h-[60vh] ' src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`} alt="img" />
+                    <div className={`cursor-pointer flex mm:flex-col lg:flex-row gap-5 justify-center items-center ${screenMode==="light"?'border':''}`}>
+                        <img className='mm:h-[30vh] sm:h-[35vh] md:h-[40vh] lg:h-[70vh] xl:h-[70vh]' src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`} alt="img" />
                         <div className='flex flex-col gap-5 p-5'>
                             <p className='text-[20px] font-bold'>
-                            {item.title}
+                              {item.title}
                             </p>
                             <p>
-                            {item.overview}
+                              {item.overview}
                             </p>
                         </div>
                     </div>

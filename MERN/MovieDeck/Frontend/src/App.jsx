@@ -57,18 +57,20 @@ Todo
 All api work move to Thunk
 Search API
 page number track
+responsive
 
 Redux toolkit
-thunk
+thunk middleware
 Error boundary
 Route 6.4
 Suspense
-Node 
+Lazy Loader
+Pagination
+
+Node
 Express
 Mongo DB
 Mongoose
 JWT
-Pagination
-
 
 */
