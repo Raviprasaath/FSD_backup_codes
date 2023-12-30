@@ -33,7 +33,7 @@ function App() {
         <Route index element={<ErrorBoundary FallbackComponent={MyErrorFallback}><Homepage /></ErrorBoundary>} />
           <Route path=':name' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailDummyPage /></ErrorBoundary>}>
             <Route index element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieCollection /></ErrorBoundary>} />
-            <Route path=':id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
+            <Route path=':page/:id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
           </Route>
           <Route path='movie' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><Category /></ErrorBoundary>}>
             <Route path=':id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
@@ -57,7 +57,6 @@ Todo
 All api work move to Thunk
 Search API
 page number track
-responsive
 
 Redux toolkit
 thunk middleware

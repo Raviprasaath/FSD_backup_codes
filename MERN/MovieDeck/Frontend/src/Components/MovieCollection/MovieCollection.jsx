@@ -50,7 +50,7 @@ const MovieCollection = () => {
         <div className={`flex flex-col justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
             <div id='check'className={`flex flex-row justify-center flex-wrap gap-4 px-2 py-4 `}  >
                 {dataLoad?.results?.map((item)=> (
-                    <Link key={item.id} onClick={()=>handlerDispatch(item.id)}  to={`${item.id}`}>
+                    <Link key={item.id} onClick={()=>handlerDispatch(item.id)}  to={`page-${page}/${item.id}`}>
                         <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
                             {loader ? (<div className={`flex justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
                                 <Discuss
