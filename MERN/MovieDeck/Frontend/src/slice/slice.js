@@ -13,10 +13,10 @@ const initialState = {
     userAuth: {},
     watchList: [],
     sideBar: false,
+    searchResult: [],
 }
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie/'
-// search/movie?query=amer&include_adult=true&language=en-US&page=1
 const SERVER_BASE_URL = "http://localhost:4501/"
 
 const API_KEY = '494170c64724d022e9296a5fa98644eb';
@@ -55,6 +55,31 @@ export const getNowPlaying = createMovieAsyncThunk('getNowPlaying', 'now_playing
 export const getPopular = createMovieAsyncThunk('getPopular', 'popular');
 export const getUpcoming = createMovieAsyncThunk('getUpcoming', 'upcoming');
 export const getTopRated = createMovieAsyncThunk('getTopRated', 'top_rated');
+
+export const gettingSearchList = createAsyncThunk(
+    'movieList/gettingSearchList',
+    async({queryValue, page}, {rejectWithValue}) => {
+        const option = {
+            method: 'GET',
+            headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${TMDB_API_TOKEN}`
+            }
+        }
+        const url = `https://api.themoviedb.org/3/search/movie?query=${queryValue}&include_adult=true&language=en-US&page=${page}`
+        try{
+            const response = await fetch(url, option);
+            if (response.ok) {
+                const result = await response.json();
+                return result;
+            } else {
+                return rejectWithValue({error: 'Movie Fetching Fails'})
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+)
 
 export const getSingleMovie = createAsyncThunk(
     'moviesList/getSingleMovie',
@@ -195,6 +220,8 @@ export const gettingWatchList =createAsyncThunk(
 )
 
 
+
+
 const movieSlices = createSlice({
     name: "movieSlice",
     initialState,
@@ -309,6 +336,19 @@ const movieSlices = createSlice({
             state.error = ''
         })
         .addCase(gettingWatchList.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(gettingSearchList.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(gettingSearchList.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.searchResult = action.payload,
+            state.error = ''
+        })
+        .addCase(gettingSearchList.rejected, (state, action)=> {
             state.isLoading = false;
             state.error = action.payload ? action.payload.error : 'Unknown error';
         })       

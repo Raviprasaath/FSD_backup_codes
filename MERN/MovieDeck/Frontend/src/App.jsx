@@ -15,6 +15,8 @@ import WatchLaterDummy from "./Components/WatchLater/WatchLaterDummy"
 import { ErrorBoundary } from 'react-error-boundary';
 import { useSelector } from "react-redux"
 import PageNotFound from "./Components/PageNotFound/PageNotFound"
+import SearchPage from "./Components/SearchPage/SearchPage"
+import SearchPageDummy from "./Components/SearchPage/SearchPageDummy"
 
 function MyErrorFallback({ error, resetErrorBoundary }) {
   const { screenMode } = useSelector((state) => state.movieReducer);
@@ -48,6 +50,10 @@ function App() {
             <Route index element={<ErrorBoundary FallbackComponent={MyErrorFallback}><WatchLater /></ErrorBoundary>} />
             <Route path=':id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
           </Route>
+          <Route path='search-result' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><SearchPageDummy /></ErrorBoundary>}>
+            <Route index element={<ErrorBoundary FallbackComponent={MyErrorFallback}><SearchPage /></ErrorBoundary>} />
+            <Route path=':id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
+          </Route>
           <Route path='*' element={<PageNotFound />} />
       </Route>
     )
@@ -59,9 +65,6 @@ export default App
 
 
 /*
-Todo
-All api work move to Thunk
-Search API
 
 Redux toolkit
 thunk middleware

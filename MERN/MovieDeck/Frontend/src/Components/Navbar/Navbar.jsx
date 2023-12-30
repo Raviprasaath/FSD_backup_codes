@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import { useDispatch, useSelector } from 'react-redux'
-import { screenModeToggler, sideBarStore } from '../../slice/slice';
+import { gettingSearchList, screenModeToggler, sideBarStore } from '../../slice/slice';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MdWatchLater } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
@@ -22,6 +22,7 @@ const Navbar = () => {
     const [isWindow, setIsWindow] = useState(false);    
     const [sideBar, setSideBar] = useState(false);
 
+    const [typingValues, setTypingValues] = useState("");
     const [searchValue, setSearchValue] = useState("");
 
 
@@ -58,6 +59,19 @@ const Navbar = () => {
         dispatch(sideBarStore(true));
     }
 
+    const handlerSearch = (e) => {
+        setTypingValues(e.target.value);
+    }
+
+    const searchBtn = () => {
+        if (typingValues) {
+            setSearchValue(typingValues);
+            dispatch(gettingSearchList({queryValue: typingValues, page: 1}));
+            navigate('/search-result', {replace: true})
+            setTypingValues('')
+        }
+    }
+
     useEffect(()=> {
         if (userLocalCheck.email) {
             setLoginCheck(true);
@@ -85,8 +99,8 @@ const Navbar = () => {
         </Link>
         <div className='flex gap-4 items-center justify-center'>
             <div className='flex items-center justify-center gap-4'>
-                <input type="text" className={`border-b	w-[150px] ${screenMode==="dark"? 'bg-slate-800 text-white':'bg-white text-black border-black'}`} />
-                <FaSearch className='hover:text-gray-400' />
+                <input onChange={(e)=>handlerSearch(e)} value={typingValues} type="text" className={`border-b	w-[150px] ${screenMode==="dark"? 'bg-slate-800 text-white':'bg-white text-black border-black'}`} />
+                <FaSearch onClick={()=>searchBtn()} className='hover:text-gray-400' />
             </div>
             {isWindow &&
                 <>
