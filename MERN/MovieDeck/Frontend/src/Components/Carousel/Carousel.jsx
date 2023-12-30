@@ -38,9 +38,9 @@ const Carousel = (props) => {
         },
         }}
       >
-        {props.props.results?.map((item)=> (
+        {props.props?.results?.slice((Math.floor(Math.random()*10)+1), (Math.floor(Math.random()*10)+20))?.map((item)=> (
             <SwiperSlide key={item.id} className='w-[90%]'>
-                <Link onClick={()=>dispatch(getSingleMovie({ id:  item.id}))} to={`movie/${item.id}`}>
+                <Link onClick={()=>dispatch(getSingleMovie({ id:  item.id}))} to={`movie/${item.title}`}>
                     <div className='cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
                         <img src={`https://image.tmdb.org/t/p/original${item.backdrop_path}`} alt="img" />
                         {item.title}

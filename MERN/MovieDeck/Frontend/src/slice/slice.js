@@ -16,10 +16,11 @@ const initialState = {
 }
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie/'
+// search/movie?query=amer&include_adult=true&language=en-US&page=1
 const SERVER_BASE_URL = "http://localhost:4501/"
 
 const API_KEY = '494170c64724d022e9296a5fa98644eb';
-const API_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTQxNzBjNjQ3MjRkMDIyZTkyOTZhNWZhOTg2NDRlYiIsInN1YiI6IjY0OTAyNGE5MjYzNDYyMDBhZTFjZGI1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7il3x7f91baELU8ceqe8OYauvsHEJ-lC34vS3Gslqoc'
+const TMDB_API_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTQxNzBjNjQ3MjRkMDIyZTkyOTZhNWZhOTg2NDRlYiIsInN1YiI6IjY0OTAyNGE5MjYzNDYyMDBhZTFjZGI1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7il3x7f91baELU8ceqe8OYauvsHEJ-lC34vS3Gslqoc'
 
 const createMovieAsyncThunk = (name, type) => {
     return createAsyncThunk(
@@ -29,7 +30,7 @@ const createMovieAsyncThunk = (name, type) => {
           method: 'GET',
           headers: {
             accept: 'application/json',
-            Authorization: `Bearer ${API_TOKEN}`,
+            Authorization: `Bearer ${TMDB_API_TOKEN}`,
           },
         };
         const pageNo = page || page.page;
@@ -62,7 +63,7 @@ export const getSingleMovie = createAsyncThunk(
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: `Bearer ${API_TOKEN}`
+                Authorization: `Bearer ${TMDB_API_TOKEN}`
             }
         }
         const url = `${BASE_URL}${id}?language=en-US`
@@ -86,7 +87,7 @@ export const getTrailerOut = createAsyncThunk(
             method: 'GET',
             headers: {
                 accept: 'application/json',
-                Authorization: `Bearer ${API_TOKEN}`
+                Authorization: `Bearer ${TMDB_API_TOKEN}`
             }
         }
         const url = `${BASE_URL}${id}/videos?language=en-US`

@@ -8,6 +8,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 
 const MovieDetailPage = () => {
   const { singleMovieFetch, screenMode, trailerLink, isLoading } = useSelector((state) => state.movieReducer);
+  
   const [showTrailerModal, setShowTrailerModal] = useState(false);
   const [trailerPath, setTrailerPath] = useState("");
   const [count, setCount] = useState(0);
@@ -17,6 +18,7 @@ const MovieDetailPage = () => {
   const [snakeBar, setSnakeBar] = useState(false);
   const [watchListStatus, setWatchListStatus] = useState(false);
   const dispatch = useDispatch();
+
 
   const localStore = JSON.parse(localStorage.getItem('watchList')) || [];
   const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];

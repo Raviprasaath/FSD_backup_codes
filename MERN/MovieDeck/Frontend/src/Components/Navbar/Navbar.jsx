@@ -81,7 +81,7 @@ const Navbar = () => {
     <section className={`flex sticky top-0 z-10 items-center justify-between px-4 ${screenMode==="dark"? 'bg-slate-800 text-white border-b	':'bg-white text-black border-b border-black'}`}>
         {!isWindow && <FaBars onClick={()=>handlerSideBar()} className='absolute'/> }
         <Link to='/'>
-            <img src={logo} alt="logo" className='w-[150px]' />
+            <img src={logo} alt="logo" className='w-[150px] my-3' />
         </Link>
         <div className='flex gap-4 items-center justify-center'>
             <div className='flex items-center justify-center gap-4'>

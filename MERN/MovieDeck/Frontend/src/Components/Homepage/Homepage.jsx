@@ -40,7 +40,7 @@ const Homepage = () => {
     return (
         <>
             <div className={`w-[100%] m-auto px-4 ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>                
-                {/* <HomeHeaderCarousel /> */}
+                <HomeHeaderCarousel />
                 <Link to='upcoming/page-1' state={{type: "upcoming"}}>
                     <h2 className='cursor-pointer font-bold uppercase p-1 hover:underline'>Upcoming</h2>
                 </Link>

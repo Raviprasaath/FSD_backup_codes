@@ -11,6 +11,7 @@ import UserPage from "./Components/UserAuthentication/UserPage"
 import SignUpPage from "./Components/UserAuthentication/SignupPage"
 import LoginPage from "./Components/UserAuthentication/LoginPage"
 import WatchLater from "./Components/WatchLater/WatchLater"
+import WatchLaterDummy from "./Components/WatchLater/WatchLaterDummy"
 import { ErrorBoundary } from 'react-error-boundary';
 import { useSelector } from "react-redux"
 import PageNotFound from "./Components/PageNotFound/PageNotFound"
@@ -43,7 +44,10 @@ function App() {
             <Route path='login' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><LoginPage /></ErrorBoundary>} />
             <Route path='signup' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><SignUpPage /></ErrorBoundary>} />
           </Route>
-          <Route path='watch-later' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><WatchLater /></ErrorBoundary>} />
+          <Route path='watch-later' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><WatchLaterDummy /></ErrorBoundary>} >
+            <Route index element={<ErrorBoundary FallbackComponent={MyErrorFallback}><WatchLater /></ErrorBoundary>} />
+            <Route path=':id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
+          </Route>
           <Route path='*' element={<PageNotFound />} />
       </Route>
     )
@@ -58,15 +62,18 @@ export default App
 Todo
 All api work move to Thunk
 Search API
-page number track
 
 Redux toolkit
 thunk middleware
 Error boundary
+Breadcrumb
 Route 6.4
 Suspense
 Lazy Loader
 Pagination
+memo
+Material UI
+Swiper
 
 Node
 Express

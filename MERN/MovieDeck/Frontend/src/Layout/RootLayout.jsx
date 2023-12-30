@@ -14,6 +14,7 @@ import { IoMdHome } from "react-icons/io";
 import { IoIosLogIn } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import AppBreadCrumbs from '../Components/AppBreadCrumbs/AppBreadCrumbs'
 
 const RootLayout = () => {
   const { sideBar, screenMode:screenModeGlobal } = useSelector((state) => state.movieReducer);
@@ -127,6 +128,7 @@ useEffect(()=> {
                 </div>
             </section>
         }
+        <AppBreadCrumbs />
         <Outlet />
         <Footer />
     </div>

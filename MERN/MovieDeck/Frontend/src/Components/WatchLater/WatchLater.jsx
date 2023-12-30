@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import { Discuss } from 'react-loader-spinner'
 import { getSingleMovie, gettingWatchList } from '../../slice/slice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -46,7 +46,7 @@ const WatchLater = () => {
         <div className={`min-h-[80vh] flex flex-col justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
             <div id='check'className={`flex flex-row justify-center flex-wrap gap-4 px-2 py-4 `}  >
                 {dataLoad.length > 0 ? dataLoad?.map((item)=> (
-                    <Link key={item.id * Math.random()} onClick={()=>handlerDispatch(item.id)}  to={`${item.id}`}>
+                    <Link key={item.id * Math.random()} onClick={()=>handlerDispatch(item.id)}  to={`${item.title}`}>
                         <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
                             {loader ? (<div className={`flex justify-center items-center ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
                                 <Discuss
