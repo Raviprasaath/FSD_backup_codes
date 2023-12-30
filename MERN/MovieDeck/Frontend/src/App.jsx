@@ -13,6 +13,7 @@ import LoginPage from "./Components/UserAuthentication/LoginPage"
 import WatchLater from "./Components/WatchLater/WatchLater"
 import { ErrorBoundary } from 'react-error-boundary';
 import { useSelector } from "react-redux"
+import PageNotFound from "./Components/PageNotFound/PageNotFound"
 
 function MyErrorFallback({ error, resetErrorBoundary }) {
   const { screenMode } = useSelector((state) => state.movieReducer);
@@ -31,9 +32,9 @@ function App() {
     createRoutesFromElements(
       <Route path='/' element={ <ErrorBoundary FallbackComponent={MyErrorFallback}> <RootLayout /> </ErrorBoundary> }>
         <Route index element={<ErrorBoundary FallbackComponent={MyErrorFallback}><Homepage /></ErrorBoundary>} />
-          <Route path=':name' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailDummyPage /></ErrorBoundary>}>
+          <Route path=':name/:page' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailDummyPage /></ErrorBoundary>}>
             <Route index element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieCollection /></ErrorBoundary>} />
-            <Route path=':page/:id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
+            <Route path=':id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
           </Route>
           <Route path='movie' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><Category /></ErrorBoundary>}>
             <Route path=':id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
@@ -43,6 +44,7 @@ function App() {
             <Route path='signup' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><SignUpPage /></ErrorBoundary>} />
           </Route>
           <Route path='watch-later' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><WatchLater /></ErrorBoundary>} />
+          <Route path='*' element={<PageNotFound />} />
       </Route>
     )
   )

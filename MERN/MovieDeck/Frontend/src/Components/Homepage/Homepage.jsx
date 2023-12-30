@@ -40,29 +40,29 @@ const Homepage = () => {
     return (
         <>
             <div className={`w-[100%] m-auto px-4 ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>                
-                <HomeHeaderCarousel />
-                <Link to='upcoming' state={{type: "upcoming"}}>
+                {/* <HomeHeaderCarousel /> */}
+                <Link to='upcoming/page-1' state={{type: "upcoming"}}>
                     <h2 className='cursor-pointer font-bold uppercase p-1 hover:underline'>Upcoming</h2>
                 </Link>
                 <Suspense fallback={<Loader />}>
                     <LazyCarousel props={upcomingMovieList}/>                
                 </Suspense>
                 <div className='my-4'></div>
-                <Link to='now-showing' state={{type: "now-showing"}}>
+                <Link to='now-showing/page-1' state={{type: "now-showing"}}>
                     <h2 className='cursor-pointer font-bold uppercase p-1 hover:underline'>Now Showing</h2>
                 </Link>
                 <Suspense fallback={<Loader />}>
                     <LazyCarousel props={nowPlayingMovieList}/>
                 </Suspense>
                 <div className='my-4'></div>
-                <Link to='popular' state={{type: "popular"}}>
+                <Link to='popular/page-1' state={{type: "popular"}}>
                     <h2 className='cursor-pointer font-bold uppercase p-1 hover:underline'>Popular Movies</h2>
                 </Link>
                 <Suspense fallback={<Loader />}>
                     <LazyCarousel props={popularMovieList}/>
                 </Suspense>
                 <div className='my-4'></div>
-                <Link to='top-rated' state={{type: "top-rated"}}>
+                <Link to='top-rated/page-1' state={{type: "top-rated"}}>
                     <h2 className='cursor-pointer font-bold uppercase p-1 hover:underline'>Top Rated</h2>
                 </Link>
                 <Suspense fallback={<Loader />}>
