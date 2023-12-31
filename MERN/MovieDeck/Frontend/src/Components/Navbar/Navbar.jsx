@@ -4,7 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import { useDispatch, useSelector } from 'react-redux'
-import { gettingSearchList, screenModeToggler, sideBarStore } from '../../slice/slice';
+import { gettingSearchList, screenModeToggler, searchQueryStore, sideBarStore } from '../../slice/slice';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MdWatchLater } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
@@ -67,6 +67,7 @@ const Navbar = () => {
         if (typingValues) {
             setSearchValue(typingValues);
             dispatch(gettingSearchList({queryValue: typingValues, page: 1}));
+            dispatch(searchQueryStore(typingValues));
             navigate('/search-result', {replace: true})
             setTypingValues('')
         }

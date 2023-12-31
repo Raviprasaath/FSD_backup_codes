@@ -21,7 +21,7 @@ const AppBreadCrumbs = () => {
   
   useEffect(()=> {
     setLinkDisable(crumbPath[0]?.key === 'movie' || crumbPath[0]?.key === 'user-authentication');
-    if (location.pathname === '/upcoming' || location.pathname === '/now-showing' || location.pathname === '/popular' || location.pathname === '/top-rated') {
+    if (location.pathname === '/search-result' || location.pathname === '/upcoming' || location.pathname === '/now-showing' || location.pathname === '/popular' || location.pathname === '/top-rated') {
       navigate(`/${crumbPath[0]?.key}/page-1`);
     }
   }, [location.pathname]);

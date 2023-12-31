@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { getSingleMovie } from '../../slice/slice';
+import { getSingleMovie, gettingSearchList } from '../../slice/slice';
 import gif from "../../assets/no_result.gif"
 
 const SearchPage = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { screenMode, searchResult } = useSelector((state) => state.movieReducer);
-    const [page, setPage] = useState(2);
+    const { screenMode, searchResult, searchQuery } = useSelector((state) => state.movieReducer);
+    const [page, setPage] = useState(Number(location.pathname.split('/')[2].charAt(5)));
     const [dataLoad, setDataLoad] = useState([]);
 
     const fetchingInitiator = location.pathname.split('/');
@@ -21,16 +21,18 @@ const SearchPage = () => {
     const handlerPageControl = (value) => {
         if (value === "prev" && page > 2) {
             setPage((prev) => prev - 1);
-            navigate(`/${fetchingInitiator[1]}/page-${page-2}`);
+            navigate(`/${fetchingInitiator[1]}/page-${page-1}`);
+            dispatch(gettingSearchList({queryValue: searchQuery, page: page-1}));
         } else if (value === "next" && page <= dataLoad.total_pages) {
             setPage((prev) => prev + 1);
-            navigate(`/${fetchingInitiator[1]}/page-${page}`);
+            navigate(`/${fetchingInitiator[1]}/page-${page+1}`);
+            dispatch(gettingSearchList({queryValue: searchQuery, page: page+1}));
         }
     };
 
     useEffect(()=> {
         setDataLoad(searchResult);
-    }, [searchResult])
+    }, [searchResult, location.pathname])
 
     return (
         <>
@@ -51,7 +53,7 @@ const SearchPage = () => {
                             Prev
                         </button>
                         <div className="bg-green-500 text-white text-[1rem] px-3 py-1 rounded-md">
-                            Current Page: {page-1}
+                            Current Page: {location.pathname.split('/')[2].charAt(5)}
                         </div>
                         <button onClick={()=>handlerPageControl("next")} className="bg-green-500 hover:bg-green-700 text-white text-[1rem] px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green">
                             Next

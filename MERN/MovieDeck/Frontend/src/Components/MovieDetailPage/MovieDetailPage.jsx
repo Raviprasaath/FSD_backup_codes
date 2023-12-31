@@ -136,14 +136,21 @@ const MovieDetailPage = () => {
       </div>):(
         <div className={`relative min-h-screen flex flex-col ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"} ` }>
           <div className="h-1/2 sm:h-2/3 lg:h-1/2 relative"/>
+            {singleMovieFetch?.backdrop_path ? 
             <img className='opacity-50' src={`https://image.tmdb.org/t/p/original/${singleMovieFetch?.backdrop_path}`} alt="img" />
+              :<div className='w-full mm:h-[600px] sm:h-[800px]  bg-gray-100'>Image Broken</div>
+          }
             <div className="flex-grow ">
               <div className="mm:top-[15%] sm:top-[20%] md:top-[35%] lg:top-[42%] left-[50%] -translate-x-1/2 -translate-y-1/2 absolute">
+                {singleMovieFetch?.poster_path ?
                 <img
                   className="w-[25vw] rounded-lg shadow-lg"
                   src={`https://image.tmdb.org/t/p/original/${singleMovieFetch?.poster_path}`}
                   alt={singleMovieFetch?.title}
-                />
+                />:(
+                  <div className='w-[25vw] h-[50vw]'>Image Broken</div>
+                )
+                }
               </div>
               <div className="container mx-auto p-8">          
                 <div className="mt-8">

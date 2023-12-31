@@ -50,7 +50,7 @@ function App() {
             <Route index element={<ErrorBoundary FallbackComponent={MyErrorFallback}><WatchLater /></ErrorBoundary>} />
             <Route path=':id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
           </Route>
-          <Route path='search-result' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><SearchPageDummy /></ErrorBoundary>}>
+          <Route path='search-result/:page' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><SearchPageDummy /></ErrorBoundary>}>
             <Route index element={<ErrorBoundary FallbackComponent={MyErrorFallback}><SearchPage /></ErrorBoundary>} />
             <Route path=':id' element={<ErrorBoundary FallbackComponent={MyErrorFallback}><MovieDetailPage /></ErrorBoundary>} />
           </Route>
