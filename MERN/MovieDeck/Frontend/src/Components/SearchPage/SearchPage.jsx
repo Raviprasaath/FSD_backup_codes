@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getSingleMovie, gettingSearchList } from '../../slice/slice';
 import gif from "../../assets/no_result.gif"
+import dummyImg from "../../assets/vertical-dummy.jpg"
+
 
 const SearchPage = () => {
     const location = useLocation();
@@ -42,7 +44,10 @@ const SearchPage = () => {
                         { dataLoad?.results?.map((item)=> (
                             <Link key={item.id} onClick={()=>handlerDispatch(item.id)} to={`${item.title}`}>
                                 <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
+                                    {item.poster_path ? 
                                     <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" />
+                                    :<img src={dummyImg} />
+                                    }
                                     {item.title}
                                 </div>
                             </Link>

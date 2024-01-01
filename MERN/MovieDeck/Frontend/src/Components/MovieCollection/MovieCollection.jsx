@@ -1,15 +1,18 @@
 import React, { useEffect, useState, useMemo  } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { getNowPlaying, getPopular, getSingleMovie, getTopRated, getUpcoming } from '../../slice/slice';
-import { Discuss } from 'react-loader-spinner'
+import { getActionMovie, getAdventureMovie, getAnimationMovie, getComedyMovie, getCrimeMovie, getDocumentaryMovie, getDramaMovie, getFamilyMovie, getFantasyMovie, getHistoryMovie, getHorrorMovie, getMusicMovie, getMysteryMovie, getNowPlaying, getPopular, getRomanceMovie, getSingleMovie, getThrillerMovie, getTopRated, getUpcoming } from '../../slice/slice';
+import dummyImg from "../../assets/vertical-dummy.jpg"
 
 
 const MovieCollection = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { screenMode, popularMovieList, nowPlayingMovieList, topRatedMovieList, upcomingMovieList } = useSelector((state) => state.movieReducer);
+    const { screenMode, popularMovieList, nowPlayingMovieList, topRatedMovieList, 
+        upcomingMovieList, actionMovie, adventureMovie, animationMovie, 
+        comedyMovie, crimeMovie, DocumentaryMovie, DramaMovie, FamilyMovie, FantasyMovie, 
+        HistoryMovie, HorrorMovie, MusicMovie, MysteryMovie, RomanceMovie, ThrillerMovie } = useSelector((state) => state.movieReducer);
     const [page, setPage] = useState(Number(location.pathname.split('/')[2].charAt(5)));
 
     const fetchingInitiator = location.pathname.split('/');
@@ -38,10 +41,43 @@ const MovieCollection = () => {
                 return nowPlayingMovieList;
             case 'top-rated':
                 return topRatedMovieList;
+            case 'action-movies':
+                return actionMovie;
+            case 'adventure-movies':
+                return adventureMovie;
+            case 'animation-movies':
+                return animationMovie;
+            case 'comedy-movies':
+                return comedyMovie;
+            case 'crime-movies':
+                return crimeMovie;
+            case 'documentary-movies':
+                return DocumentaryMovie;
+            case 'drama-movies':
+                return DramaMovie;
+            case 'family-movies':
+                return FamilyMovie;
+            case 'fantasy-movies':
+                return FantasyMovie;
+            case 'history-movies':
+                return HistoryMovie;
+            case 'horror-movies':
+                return HorrorMovie;
+            case 'music-movies':
+                return MusicMovie;
+            case 'mystery-movies':
+                return MysteryMovie;
+            case 'romance-movies':
+                return RomanceMovie;
+            case 'thriller-movies':
+                return ThrillerMovie;
             default:
                 return [];
         }
-    }, [upcomingMovieList, popularMovieList, nowPlayingMovieList, topRatedMovieList, fetchingInitiator[1]]);
+    }, [upcomingMovieList, popularMovieList, nowPlayingMovieList, topRatedMovieList,
+        actionMovie, adventureMovie, animationMovie, comedyMovie, crimeMovie, DocumentaryMovie, 
+        DramaMovie, FamilyMovie, FantasyMovie, HistoryMovie, HorrorMovie, MusicMovie, MysteryMovie,
+        RomanceMovie, ThrillerMovie, fetchingInitiator[1]]);
 
     const rendering = () => {
         const fetchingPage = location.pathname.split('/');
@@ -54,6 +90,36 @@ const MovieCollection = () => {
             dispatch(getNowPlaying({ type: fetchingPage[1], page: pageNumber }));
         } else if (fetchingPage[1] === 'top-rated') {
             dispatch(getTopRated({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'action-movies') {
+            dispatch(getActionMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'adventure-movies') {
+            dispatch(getAdventureMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'animation-movies') {
+            dispatch(getAnimationMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'comedy-movies') {
+            dispatch(getComedyMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'crime-movies') {
+            dispatch(getCrimeMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'documentary-movies') {
+            dispatch(getDocumentaryMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'family-movies') {
+            dispatch(getFamilyMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'fantasy-movies') {
+            dispatch(getFantasyMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'history-movies') {
+            dispatch(getHistoryMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'horror-movies') {
+            dispatch(getHorrorMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'music-movies') {
+            dispatch(getMusicMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'mystery-movies') {
+            dispatch(getMysteryMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'romance-movies') {
+            dispatch(getRomanceMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'thriller-movies') {
+            dispatch(getThrillerMovie({ type: fetchingPage[1], page: pageNumber }));
+        }else if (fetchingPage[1] === 'drama-movies') {
+            dispatch(getDramaMovie({ type: fetchingPage[1], page: pageNumber }));
         }
     };
 
@@ -69,7 +135,10 @@ const MovieCollection = () => {
                 { dataLoad?.results?.map((item)=> (
                     <Link key={item.id} onClick={()=>handlerDispatch(item.id)} to={`${item.title}`}>
                         <div className='w-[150px] cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
-                            <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" />
+                            {item.poster_path ? 
+                                <img className='w-[150px]' src={`https://image.tmdb.org/t/p/original${item.poster_path}`} alt="img" /> 
+                                : (<img src={dummyImg} />)
+                            }
                             {item.title}
                         </div>
                     </Link>

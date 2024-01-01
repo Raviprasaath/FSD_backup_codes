@@ -15,11 +15,28 @@ const initialState = {
     sideBar: false,
     searchResult: [],
     searchQuery: "",
+    relatedMovie: [],
+    actionMovie: [],
+    adventureMovie: [],
+    animationMovie: [],
+    comedyMovie: [],
+    crimeMovie: [],
+    DocumentaryMovie: [],
+    DramaMovie: [],
+    FamilyMovie: [],
+    FantasyMovie: [],
+    HistoryMovie: [],
+    HorrorMovie: [],
+    MusicMovie: [],
+    MysteryMovie: [],
+    RomanceMovie: [],
+    ThrillerMovie: [],
 }
 
 const BASE_URL = 'https://api.themoviedb.org/3/movie/'
-// const SERVER_BASE_URL = "http://localhost:4501/"
-const SERVER_BASE_URL = "https://server-hosting-test-nguq.onrender.com/"
+
+// const SERVER_BASE_URL = "http://localhost:4502/"
+const SERVER_BASE_URL = "https://filmfleet-backend-server.onrender.com/"
 
 const API_KEY = '494170c64724d022e9296a5fa98644eb';
 const TMDB_API_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0OTQxNzBjNjQ3MjRkMDIyZTkyOTZhNWZhOTg2NDRlYiIsInN1YiI6IjY0OTAyNGE5MjYzNDYyMDBhZTFjZGI1NiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7il3x7f91baELU8ceqe8OYauvsHEJ-lC34vS3Gslqoc'
@@ -176,6 +193,7 @@ export const getSignup = createAsyncThunk(
         }
     }
 )
+
 export const gettingWatchList =createAsyncThunk(
     'watchListGetting/gettingWatchList',
     async ({tokenValue, methods, suffix, movie }, {rejectWithValue}) => {
@@ -221,6 +239,77 @@ export const gettingWatchList =createAsyncThunk(
     }
 )
 
+export const gettingRelatedMovie =createAsyncThunk(
+    'movieList/gettingRelatedMovie',
+    async ({ value, page }, { rejectWithValue }) => {
+        const option = {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${TMDB_API_TOKEN}`,
+          },
+        };
+        const pageNo = page || page.page;
+        const url = `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=en-US&page=${pageNo}&with_genres=${value}`
+        try {
+          const response = await fetch(url, option);
+  
+          if (response.ok) {
+            const result = await response.json();
+            return result;
+          } else {
+            return rejectWithValue({ error: 'Movie Fetching Fails' });
+          }
+        } catch (error) {
+          return rejectWithValue({ error: 'An error occurred during the fetch' });
+        }
+    }
+)
+
+const genresMovieAsyncThunk = (name, type) => {
+    return createAsyncThunk(
+      `moviesTypeList/${name}`,
+      async ({ page }, { rejectWithValue }) => {
+        const option = {
+          method: 'GET',
+          headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${TMDB_API_TOKEN}`,
+          },
+        };
+        const pageNo = page || page.page;
+        const url = `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=en-US&page=${pageNo}&with_genres=${type}`
+        try {
+          const response = await fetch(url, option);
+  
+          if (response.ok) {
+            const result = await response.json();
+            return result;
+          } else {
+            return rejectWithValue({ error: 'Movie Fetching Fails' });
+          }
+        } catch (error) {
+          return rejectWithValue({ error: 'An error occurred during the fetch' });
+        }
+      }
+    );
+};
+
+export const getActionMovie = genresMovieAsyncThunk('getActionMovie', '28');
+export const getAdventureMovie = genresMovieAsyncThunk('getAdventureMovie', '12');
+export const getAnimationMovie = genresMovieAsyncThunk('getAnimationMovie', '16');
+export const getComedyMovie = genresMovieAsyncThunk('getComedyMovie', '35');
+export const getCrimeMovie = genresMovieAsyncThunk('getCrimeMovie', '80');
+export const getDocumentaryMovie = genresMovieAsyncThunk('getDocumentaryMovie', '99');
+export const getDramaMovie = genresMovieAsyncThunk('getDramaMovie', '18');
+export const getFamilyMovie = genresMovieAsyncThunk('getFamilyMovie', '10751');
+export const getFantasyMovie = genresMovieAsyncThunk('getFantasyMovie', '14');
+export const getHistoryMovie = genresMovieAsyncThunk('getHistoryMovie', '36');
+export const getHorrorMovie = genresMovieAsyncThunk('getHorrorMovie', '27');
+export const getMusicMovie = genresMovieAsyncThunk('getMusicMovie', '10402');
+export const getMysteryMovie = genresMovieAsyncThunk('getMysteryMovie', '9648');
+export const getRomanceMovie = genresMovieAsyncThunk('getRomanceMovie', '10749');
+export const getThrillerMovie = genresMovieAsyncThunk('getThrillerMovie', '53');
 
 
 
@@ -354,6 +443,214 @@ const movieSlices = createSlice({
             state.error = ''
         })
         .addCase(gettingSearchList.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(gettingRelatedMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(gettingRelatedMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.relatedMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(gettingRelatedMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getActionMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getActionMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.actionMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getActionMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getAdventureMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getAdventureMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.adventureMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getAdventureMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getAnimationMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getAnimationMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.animationMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getAnimationMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getComedyMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getComedyMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.comedyMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getComedyMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getCrimeMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getCrimeMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.crimeMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getCrimeMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getDocumentaryMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getDocumentaryMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.DocumentaryMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getDocumentaryMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getDramaMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getDramaMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.DramaMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getDramaMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getFamilyMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getFamilyMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.FamilyMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getFamilyMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getFantasyMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getFantasyMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.FantasyMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getFantasyMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getHistoryMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getHistoryMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.HistoryMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getHistoryMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getHorrorMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getHorrorMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.HorrorMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getHorrorMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getMusicMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getMusicMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.MusicMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getMusicMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getMysteryMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getMysteryMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.MysteryMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getMysteryMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getRomanceMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getRomanceMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.RomanceMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getRomanceMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(getThrillerMovie.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(getThrillerMovie.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.ThrillerMovie = action.payload,
+            state.error = ''
+        })
+        .addCase(getThrillerMovie.rejected, (state, action)=> {
             state.isLoading = false;
             state.error = action.payload ? action.payload.error : 'Unknown error';
         })       

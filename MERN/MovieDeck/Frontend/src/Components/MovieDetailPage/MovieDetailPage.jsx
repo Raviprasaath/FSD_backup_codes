@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoMdCloseCircleOutline } from "react-icons/io";
-import { getTrailerOut, gettingWatchList } from '../../slice/slice';
+import { getTrailerOut, gettingRelatedMovie, gettingWatchList } from '../../slice/slice';
 import { FidgetSpinner } from 'react-loader-spinner'
 import LazyLoader from '../LazyLoader/LazyLoader';
 import { IoMdCloseCircle } from "react-icons/io";
+import Carousel from '../Carousel/Carousel';
 
 const MovieDetailPage = () => {
-  const { singleMovieFetch, screenMode, trailerLink, isLoading } = useSelector((state) => state.movieReducer);
+  const { singleMovieFetch, screenMode, trailerLink, isLoading, relatedMovie } = useSelector((state) => state.movieReducer);
   
   const [showTrailerModal, setShowTrailerModal] = useState(false);
   const [trailerPath, setTrailerPath] = useState("");
@@ -19,7 +20,6 @@ const MovieDetailPage = () => {
   const [watchListStatus, setWatchListStatus] = useState(false);
   const dispatch = useDispatch();
 
-
   const localStore = JSON.parse(localStorage.getItem('watchList')) || [];
   const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];
 
@@ -30,7 +30,7 @@ const MovieDetailPage = () => {
 
     const time = setTimeout(()=> {
       setSpinner(true);
-    }, [500])
+    }, [800])
     setSpinner(false);
     return (()=> clearTimeout(time));
   };
@@ -115,6 +115,10 @@ const MovieDetailPage = () => {
   }, [snakeBar])
 
   useEffect(()=> {
+    dispatch(gettingRelatedMovie({
+      value: singleMovieFetch?.genres[0].id,
+      page: 1,  
+    }))
     if (userLocalCheck.email) {
       let time = setTimeout(()=> {
         let idCheck = false;
@@ -123,11 +127,12 @@ const MovieDetailPage = () => {
         if (idCheck) {
           setWatchListStatus(true);
         }
-      }, 1000)
+      }, 2000)
       return (()=>clearTimeout(time))
     }
+
   }, [singleMovieFetch])
-  
+
 
   return (
     <>
@@ -141,10 +146,10 @@ const MovieDetailPage = () => {
               :<div className='w-full mm:h-[600px] sm:h-[800px]  bg-gray-100'>Image Broken</div>
           }
             <div className="flex-grow ">
-              <div className="mm:top-[15%] sm:top-[20%] md:top-[35%] lg:top-[42%] left-[50%] -translate-x-1/2 -translate-y-1/2 absolute">
+              <div className=" mm:top-[15%] sm:top-[20%] md:top-[25%] lg:top-[30%] xl:top-[38%] left-[50%] -translate-x-1/2 -translate-y-1/2 absolute">
                 {singleMovieFetch?.poster_path ?
                 <img
-                  className="w-[25vw] rounded-lg shadow-lg"
+                  className="w-[22vw] rounded-lg shadow-lg"
                   src={`https://image.tmdb.org/t/p/original/${singleMovieFetch?.poster_path}`}
                   alt={singleMovieFetch?.title}
                 />:(
@@ -236,6 +241,11 @@ const MovieDetailPage = () => {
                 </div>
               </div>
             )}
+
+            <h2 className='font-bold uppercase p-1'>Related Movies</h2>
+            <div className='p-1 flex '>
+              <Carousel props={relatedMovie?relatedMovie:null} />
+            </div>
 
             {!spinner && (
                 <div className="absolute z-5 top-[80%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out">

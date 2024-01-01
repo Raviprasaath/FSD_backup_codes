@@ -21,7 +21,17 @@ const AppBreadCrumbs = () => {
   
   useEffect(()=> {
     setLinkDisable(crumbPath[0]?.key === 'movie' || crumbPath[0]?.key === 'user-authentication');
-    if (location.pathname === '/search-result' || location.pathname === '/upcoming' || location.pathname === '/now-showing' || location.pathname === '/popular' || location.pathname === '/top-rated') {
+    if (location.pathname === '/search-result' || location.pathname === '/upcoming' || location.pathname === '/now-showing' 
+    || location.pathname === '/popular' || location.pathname === '/top-rated'
+    || location.pathname === '/action-movies' ||  location.pathname === '/adventure-movies' 
+    || location.pathname === '/animation-movies' || location.pathname === '/comedy-movies' ||
+    location.pathname === '/crime-movies' || location.pathname === '/documentary-movies' || 
+    location.pathname === '/drama-movies' || location.pathname === '/family-movies' || 
+    location.pathname === '/fantasy-movies' || location.pathname === '/history-movies' ||
+    location.pathname === '/horror-movies' || location.pathname === '/music-movies' || 
+    location.pathname === '/mystery-movies' || location.pathname === '/romance-movies' ||
+    location.pathname === '/thriller-movies'
+    ) {
       navigate(`/${crumbPath[0]?.key}/page-1`);
     }
   }, [location.pathname]);
