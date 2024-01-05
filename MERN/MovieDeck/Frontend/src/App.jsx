@@ -29,7 +29,6 @@ function MyErrorFallback({ error, resetErrorBoundary }) {
     </div>
   );
 }
-
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
