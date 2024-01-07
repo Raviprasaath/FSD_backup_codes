@@ -3,11 +3,11 @@ const watchListModel = require("../models/watchLaterModel");
 
 const gettingWatchList = async (req, res) => {
     try {
-        const allMovies = await watchListModel.find({});
-        res.status(200).json(allMovies);
-      } catch (e) {
-        res.status(400).json({ error: e.message })
-      }
+      const allMovies = await watchListModel.find({});
+      res.status(200).json(allMovies);
+    } catch (e) {
+      res.status(400).json({ error: e.message })
+    }
 }
 const addingToWatchList = async (req, res) => {
   const { detail } = req.body;
