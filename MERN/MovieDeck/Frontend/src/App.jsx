@@ -29,6 +29,7 @@ function MyErrorFallback({ error, resetErrorBoundary }) {
     </div>
   );
 }
+
 function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -64,7 +65,7 @@ export default App
 
 
 /*
-
+Lazy Loader individual component UI render
 Redux toolkit
 thunk middleware
 Error boundary

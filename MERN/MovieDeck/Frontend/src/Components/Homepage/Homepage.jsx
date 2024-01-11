@@ -17,8 +17,7 @@ const Homepage = () => {
     const [loginCheck, setLoginCheck] = useState(false);
 
     const LazyCarousel = React.lazy(()=>import("../Carousel/Carousel"));
-    const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];
-    
+    const userLocalCheck = JSON.parse(localStorage.getItem('userDetails')) || [];   
 
     useEffect(()=> {
         dispatch(getNowPlaying({ type: 'now_playing', page: 1 }));
