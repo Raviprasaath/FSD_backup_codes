@@ -100,9 +100,12 @@ const MovieDetailPage = () => {
   }
 
   useEffect(()=> {
-    if (trailerLink) {
-      const key = trailerLink?.results?.filter((item)=>item.name.includes("Trailer")||item.name.includes("Teaser"))
-      setTrailerPath(key[0].key);
+    const keys = trailerLink?.results?.filter((item)=>item.name.includes("Trailer")||item.name.includes("Teaser")) || ''
+    if (trailerLink?.results?.length > 0) {
+      console.log(keys[0])
+      setTrailerPath(keys[0].key);
+    } else {
+      setTrailerPath('');
     }
     if (userLocalCheck.email) {
       setLoginCheck(true);
