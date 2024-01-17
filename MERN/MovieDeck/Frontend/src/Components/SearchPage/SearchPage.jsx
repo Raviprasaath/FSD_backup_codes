@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getSingleMovie, gettingSearchList } from '../../slice/slice';
 import gif from "../../assets/no_result.gif"
+import wentWrong from "../../assets/oops-something-went-wrong-vector.jpg"
 import dummyImg from "../../assets/vertical-dummy.jpg"
+import useScrollTop from '../CustomHook/useScrollTop';
+import { Shimmer } from 'react-shimmer';
 
 
 const SearchPage = () => {
@@ -14,9 +17,10 @@ const SearchPage = () => {
     const [page, setPage] = useState(Number(location.pathname.split('/')[2].charAt(5)));
     const [dataLoad, setDataLoad] = useState([]);
     const [pageDelay, setPageDelay] = useState(true);
+    const [loadDelay, setLoadDelay] = useState(false);
 
     const fetchingInitiator = location.pathname.split('/');
-
+    useScrollTop();
     const handlerDispatch = (idVal) => {
         dispatch(getSingleMovie({ id: idVal }));
         localStorage.setItem('movieIdBackup', JSON.stringify(idVal));
@@ -40,9 +44,25 @@ const SearchPage = () => {
         setPageDelay(true);
         const timer = setTimeout(()=> {
             setPageDelay(false);
+            setLoadDelay(true);
         }, 1000)
         return (()=>timer);
     }, [searchResult, location.pathname])
+
+    if (searchResult.length === 0) {
+        return (
+            <>
+                <div className='flex h-[70dvh] justify-center items-center'>
+                    {loadDelay &&
+                        <>
+                            <h1 className='absolute top-[120px] text-[2vw] text-gray-500 font-extrabold'>Search Again</h1>
+                            <img src={wentWrong} alt='gif-img' className='sm:h-[40dvh] md:h-[70vh]' />
+                        </>
+                    }
+                </div>
+            </>
+        )
+    }
 
     return (
         <>
@@ -51,9 +71,9 @@ const SearchPage = () => {
                     <div id='check'className={`flex flex-row justify-center flex-wrap gap-4 px-2 py-4 `}  >
                         {dataLoad?.results?.map((item)=> (
                             <Link key={item.id} onClick={()=>handlerDispatch(item.id)} to={`${item.title}`}>
-                                {pageDelay ? <div className='w-[180px] h-[250px] bg-gray-500 cursor-pointer flex flex-col justify-center items-center'></div>
+                                {pageDelay ? <Shimmer width={180} height={250}/>
                                 :
-                                <div className='w-[150px] h-[300px] overflow-hidden cursor-pointer flex flex-col justify-center items-center hover:opacity-60'>
+                                <div className='w-[150px] h-[300px] overflow-hidden cursor-pointer flex flex-col items-center hover:opacity-60'>
                                     { !item.poster_path ?
                                         <img className='w-[150px]' src={dummyImg} alt="img" /> 
                                         :
@@ -83,7 +103,7 @@ const SearchPage = () => {
                 )
             }
         </>
-  )
+    )
 }
 
 export default SearchPage

@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import bg from '../../assets/userpage.jpg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSignup } from '../../slice/slice';
+import { useScreenSize } from '../CustomHook/useScreenSize';
+import CircleLoader from 'react-spinners/CircleLoader'
+import useScrollTop from '../CustomHook/useScrollTop';
 
 const LoginPage = () => {
-  const { screenMode } = useSelector((state) => state.movieReducer);
+  const { screenMode, userAuth, error:errorMessageFromSlice, isLoading } = useSelector((state) => state.movieReducer);
   const [errorMessage, setErrorMessage] = useState("");
   const [status, setStatus] = useState(false);
+  const [forceLoader, setForceLoader] = useState(false);
+  const [allFieldCheck, setAllFieldCheck] = useState(true);
+  const screen = useScreenSize();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,6 +36,7 @@ const LoginPage = () => {
     const isPasswordValid = user.password.trim().length >= 8;
 
     const isAnyFieldMissing = !isEmailValid || !isPasswordValid;
+    setAllFieldCheck(isAnyFieldMissing);
 
     setError({
       email: !isEmailValid,
@@ -37,25 +45,25 @@ const LoginPage = () => {
     });
 
     if (!isAnyFieldMissing) {
-      const result = dispatch(getSignup({
+      dispatch(getSignup({
         email: user.email,
         password: user.password,
         signing: 'login',
       }));
-
-      result.then(result => {
-        if (result.payload._id || result.payload.accessToken) {
-          setStatus(true);
-          navigateHome();
-          localStorage.setItem('userDetails', JSON.stringify(result.payload));
-        } else {
-          setErrorMessage(result.payload.error);
-          // setErrorMessage(result); // -> manual error creation my note
-        }
-      })
-
+      setForceLoader(!forceLoader);
     }
   };
+  
+  useScrollTop();
+  useEffect(()=> {
+      if (userAuth.accessToken) {
+        setStatus(true);
+        navigateHome();
+        localStorage.setItem('userDetails', JSON.stringify(userAuth));
+      } else {
+        setErrorMessage(errorMessageFromSlice);
+      }
+  }, [userAuth, errorMessageFromSlice])
 
 
   function navigateHome() {
@@ -81,9 +89,11 @@ const LoginPage = () => {
 
   return (
     <>
-      <div className={`flex ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
-        <img className="w-[60%]" src={bg} alt="background" />
-        <div className='flex flex-col justify-center w-[40%]'>
+      <div className={`relative flex h-dvh justify-center  ${screenMode==="dark"?"bg-slate-800 text-white":"bg-white text-black"}`}>
+        {screen > 960 &&
+        <img className=" h-fit w-[60%]" src={bg} alt="background" />
+        }
+        <div className='flex h-fit flex-col justify-center w-[40%]'>
           <h2 className='text-[28px] my-5 text-center font-bold'>LOGIN</h2>
           <form onSubmit={handleUserForm} className=" flex flex-col gap-2 justify-center items-center">
             <label htmlFor="email">EMAIL</label>
@@ -122,13 +132,20 @@ const LoginPage = () => {
                 Login Success 
               </div>):(
               <div className='text-red-500'>
-                {errorMessage}
+                {!allFieldCheck && errorMessage}
               </div>
               )
             }
           </form>
         </div>
-        
+        {isLoading && 
+          <div className='absolute flex justify-center items-center bg-black opacity-50 w-full h-full'>
+            <CircleLoader 
+            size={250}
+            color="white"
+            />
+          </div>
+        }
       </div>
     </>
   )

@@ -4,12 +4,12 @@ import { FaSearch } from "react-icons/fa";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { CiLight } from "react-icons/ci";
 import { useDispatch, useSelector } from 'react-redux'
-import { gettingSearchList, screenModeToggler, searchQueryStore, sideBarStore } from '../../slice/slice';
+import { gettingSearchList, gettingSingOut, screenModeToggler, searchQueryStore, sideBarStore } from '../../slice/slice';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { MdWatchLater } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
 import { FaBars } from "react-icons/fa";
-import { useScreenSize } from '../CustomHook/ScreenSize';
+import { useScreenSize } from '../CustomHook/useScreenSize';
 
 const Navbar = () => {
     const dispatch = useDispatch();
@@ -52,6 +52,7 @@ const Navbar = () => {
         localStorage.removeItem('userDetails');
         localStorage.removeItem('watchList');
         setLoginCheck(false);
+        dispatch(gettingSingOut());
     }
 
     const handlerSideBar = () => {
@@ -63,13 +64,23 @@ const Navbar = () => {
         setTypingValues(e.target.value);
     }
 
-    const searchBtn = () => {
+    function searchFunctionality () {
         if (typingValues) {
             setSearchValue(typingValues);
             dispatch(gettingSearchList({queryValue: typingValues, page: 1}));
             dispatch(searchQueryStore(typingValues));
             navigate('/search-result', {replace: true})
             setTypingValues('')
+        }
+    }
+
+    const searchBtn = () => {
+        searchFunctionality();
+    }
+
+     const handleKeyDown = (event) => {
+        if (event.keyCode === 13) {
+            searchFunctionality();
         }
     }
 
@@ -93,15 +104,19 @@ const Navbar = () => {
 
 
   return (
-    <section className={`flex sticky top-0 z-10 items-center justify-between px-4 ${screenMode==="dark"? 'bg-slate-800 text-white border-b	':'bg-white text-black border-b border-black'}`}>
+    <section className={`flex opacity-99 sticky top-0 z-10 items-center justify-between px-3 ${screenMode==="dark"? 'bg-slate-800 text-white border-b	':'bg-white text-black border-b border-black'}`}>
         {!isWindow && <FaBars onClick={()=>handlerSideBar()} className='absolute'/> }
         <Link to='/'>
             <img src={logo} alt="logo" className='w-[150px] my-3' />
         </Link>
         <div className='flex gap-4 items-center justify-center'>
             <div className='flex items-center justify-center gap-4'>
-                <input onChange={(e)=>handlerSearch(e)} value={typingValues} type="text" className={`border-b	w-[150px] ${screenMode==="dark"? 'bg-slate-800 text-white':'bg-white text-black border-black'}`} />
-                <FaSearch onClick={()=>searchBtn()} className='hover:text-gray-400' />
+                <input onKeyDown={handleKeyDown} onChange={(e)=>handlerSearch(e)} value={typingValues} type="text" className={`border-b	w-[150px] ${screenMode==="dark"? 'bg-slate-800 text-white':'bg-white text-black border-black'}`} />
+                <FaSearch 
+                    onClick={searchBtn}
+                    className='hover:text-gray-400' 
+                />
+
             </div>
             {isWindow &&
                 <>

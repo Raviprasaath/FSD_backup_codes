@@ -35,6 +35,7 @@ const initialState = {
     MysteryMovie: [],
     RomanceMovie: [],
     ThrillerMovie: [],
+    crew: [],
 }
 
 const createMovieAsyncThunk = (name, type) => {
@@ -77,7 +78,28 @@ export const gettingSearchList = createAsyncThunk(
                     Authorization: `Bearer ${TMDB_API_TOKEN}`
                 }
             }
-            const url = `https://api.themoviedb.org/3/search/movie?query=${queryValue}&include_adult=true&language=en-US&page=${page}`
+            const url = `https://api.themoviedb.org/3/search/movie?query=${queryValue}&include_adult=false&language=en-US&page=${page}`
+            const response = await axios(url, option);
+            return response.data;            
+        }
+        catch(error) {
+            return rejectWithValue({error: 'Movie Fetching Fails'})
+        }
+    }
+)
+
+export const gettingTeamDetails = createAsyncThunk(
+    'movieList/gettingTeamDetails',
+    async({id}, {rejectWithValue}) => {
+        try {
+            const option = {
+                method: 'GET',
+                headers: {
+                    accept: 'application/json',
+                    Authorization: `Bearer ${TMDB_API_TOKEN}`
+                }
+            }
+            const url = BASE_URL + id +'/credits?language=en-US'
             const response = await axios(url, option);
             return response.data;            
         }
@@ -119,10 +141,11 @@ export const getTrailerOut = createAsyncThunk(
                     Authorization: `Bearer ${TMDB_API_TOKEN}`
                 }
             }
-            const url = `${BASE_URL}${id}/videos?language=en-US`
-            const response = await axios(url, option);
-            console.log('response from trailer fetch', response)
-            return response.data;
+            if (id) {
+                const url = `${BASE_URL}${id}/videos?language=en-US`
+                const response = await axios(url, option);
+                return response.data;
+            }
         } catch (error) {
             return rejectWithValue({error: 'Movie Fetching Fails'})
         }
@@ -201,7 +224,6 @@ export const getSignup = createAsyncThunk(
 
         try{
             const response = await fetch(url, options);
-            console.log(response);
             if (response.ok) {
                 const result = await response.json();
                 return result;
@@ -309,6 +331,17 @@ const genresMovieAsyncThunk = (name, type) => {
     }
     );
 };
+
+export const gettingSingOut = createAsyncThunk(
+    'movieList/gettingSingOut', 
+    async ()=> {
+        return null;
+    }
+)
+
+
+
+
 
 export const getActionMovie = genresMovieAsyncThunk('getActionMovie', '28');
 export const getAdventureMovie = genresMovieAsyncThunk('getAdventureMovie', '12');
@@ -434,7 +467,11 @@ const movieSlices = createSlice({
         .addCase(getSignup.rejected, (state, action)=> {
             state.isLoading = false;
             state.error = action.payload ? action.payload.error : 'Unknown error';
-        })       
+        })
+        
+        .addCase(gettingSingOut.fulfilled, (state, action)=> {
+            state.userAuth = {};
+        })
         
         .addCase(gettingWatchList.pending, (state)=> {
             state.isLoading = true
@@ -666,6 +703,19 @@ const movieSlices = createSlice({
             state.error = ''
         })
         .addCase(getThrillerMovie.rejected, (state, action)=> {
+            state.isLoading = false;
+            state.error = action.payload ? action.payload.error : 'Unknown error';
+        })       
+        
+        .addCase(gettingTeamDetails.pending, (state)=> {
+            state.isLoading = true
+        })
+        .addCase(gettingTeamDetails.fulfilled, (state, action)=> {
+            state.isLoading = false,
+            state.crew = action.payload,
+            state.error = ''
+        })
+        .addCase(gettingTeamDetails.rejected, (state, action)=> {
             state.isLoading = false;
             state.error = action.payload ? action.payload.error : 'Unknown error';
         })       
