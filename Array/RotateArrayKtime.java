@@ -8,10 +8,10 @@ public class RotateArrayKtime {
         int n = array.length;
         int kTimes=3;
         rotation(array, kTimes);
-        // rotatearraylist(array, n, kTimes);
+        // rotateArraylist(array, n, kTimes);
     }
 
-    public static void rotatearraylist(int[] arr,int n,int k ){
+    public static void rotateArraylist(int[] arr,int n,int k ){
         ArrayList<Integer>list=new ArrayList<>(n);
         for(int i=0; i<n; i++){
             list.add(arr[i]);

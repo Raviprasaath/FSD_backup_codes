@@ -9,7 +9,7 @@ public class GCD {
     }
 		
 	public static int gcdNum(int a, int b){
-        if(b==0){
+        if (b==0) {
             return a;
         }
         return gcdNum(b, a%b);

@@ -9,16 +9,38 @@ const gettingWatchList = async (req, res) => {
       res.status(400).json({ error: e.message })
     }
 }
+
 const addingToWatchList = async (req, res) => {
-  const { detail } = req.body;
-  console.log('detail', detail);
+  const { emailString, details } = req.body;
+
   try {
-    const watchList = await watchListModel.create({detail});
+    const watchList = await watchListModel.create({emailString, details });
+  
     res.status(200).json(watchList);
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
 }
+
+const updatingToWatchList = async (req, res) => {
+  const { id } = req.params;
+  const { emailString, details } = req.body;
+  console.log(emailString, details)
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: "Not Found"})
+  }
+  
+  try {
+    const watchList = await watchListModel.findByIdAndUpdate( {_id:id}, {emailString, details}, { new: true, runValidators: true });
+    res.status(200).json(watchList);
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+}
+
+
+
+
 
 const deletingFromWatchList = async (req, res) => {
   const { id } = req.params;
@@ -33,4 +55,4 @@ const deletingFromWatchList = async (req, res) => {
   }
 };
 
-module.exports = { gettingWatchList, addingToWatchList, deletingFromWatchList };
+module.exports = { gettingWatchList, addingToWatchList, updatingToWatchList, deletingFromWatchList };

@@ -1,15 +1,13 @@
 const mongoose = require('mongoose');
 
-const watchListSchema = new mongoose.Schema({
-    detail: {
-        type : mongoose.Schema.Types.Mixed,
-        required: true,
-        unique: true
-    }
-}, 
-    {
-        timestamps: true
-    }
-);
+const watchListUserSchema = new mongoose.Schema({
+    emailString: {
+        type: String,
+        required: false,
+        unique: true,
+        sparse: true,
+    },
+    details: {type : mongoose.Schema.Types.Mixed}
+});
 
-module.exports = mongoose.model("MovieDeckWatchLists", watchListSchema)
+module.exports = mongoose.model("MovieDeckWatchLists", watchListUserSchema);
