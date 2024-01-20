@@ -39,16 +39,14 @@ const updatingToWatchList = async (req, res) => {
 }
 
 
-
-
-
 const deletingFromWatchList = async (req, res) => {
   const { id } = req.params;
+  const { emailString, details } = req.body;
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(404).json({error: "Task Not Found"});
   }
   try {
-    const taskDelete = await watchListModel.findByIdAndDelete(id)
+    const taskDelete = await watchListModel.findByIdAndUpdate({_id:id}, {emailString, details}, { new: true, runValidators: true })
     res.status(200).json(taskDelete)
   } catch (e) {
     res.status(400).json({errors: e.message})

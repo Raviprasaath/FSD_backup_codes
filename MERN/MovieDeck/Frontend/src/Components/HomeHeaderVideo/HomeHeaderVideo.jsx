@@ -16,11 +16,13 @@ const HomeHeaderVideo = () => {
     const dispatch = useDispatch();
     
     const array = [adventureMovie, animationMovie, FantasyMovie, HistoryMovie, MusicMovie, RomanceMovie];
-    let indexNumber = Math.floor(Math.random()*array.length);
-    let randomMovie = Math.floor(20 % Math.random()*20+1);
+
+    let indexNumber = Math.floor(Math.random()*(array.length - 1));
+    let randomMovie = Math.floor(20 % Math.random()*20);
 
     useEffect(()=> {
         const time = setTimeout(()=> {
+            console.log(randomMovie)
             dispatch(getTrailerOut( {id: array[indexNumber]?.results[randomMovie]?.id} ));
 
             setTitle(array[indexNumber]?.results[randomMovie]?.title || array[indexNumber]?.results[randomMovie]?.original_title)

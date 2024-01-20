@@ -7,7 +7,7 @@ const watchListUserSchema = new mongoose.Schema({
         unique: true,
         sparse: true,
     },
-    details: {type : mongoose.Schema.Types.Mixed}
+    details: [{type : mongoose.Schema.Types.Mixed}]
 });
 
 module.exports = mongoose.model("MovieDeckWatchLists", watchListUserSchema);

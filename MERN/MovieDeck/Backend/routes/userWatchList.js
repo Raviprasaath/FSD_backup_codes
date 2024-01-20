@@ -10,6 +10,7 @@ route.get('/', gettingWatchList);
 // route.post('/:id', validateToken, addingToWatchList);
 route.post('/:id', addingToWatchList);
 route.patch('/:id', updatingToWatchList);
-route.delete('/:id', validateToken, deletingFromWatchList);
+// route.delete('/:id', validateToken, deletingFromWatchList);
+route.delete('/:id', deletingFromWatchList);
 
 module.exports = route;
