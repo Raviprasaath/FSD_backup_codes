@@ -65,7 +65,7 @@ class LinkingList {
         
         while (n -- != 0) {
             temp = temp.next;
-        } 
+        }
         
         newNode.next = temp.next;
         temp.next = newNode;

@@ -25,7 +25,6 @@ const MovieDetailPage = () => {
   const dispatch = useDispatch();
   const [idVal, setIdVal] = useState();
 
-  let { email } = JSON.parse(localStorage.getItem('userDetails'));
   let movieValue = JSON.parse(localStorage.getItem('singleMovieResult'));
 
 
@@ -54,104 +53,42 @@ const MovieDetailPage = () => {
   }
 
 
-  const handlerWatchList = (movie) => {
-    let { email } = JSON.parse(localStorage.getItem('userDetails'));
+  const handlerWatchList = (movie, idVal, watchList, tokenValue) => {
+    let checkAlreadyAvailable;
+    let isAlreadyAvailable;
+    let id;
+    if (watchList.length !== 0) {
+      checkAlreadyAvailable = watchList?.some((item)=>item?.details[0]?.id === movie?.id);
+      isAlreadyAvailable = watchList?.filter((item)=>item?.details[0]?.id === movie?.id);
+      id = (isAlreadyAvailable[0]?._id);
+    }
 
-    if (loginCheck) {
-      console.log(watchList);
-
-      let checkingUserAvailable = [];
-      if (Array.isArray(watchList)) {
-        checkingUserAvailable = watchList.some((user)=>user.emailString === email);
-      }
-      console.log(Array.isArray(watchList), checkingUserAvailable);
-
-      if (Array.isArray(watchList) && !checkingUserAvailable) {
-        console.log('chec')
-        dispatch(gettingWatchList({
-          tokenValue: tokenValue,
-          methods: "POST",
-          suffix: `watch-later/${movie.id}/`,
-          emailString: email,
-          movie: movie,
-        }))
-        setWatchListStatus(true);
-      } else { 
-        console.log("tet", checkingUserAvailable[0])
-        let userFind=watchList;
-        let userWatchList = watchList;
-        if (Array.isArray(watchList)) {
-          userWatchList = watchList.filter((user)=>user.emailString === email);
-        }
-        if (checkingUserAvailable) {
-          userFind = userWatchList[0].details;
-        } else {
-          userFind = watchList.details
-        }
-        console.log(userFind)
-        let isMovieAvailable = userFind?.filter((item)=>item.id === movie.id);
-        if (isMovieAvailable?.length === 0) {
-          dispatch(gettingWatchList({
-            tokenValue: tokenValue,
-            methods: "PATCH",
-            suffix: `watch-later/${idVal}/`,
-            emailString: email,
-            movie: [...userFind, movie],  
-          }))
-          setWatchListStatus(true);
-        } else {
-          console.log('delete', userFind)
-
-          const filteredMovies = userFind?.filter((item)=>item.id !== movie.id)
-          dispatch(gettingWatchList({
-            tokenValue: tokenValue,
-            methods: "PATCH",
-            suffix: `watch-later/${idVal}/`,
-            emailString: email,
-            movie: filteredMovies,  
-          }))
-          setWatchListStatus(false);
-          
-        }
-      }
+    if (!checkAlreadyAvailable || watchList.length === 0) {
+      dispatch(gettingWatchList({
+        tokenValue: tokenValue,
+        methods: "POST",
+        suffix: `watch-later/${movie.id}/?userId=${userLocalCheck.userId}`,
+        emailString: userLocalCheck?.email,
+        movie: movie
+      }))
+      setWatchListStatus(true);
     } else {
-      setSnakeBar(true);
+      dispatch(gettingWatchList({
+        tokenValue: tokenValue,
+        methods: "DELETE",
+        suffix: `watch-later/${id}/?userId=${userLocalCheck.userId}`,
+        emailString: userLocalCheck?.email,
+      }))
+      setWatchListStatus(false);
     }
   }
+
+
   
   const handlerSnakeBarClose = () => {
     setSnakeBar(false);
   }
   
-  async function fetchingFunction() {
-    console.log(watchList);
-    let result=null;  
-      if (Array.isArray(watchList)) {
-        result = watchList?.filter((item)=>item?.emailString === email)[0] || null;
-      }
-      const fetchedRes = result || watchList;
-      const userFilteredResult =  fetchedRes?.details?.some((item)=>{
-        console.log(item.id, movieValue.id, item.id === movieValue.id, movieValue, item);
-        return item.id == movieValue.id
-      });
-
-      console.log(userFilteredResult);
-      setWatchListStatus(userFilteredResult)
-    
-  }
-  async function fetchingFunction1() {
-    const response = await dispatch(gettingWatchList({
-      tokenValue: userLocalCheck.accessToken,
-      methods: "GET",
-      suffix: "watch-later/",
-    }))
-    const result = await response?.payload.filter((item)=>item?.emailString === email)[0]?.details.some((item)=>{
-      console.log(item.id, movieValue.id, item.id === movieValue.id, movieValue, item);
-      return item.id == movieValue.id
-    });
-    console.log(result);
-    setWatchListStatus(result)
-  }
 
   useEffect(()=> {
     const keys = trailerLink?.results?.filter((item)=>item.name.includes("Trailer")||item.name.includes("Teaser")) || ''
@@ -162,10 +99,14 @@ const MovieDetailPage = () => {
     }
     if (userLocalCheck.email) {
       setLoginCheck(true);
-      setTokenValue(userLocalCheck.accessToken)
+      setTokenValue(userLocalCheck.accessToken);
+    }
+
+    if (watchList && watchList.length !== 0) {
+      const isMovieAvail = watchList?.some((item)=>item?.details[0]?.id === singleMovieFetch?.id);
+      setWatchListStatus(isMovieAvail);
     }
     
-    fetchingFunction();
   }, [trailerLink, showTrailerModal, singleMovieFetch, watchList])
 
   useEffect (()=> {
@@ -180,11 +121,6 @@ const MovieDetailPage = () => {
       value: movieValue?.genres[0]?.id,
       page: 1,  
     }))
-    let result = [];
-    if (Array.isArray(watchList)) {
-      result = watchList?.filter((item)=>item?.emailString === email)[0]?._id || [];
-    }
-    setIdVal(result);
   }, [singleMovieFetch])
 
 
@@ -193,11 +129,14 @@ const MovieDetailPage = () => {
     dispatch(getSingleMovie({ id: idValue }));
     dispatch(gettingTeamDetails({ id: idValue }));
     setBackupData(movieValue);
-    dispatch(gettingWatchList({
-      tokenValue: userLocalCheck.accessToken,
-      methods: "GET",
-      suffix: "watch-later/",
-    }))
+
+    if (userLocalCheck?.email) {
+      dispatch(gettingWatchList({
+        tokenValue: userLocalCheck?.accessToken,
+        methods: "GET",
+        suffix: `watch-later/?userId=${userLocalCheck?.userId}`,
+      }))
+    }
 
   }, [])
 
@@ -232,7 +171,7 @@ const MovieDetailPage = () => {
                     Watch Trailer
                   </button>
 
-                  <button className="mt-4 bg-green-500 hover:bg-green-700 text-white text-[1rem] px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green" onClick={() => handlerWatchList(singleMovieFetch)}>
+                  <button className="mt-4 bg-green-500 hover:bg-green-700 text-white text-[1rem] px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green" onClick={() => handlerWatchList(singleMovieFetch, idVal, watchList, tokenValue)}>
                     {watchListStatus ? "Remove From Watch List":"Add to Watch List"}
       
                   </button>

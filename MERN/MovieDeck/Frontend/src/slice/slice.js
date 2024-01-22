@@ -219,25 +219,24 @@ export const gettingWatchList =createAsyncThunk(
             let raw = JSON.stringify({
                 emailString,
                 details: movie,
-              })
-              requestOptions = {
-                  method: methods,
-                  headers: myHeaders,
-                  body: raw,
-                  redirect: 'follow'
-                };
-            } else if (methods === "GET") {
-                requestOptions = {
-                    method: methods,
-                    headers: myHeaders,
-                    redirect: 'follow',
-                };
+            })
+            requestOptions = {
+                method: methods,
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+        } else if (methods === "GET") {
+            requestOptions = {
+                method: methods,
+                headers: myHeaders,
+                redirect: 'follow',
+            };
         }
         let url = SERVER_BASE_URL + suffix
-        
-
         try {
             const response = await fetch(url, requestOptions);
+        
             if (response.ok) {
                 const result = await response.json();
                 return result

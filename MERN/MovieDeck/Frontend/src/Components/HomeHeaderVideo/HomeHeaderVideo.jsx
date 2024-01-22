@@ -22,7 +22,6 @@ const HomeHeaderVideo = () => {
 
     useEffect(()=> {
         const time = setTimeout(()=> {
-            console.log(randomMovie)
             dispatch(getTrailerOut( {id: array[indexNumber]?.results[randomMovie]?.id} ));
 
             setTitle(array[indexNumber]?.results[randomMovie]?.title || array[indexNumber]?.results[randomMovie]?.original_title)

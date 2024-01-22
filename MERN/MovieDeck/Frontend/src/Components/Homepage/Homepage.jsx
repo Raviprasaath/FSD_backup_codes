@@ -44,13 +44,8 @@ const Homepage = () => {
 
         if (userLocalCheck.email) {
             setLoginCheck(true);
-            dispatch(gettingWatchList({
-                tokenValue: userLocalCheck.accessToken,
-                methods: "GET",
-                suffix: "watch-later/",
-            }))
+            
         }
-        console.log("homepage ", watchList);
         
     }, [loginCheck, location.pathname])
     
