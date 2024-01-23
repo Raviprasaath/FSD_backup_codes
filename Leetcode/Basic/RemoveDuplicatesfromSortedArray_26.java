@@ -8,7 +8,7 @@ public class RemoveDuplicatesfromSortedArray_26 {
             System.out.print(arr[i]+" ");
         }
     }
-    public static int removeDuplicates(int[] nums) {
+    public static int removeDuplicates1(int[] nums) {
         int j = 1;
         for (int i=0; i<nums.length-1; i++) {
             if (nums[i] != nums[i+1]) {
@@ -17,5 +17,18 @@ public class RemoveDuplicatesfromSortedArray_26 {
             }
         }
         return j;
+    }
+
+    public int removeDuplicates(int[] nums) {
+        int count = 0;
+        for (int i=0; i<nums.length; i++) {
+            if (i < nums.length-1 && nums[i] == nums[i+1]) {
+                continue;
+            } else {
+                nums[count] = nums[i];
+                count++;
+            }
+        }
+        return count;
     }
 }
