@@ -35,6 +35,7 @@ class LinkList{
     }
     public Node merge(Node list1, Node list2) {
       Node newNode = new Node (0);
+      newNode.next = head;
       Node temp = newNode;
       
       while (list1 != null && list2 != null)  {  
