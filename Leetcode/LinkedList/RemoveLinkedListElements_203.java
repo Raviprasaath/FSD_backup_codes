@@ -49,7 +49,7 @@ class LLN {
         return temp.next;
     }
 }
-    
+
 public class RemoveLinkedListElements_203 {
     public static void main(String[] args) {
         LLN list = new LLN();
