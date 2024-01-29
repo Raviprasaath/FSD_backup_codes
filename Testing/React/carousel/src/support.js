@@ -1,0 +1,2 @@
+export const imageArray =
+ ["https://thumbs.dreamstime.com/b/random-nature-shot-186987322.jpg","https://climatecommunication.yale.edu/wp-content/uploads/2017/04/001-stone-circle-jpeg-768x350.jpg", "https://shorturl.at/LPQTX","https://shorturl.at/abxP7", "https://cdn.pixabay.com/photo/2019/04/18/13/26/a-random-lake-4136935_960_720.jpg"]
