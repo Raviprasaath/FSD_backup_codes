@@ -13,7 +13,7 @@ class TreeNodeC {
         this.right = null;
     }
 }
-public class FindthekthsmallestelementinBST {
+public class FindTheKthSmallestElementInBST {
     public static void main(String[] args) {
         TreeNodeC root = new TreeNodeC(50);
         root.left = new TreeNodeC(25);
