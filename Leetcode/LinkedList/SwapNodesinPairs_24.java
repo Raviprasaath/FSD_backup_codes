@@ -34,7 +34,7 @@ class LLNN {
             head = newNode;
         }
     }
-    public Node swapPairs(Node head) {   
+    public Node swapPairs1(Node head) {   
         Node temp = head;
         Node first = head;
         Node second = head;
@@ -61,6 +61,21 @@ class LLNN {
             }
             return head;
         }
+    }
+    public Node swapPairs (Node head) {
+        if (head == null || head.next == null) return head;
+        Node temp = head;
+        Node first = head;
+        Node second = head;
+        while (temp != null && temp.next != null) {
+            first = temp;
+            second = temp.next;
+            int val = first.val;
+            first.val = second.val;
+            second.val = val;
+            temp = temp.next.next;
+        }
+        return head;
     }
 }
 
