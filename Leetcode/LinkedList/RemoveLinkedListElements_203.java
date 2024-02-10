@@ -10,6 +10,9 @@ class LLN {
         Node(){}
         Node (int value) {
             this.val = value;
+        }
+        Node (int value, Node next) {
+            this.val = value;
             this.next = null;
         }
     }
@@ -33,7 +36,7 @@ class LLN {
             head = newNode;
         }
     }
-    public Node removeElements(Node head, int val) {
+    public Node removeElements1(Node head, int val) {
         Node newNode = new Node(0);
         Node temp = newNode;
         Node fast = head;
@@ -47,6 +50,18 @@ class LLN {
         }
         newNode.next = null;
         return temp.next;
+    }
+    public Node removeElements(Node head, int val) {
+        Node newNode = new Node(0, head);
+        Node temp = newNode;
+
+        while (temp != null) {
+            while (temp.next != null && temp.next.val == val) {
+                temp.next = temp.next.next;
+            }
+            temp = temp.next;
+        }
+        return newNode.next;
     }
 }
 
