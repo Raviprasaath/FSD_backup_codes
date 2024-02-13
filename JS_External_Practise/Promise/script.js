@@ -1,7 +1,7 @@
 
 const p1 = new Promise ((res, rej)=> {
     setTimeout(()=> {
-        res("P1 ok");
+        rej("P1 ok");
     }, 3000)
 })
 
@@ -35,7 +35,7 @@ Promise.allSettled([p1, p2, p3]).then((response)=> {
 })
 
 
-// it will return when first promise is settle
+// it will return when first promise is settle - any success
 
 Promise.any([p1, p2, p3]).then((response)=> {
     console.log("any ",response)
@@ -43,12 +43,12 @@ Promise.any([p1, p2, p3]).then((response)=> {
     console.error("any ",err);
 })
 
-// it will return when first promise is success
+// it will return when first promise is settle -> success or fail but first settle
 
 Promise.race([p1, p2, p3]).then((response)=> {
     console.log("race",response)
 }).catch((err)=> {
-    console.error("race",err);
+    console.error("race error",err);
 })
 
 
