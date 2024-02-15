@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="my-4 flex flex-col justify-center items-center">
+        <div class="flex gap-2 ">
+            <input onchange="handlerTodoAdd(this.value)" class="border border-black" value="" type="text" name="" id="inputValue">
+            <button onclick="handlerBtnClick()" class="bg-green-300 px-3 py-1 rounded">Add</button>
+        </div>
+        <div class="flex gap-4 my-2 w-full justify-center items-center">
+            <div class="w-1/5 flex flex-col justify-center items-center">
+                <h2>Pending</h2>
+                <div id="table1" class="border border-black w-full h-[250px]" 
+                 ondrop="drop(event)" ondragover="allowDrop(event)""
+                >
+                    
+                </div>
+            </div>
+            <div class="w-1/5  flex flex-col justify-center items-center">
+                <h2>Working</h2>
+                <div id="table2" class="border border-black w-full h-[250px]"
+                 ondrop="drop(event)" ondragover="allowDrop(event)""
+                >
+                    
+                </div>
+            </div>
+            <div class="w-1/5  flex flex-col justify-center items-center">
+                <h2>Completed</h2>
+                <div id="table3" class="border border-black w-full h-[250px]"
+                ondrop="drop(event)" ondragover="allowDrop(event)"
+                >
+                    
+                </div>
+            </div>
+
+        </div>
+        
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
