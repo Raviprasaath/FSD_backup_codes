@@ -57,12 +57,12 @@ const HomeHeaderVideo = () => {
             <>
                 <div className='w-full relative sm:-my-10 lg:-my-20 '>
                     <div className='w-full mm:h-[250px] sm:h-[300px] md:h-[600px] lg:h-[650px] xl:h-[790px] '>
-                    <iframe
-                        className="w-full aspect-video"
-                        src={ "https://www.youtube.com/embed/" + trailerKey + "?&autoplay=1&mute=1&loop=1" }
-                        title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    ></iframe>
+                        <iframe
+                            className="w-full aspect-video"
+                            src={ "https://www.youtube.com/embed/" + trailerKey + "?&autoplay=1&mute=1&loop=1" }
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        ></iframe>
                     </div>
                     {screen > 960 ?
                         <div className='absolute top-0 px-10 left-0 w-full aspect-video bg-gradient-to-r from-gray-800 from-5% via-transparent via-50% to-transparent to-100%'>
