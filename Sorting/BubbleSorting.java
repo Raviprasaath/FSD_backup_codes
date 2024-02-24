@@ -4,13 +4,13 @@ public class BubbleSorting {
     public static void main(String [] args){
         int array[]={3,4,6,22,11,5};
         int n = array.length;
-        bubbleSort(array, n);
+        bubbleSort1(array, n);
         for (int i = 0; i < n; i++) {
             System.out.print(array[i]+" ");
         } 
 
     }
-    public static void bubblesort1(int array[], int n){
+    public static void bubbleSort1(int array[], int n){
         if(n==0 || n==1){
             return;
         }
@@ -21,7 +21,7 @@ public class BubbleSorting {
                 array[j+1]=temp;
             }
         }
-        bubblesort(array, n-1);
+        bubbleSort1(array, n-1);
     }
     public static void bubbleSort (int [] array, int n) {
         for (int i = 0; i < n; i++) {
