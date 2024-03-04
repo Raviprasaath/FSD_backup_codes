@@ -14,4 +14,4 @@ function throttleSearchHandler(e) {
     }
 }
 
-// eg.shot gun
+// eg.shot gun, auto save

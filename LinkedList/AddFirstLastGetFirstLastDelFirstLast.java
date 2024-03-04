@@ -96,11 +96,6 @@ class LinkingList {
         size++;
         return newNode.next;
     }
-
-    
-    
-    
-
 }
 public class AddFirstLastGetFirstLastDelFirstLast {
     public static void main(String[] args) {
