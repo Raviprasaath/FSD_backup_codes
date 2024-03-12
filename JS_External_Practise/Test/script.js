@@ -12,8 +12,6 @@ const languages = [
     { language: 'JavaScript' }, { language: 'JavaScript' }, { language: 'TypeScript' }, { language: 'C++' }
 ] 
 
-
-
 let result = [];
 languages.forEach(({language})=>{
     console.log(language);
