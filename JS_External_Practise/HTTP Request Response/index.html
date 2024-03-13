@@ -1,37 +1,32 @@
+<!----------------------------------------------------------------------------------->
 1xx Informational:
 
 100 Continue: The server has received the initial part of the request, and the client can continue with the rest of the request.
-`
-<!------------------------------------------------------->
-
+<!----------------------------------------------------------------------------------->
 2xx Success:
 
 200 OK: The request was successful.
 201 Created: The request was successful, and a new resource was created.
 204 No Content: The server successfully processed the request but there is no additional content to send in the response.
 
-<!------------------------------------------------------->
-
+<!----------------------------------------------------------------------------------->
 3xx Redirection:
 
 301 Moved Permanently: The requested resource has been permanently moved to a new location.
 302 Found (or 303 See Other): The requested resource resides temporarily under a different URL.
 304 Not Modified: The resource has not been modified since the last request.
-
-<!------------------------------------------------------->
-
+<!----------------------------------------------------------------------------------->
 4xx Client Errors:
 
 400 Bad Request: The server cannot process the request due to a client error (e.g., malformed request syntax, invalid request message framing, or deceptive request routing).
 401 Unauthorized: Similar to 403, but specifically for cases where authentication is required and has failed or has not been provided.
 403 Forbidden: The client does not have permission to access the requested resource.
 404 Not Found: The requested resource could not be found on the server.
-
-<!------------------------------------------------------->
-
+<!----------------------------------------------------------------------------------->
 5xx Server Errors:
 
 500 Internal Server Error: A generic error message indicating that the server has encountered a situation it doesn't know how to handle.
 501 Not Implemented: The server does not support the functionality required to fulfill the request.
 502 Bad Gateway: The server, while acting as a gateway or proxy, received an invalid response from the upstream server it accessed.
 503 Service Unavailable: The server is not ready to handle the request. Common causes include a server that is down for maintenance or is overloaded.
+<!----------------------------------------------------------------------------------->
