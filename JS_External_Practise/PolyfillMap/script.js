@@ -1,6 +1,4 @@
-
 // Step by Step will see
-
 
 let array = [2,4,5,6,8];
 
@@ -17,7 +15,7 @@ console.log(area(array));
 const dia = function (array) {
     let ans = [];
     for (let i=0; i<array.length; i++) {
-        ans.push(array[i] * 2);        
+        ans.push(array[i] * 2);
     }
     return ans;
 }

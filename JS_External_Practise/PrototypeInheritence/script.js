@@ -25,8 +25,6 @@
 // Object.__proto__.__proto__      // null
 
 
-
-
 // function func () {
 
 // }

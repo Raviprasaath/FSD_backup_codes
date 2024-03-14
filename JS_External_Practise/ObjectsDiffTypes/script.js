@@ -1,3 +1,7 @@
+
+
+
+
 // 1. Object create
 // const Proto = {
 //     greet: function() {

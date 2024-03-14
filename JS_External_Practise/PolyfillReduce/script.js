@@ -9,13 +9,11 @@ let ans = arr.reduce((accum, val) => {
 
 console.log(ans);
 
-
-
 Array.prototype.reduce = function(callback, initialValue) {
     let accumulator = initialValue !== undefined ? initialValue : this[0];
 
     for (let i = 0; i < this.length; i++) {
-        accumulator = callback.call(undefined, accumulator, this[i], i, this);    
+        accumulator = callback.call(undefined, accumulator, this[i], i, this);
     }
 
     return accumulator;
@@ -28,8 +26,6 @@ const sum = numbers.reduce((accumulator, currentValue) => {
 }, 0);
 
 console.log(sum);
-
-
 
 // ------------------from newton assignment
 // Array.prototype.myReduce = function (cb, initialValue) {
