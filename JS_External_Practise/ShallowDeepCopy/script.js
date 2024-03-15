@@ -70,10 +70,6 @@ const originalObject1 = {
   
   console.log(originalObject1.prop2.nestedProp); // Outputs: nestedValue
   
-
-
-
-  
 //   array
 
 const originalArray2 = [1, 2, [3, 4]];
