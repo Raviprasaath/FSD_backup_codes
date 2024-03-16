@@ -45,6 +45,6 @@ function onKeyUpHandler(e) {
         console.log("debounce");
         
         console.log(e.target.value);   // callback function
-    }, 5000);
+    }, 2000);
 
 }
