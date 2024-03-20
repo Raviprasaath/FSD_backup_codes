@@ -3,22 +3,16 @@ import java.util.*;
 
 public class roughwork9 {
     public static void main (String [] args) {
-        Scanner sc = new Scanner (System.in);
-        int n = sc.nextInt();
-        int [] array = new int[n];
-        for (int i=0; i<n; i++) {
-            array[i] = sc.nextInt();
+        String s = "avcdsfczxaxz";
+        HashMap <Character, Integer> map = new HashMap<>();
+        for (int i=0; i<s.length(); i++) {
+            char ch = s.charAt(i);
+            map.put(ch, map.getOrDefault(ch, 0)+1);
         }
-        int k = sc.nextInt();
-        int l = sc.nextInt();
-        int r = sc.nextInt();
-        Arrays.sort(array);
-
-        for (int i=l; i<=r; i++) {
-            k--;
-            if (k == 0) {
-                System.out.print(array[i]);
-                break;
+        for (int i=0; i<s.length(); i++) {
+            char ch = s.charAt(i);
+            if (map.get(ch)==1) {
+                System.out.print(ch+"-"+map.get(ch)+" ");
             }
         }
     }

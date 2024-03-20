@@ -22,7 +22,6 @@ public class FirstUniqueCharacterinString387_method2 {
                 break;
             }
         }
-        
         return index;
     }
 

@@ -6,6 +6,18 @@ public class BestTimetoBuyandSellStock_121 {
         System.out.println(maxProfit(array));
     }
     public static int maxProfit(int[] prices) {
+        int max=0;
+        int min=prices[0];
+        for(int i=1; i<prices.length; i++){
+            if(min < prices[i]){
+                max = Math.max(max, prices[i] - min);
+            } else {
+                min = prices[i];
+            }
+        }      
+        return max;
+    }
+    public static int maxProfit1(int[] prices) {
         int n = prices.length;
         int max = 0;
         int count = 0;

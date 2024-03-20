@@ -50,7 +50,7 @@ class LList{
             }
             newNode = newNode.next;
         }
-        
+
         if (list1 ==  null) {
             newNode.next = list2;
         } else if (list2 == null) {
