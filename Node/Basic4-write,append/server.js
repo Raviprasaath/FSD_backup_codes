@@ -2,10 +2,10 @@
 const fs = require('fs');
 const path = require('path');
 
-// fs.writeFile(path.join(__dirname, 'files', 'Notepad2.txt'), "This is created by node", (err) => {
-//   if (err) throw err;
-//   console.log('write complete');
-// })
+fs.writeFile(path.join(__dirname, 'files', 'Notepad6.txt'), "03-30-2024", (err) => {
+  if (err) throw err;
+  console.log('data');
+})
 
 // process.on('uncaughtException', err => {
 //   console.log(err);
