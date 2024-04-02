@@ -1,7 +1,5 @@
 // copying the content from and pasting to another file 
 
-
-
 const fs = require('fs');
 const path = require('path');
 const rs = fs.createReadStream(path.join(__dirname, 'files', 'bigfile.txt'), {encoding: 'utf8'})
