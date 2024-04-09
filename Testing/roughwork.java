@@ -1,33 +1,33 @@
-package Testing;
 
 import java.util.Stack;
 
 public class roughwork {
     public static void main(String[] args) {
-        int [] array = {73,74,75,71,69,72,76,73};
-        int [] ans = dailyTemperatures(array);
+        int[] array = { 73, 74, 75, 71, 69, 72, 76, 73 };
+        int[] ans = dailyTemperatures(array);
         for (int i = 0; i < array.length; i++) {
-            System.out.print(ans[i]+" ");
+            System.out.print(ans[i] + " ");
         }
     }
+
     public static int[] dailyTemperatures(int[] temperatures) {
         int count = 0;
-        int k = temperatures.length-1;
-        int [] ans = new int[temperatures.length];
-        Stack <Integer> st = new Stack <>();
-        Stack <Integer> tempStack = new Stack <>();
-        for (int i=temperatures.length-1; i>=0; i--) {
+        int k = temperatures.length - 1;
+        int[] ans = new int[temperatures.length];
+        Stack<Integer> st = new Stack<>();
+        Stack<Integer> tempStack = new Stack<>();
+        for (int i = temperatures.length - 1; i >= 0; i--) {
             int temp = temperatures[i];
             while (!st.isEmpty()) {
                 if (temp < st.peek()) {
-                    if(tempStack.isEmpty()) {
+                    if (tempStack.isEmpty()) {
                         count++;
                         ans[k] = count;
                     } else {
                         count = tempStack.size();
                         ans[k] = count;
                     }
-                    while(!tempStack.isEmpty()) {
+                    while (!tempStack.isEmpty()) {
                         st.push(tempStack.pop());
                     }
                     count = 0;
@@ -42,9 +42,9 @@ public class roughwork {
             }
             st.push(temp);
             k--;
-            System.out.println("temp: "+temp+" "+st);
+            System.out.println("temp: " + temp + " " + st);
         }
         return ans;
     }
-    
+
 }
