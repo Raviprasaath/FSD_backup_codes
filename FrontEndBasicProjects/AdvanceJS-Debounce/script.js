@@ -29,9 +29,6 @@
 
 
 
-
-
-
 // Basic level
 const inputBox = document.getElementById("input");
 inputBox.addEventListener("input", onKeyUpHandler);
